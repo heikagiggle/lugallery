@@ -39,10 +39,10 @@ const MobileNavigation = () => {
       {isOpen && (
         <div className="fixed left-0 right-0 top-0 p-5 pt-0 bg-white transition z-[100] h-100vh">
           <ul>
-            <div className="flex items-center gap-x-32 md:gap-x-52 mt-6 mb-8">
+            <div className="flex items-center gap-x-32 md:gap-x-52 mt-6 mb-4">
               <RiCloseLine
-                size={20}
-                className="cursor-pointer hover:text-red-500"
+                size={30}
+                className="cursor-pointer hover:text-[#006400]"
                 onClick={toggleMenu}
               />
             </div>
@@ -50,20 +50,20 @@ const MobileNavigation = () => {
               <li
                 key={index}
                 className={`w-full p-[0.08rem] transition-all text-sm ${
-                  activeTab === index ? "text-red-500" : "text-black"
-                } hover:text-red-500`}
+                  activeTab === index ? "text-[#006400]" : "text-black"
+                } hover:text-[#006400]`}
               >
                 <Link
                   href={`${navItem.path}`}
                   onClick={() => handleSetActiveTab(index)}
-                  className="flex w-full p-5"
+                  className="flex w-full p-3"
                 >
                   {navItem.title}
                 </Link>
               </li>
             ))}
 
-            <p className=" pl-5 cursor-pointer" onClick={logout}>
+            <p className=" pl-3 cursor-pointer hover:text-[#006400]" onClick={logout}>
               Log out
             </p>
           </ul>

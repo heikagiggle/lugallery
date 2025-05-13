@@ -18,6 +18,20 @@
     background: #006400;
   }
 }
+/* Target the container with overflow-x-auto */
+.slim-scrollbar::-webkit-scrollbar {
+  height: 4px; /* Adjust height for horizontal scrollbar */
+}
+
+.slim-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Optional: scrollbar track background */
+}
+
+.slim-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #2a9d46; /* Scrollbar thumb color */
+  border-radius: 10px;
+}
+
 
 /* @custom-variant dark (&:is(.dark *)); */
 

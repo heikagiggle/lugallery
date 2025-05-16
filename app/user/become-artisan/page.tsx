@@ -1,9 +1,13 @@
-import React from 'react'
+import Banner from './banner/Banner'
+import Faqs from './faq/Faqs'
+import FormComponent from './form'
 
 const BecomeArtisan = () => {
   return (
     <div>
-      yasss!
+      <Banner/>
+      <FormComponent/>
+      <Faqs/>
     </div>
   )
 }

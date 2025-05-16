@@ -1,7 +1,8 @@
+import React from "react";
 import Accordion from "./Accordion";
-import { userFaqs } from "./data";
+import { partnerFaqs } from "./data";
 
-const Faqs = () => {
+const Faq = () => {
   return (
     <div className="py-16 mt-5 px-12">
       <div className="space-y-2.5 text-center">
@@ -11,7 +12,7 @@ const Faqs = () => {
       </div>
 
       <div className="mt-12 mx-auto w-full max-w-3xl px-4">
-        {userFaqs.map((faq, index) => (
+        {partnerFaqs.map((faq, index) => (
           <Accordion key={index} question={faq.question} answer={faq.answer} />
         ))}
       </div>
@@ -19,4 +20,4 @@ const Faqs = () => {
   );
 };
 
-export default Faqs;
+export default Faq;

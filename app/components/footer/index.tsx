@@ -8,7 +8,7 @@ const Footer = () => {
         <div>
           <Link
             href="/"
-            className="font-bold md:text-2xl text-lg cursor-pointer"
+            className="font-bold logo-font md:text-2xl text-lg cursor-pointer"
           >
             Lugallery
           </Link>

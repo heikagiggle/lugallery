@@ -1,5 +1,6 @@
+import React from "react";
 import Accordion from "./Accordion";
-import { userFaqs } from "./data";
+import { apprenticeFaqs } from "./data";
 
 const Faqs = () => {
   return (
@@ -11,7 +12,7 @@ const Faqs = () => {
       </div>
 
       <div className="mt-12 mx-auto w-full max-w-3xl px-4">
-        {userFaqs.map((faq, index) => (
+        {apprenticeFaqs.map((faq, index) => (
           <Accordion key={index} question={faq.question} answer={faq.answer} />
         ))}
       </div>

@@ -1,4 +1,3 @@
-// Menu navigation items
 export const menu = [
   {
     id: "1",

@@ -1,11 +1,12 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
-*{
+* {
   /* font-family: "Roboto", sans-serif; */
-  font-family: "Cascadia Mono", sans-serif;
+  /* font-family: "Cascadia Mono", sans-serif; */
+  font-family: "Outfit", sans-serif;
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -18,20 +19,23 @@
     background: #006400;
   }
 }
-/* Target the container with overflow-x-auto */
+
+.logo-font {
+  font-family: "Cascadia Mono", sans-serif;
+}
+
 .slim-scrollbar::-webkit-scrollbar {
-  height: 4px; /* Adjust height for horizontal scrollbar */
+  height: 4px;
 }
 
 .slim-scrollbar::-webkit-scrollbar-track {
-  background: transparent; /* Optional: scrollbar track background */
+  background: transparent;
 }
 
 .slim-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #2a9d46; /* Scrollbar thumb color */
+  background-color: #2a9d46;
   border-radius: 10px;
 }
-
 
 /* @custom-variant dark (&:is(.dark *)); */
 

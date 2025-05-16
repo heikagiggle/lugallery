@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const CareersAndPartners = () => {
   return (
-    <div className="py-10 px-4 md:px-12">
+    <div className="py-10 px-12">
       <div className="text-center space-y-2.5">
         <h1 className="text-3xl md:text-5xl font-semibold">Craft Your Path</h1>
         <p className="text-lg md:text-xl text-muted-foreground">

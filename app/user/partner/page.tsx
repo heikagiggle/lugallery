@@ -1,11 +1,15 @@
-import React from 'react'
+import Banner from "./components/banner/Banner";
+import Faq from "./components/faqs/Faq";
+import FormComponent from "./components/form";
 
 const Partner = () => {
   return (
     <div>
-      partner
+      <Banner />
+      <FormComponent />
+      <Faq/>
     </div>
-  )
-}
+  );
+};
 
-export default Partner
+export default Partner;

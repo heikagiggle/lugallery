@@ -1,4 +1,4 @@
-import React from "react";
+'use client'
 import LoginForm from "../components/login-form";
 
 const Login = () => {

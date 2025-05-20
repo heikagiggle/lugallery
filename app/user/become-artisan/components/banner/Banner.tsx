@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <div className="w-full bg-gradient-to-br from-[#E0F7FA] to-[#E0F2F1] py-16 px-6 sm:px-12 lg:px-24">
+    <div className="w-full bg-gradient-to-br from-[#E0F7FA] to-[#E0F2F1] py-16 px-12">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
         
         <div className="text-center md:text-left flex-1">

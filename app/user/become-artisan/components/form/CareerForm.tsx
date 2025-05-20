@@ -1,12 +1,12 @@
-'use client'
+"use client";
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../../components/ui/form";
-import { Input } from "../../../../components/ui/input";
+} from "../../../../../components/ui/form";
+import { Input } from "../../../../../components/ui/input";
 import { PartnerData, PartnerSchema } from "./schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,8 +16,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../../components/ui/select";
-import { UserButton } from "../../../components/widgets/buttons/UserButton";
+} from "../../../../../components/ui/select";
+import { UserButton } from "../../../../components/widgets/buttons/UserButton";
 
 const CareerForm = () => {
   const handler = useForm<PartnerData>({
@@ -34,7 +34,7 @@ const CareerForm = () => {
     <Form {...handler}>
       <form
         onSubmit={handler.handleSubmit(onSubmit)}
-        className="space-y-3 w-full mx-auto border p-4 rounded-md my-5"
+        className="space-y-3 w-full mx-auto p-4 rounded-md my-5"
       >
         <h1 className="text-xl md:text-2xl  font-semibold text-center">
           Start your journey
@@ -76,7 +76,7 @@ const CareerForm = () => {
         />
         <FormField
           control={control}
-          name="price"
+          name="size"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Size</FormLabel>
@@ -107,7 +107,7 @@ const CareerForm = () => {
           )}
         />
 
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-5">
           <UserButton type="submit">Register</UserButton>
         </div>
       </form>

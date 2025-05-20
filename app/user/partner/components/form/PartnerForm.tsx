@@ -34,7 +34,7 @@ const PartnerForm = () => {
     <Form {...handler}>
       <form
         onSubmit={handler.handleSubmit(onSubmit)}
-        className="space-y-3 w-full mx-auto border p-4 rounded-md my-5"
+        className="space-y-3 w-full mx-auto p-4 rounded-md my-5"
       >
         <h1 className="text-xl md:text-2xl  font-semibold text-center">
           Start your journey
@@ -76,7 +76,7 @@ const PartnerForm = () => {
         />
         <FormField
           control={control}
-          name="price"
+          name="size"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Size</FormLabel>
@@ -107,7 +107,7 @@ const PartnerForm = () => {
           )}
         />
 
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-5">
           <UserButton type="submit">Register</UserButton>
         </div>
       </form>

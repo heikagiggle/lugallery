@@ -8,7 +8,7 @@ export const PartnerSchema = z.object({
   price: z.string(),
   discount: z.string().nullable().optional(),
   stock: z.string().optional(),
-  
+  size: z.string().optional(),
 });
 
 export type PartnerData = z.infer<typeof PartnerSchema>;

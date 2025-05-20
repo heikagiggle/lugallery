@@ -1,15 +1,15 @@
-import Banner from './banner/Banner'
-import Faqs from './faq/Faqs'
-import FormComponent from './form'
+import Banner from "./components/banner/Banner";
+import Faqs from "./components/faq/Faqs";
+import FormComponent from "./components/form";
 
 const BecomeArtisan = () => {
   return (
     <div>
-      <Banner/>
-      <FormComponent/>
-      <Faqs/>
+      <Banner />
+      <FormComponent />
+      <Faqs />
     </div>
-  )
-}
+  );
+};
 
-export default BecomeArtisan
+export default BecomeArtisan;

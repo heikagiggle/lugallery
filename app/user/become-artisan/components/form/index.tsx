@@ -11,7 +11,7 @@ const FormComponent = () => {
           <WhyJoin />
         </div>
 
-        <div className="flex-1" id="learn">
+        <div className="flex-1 border shadow px-5" id="learn">
           <CareerForm />
         </div>
       </div>

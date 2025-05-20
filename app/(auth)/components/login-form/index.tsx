@@ -1,95 +1,86 @@
-'use client';
-
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import Link from "next/link";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../../components/ui/form";
+import { Input } from "../../../../components/ui/input";
+import { LoginData, LoginSchema } from "../schema/schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UserButton } from "../../../components/widgets/buttons/UserButton";
+import { PasswordInput } from "../widgets/PasswordInput";
 
 const LoginForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const handler = useForm<LoginData>({
+    resolver: zodResolver(LoginSchema),
 
-  const toggleMode = () => setIsLogin(!isLogin);
+    mode: "onChange",
+  });
+  const { control } = handler;
 
+  const onSubmit = (data: LoginData) => {
+    console.log(data);
+  };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#FDFCFB] to-[#E2D1C3] px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <AnimatePresence mode="wait">
-          {isLogin ? (
-            <motion.div
-              key="login"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-6"
+    <div>
+      <Form {...handler}>
+        <form
+          onSubmit={handler.handleSubmit(onSubmit)}
+          className="space-y-3 w-full "
+        >
+          <h1 className="text-xl md:text-2xl text-[#006400] font-semibold text-center">
+            Welcome Back
+          </h1>
+          <FormField
+            control={control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <Input {...field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <PasswordInput {...field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <p className="text-sm mt-3">
+            Forgot password?
+            <Link
+              href="/forgot-password"
+              className="text-[#5603AD] font-medium hover:underline pl-1"
             >
-              <h2 className="text-2xl font-bold text-center text-[#1F1F1F]">
-                Welcome Back
-              </h2>
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5603AD]"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5603AD]"
-              />
-              <button className="w-full bg-[#5603AD] text-white py-2 rounded-lg hover:bg-[#440290] transition">
-                Login
-              </button>
-              <p className="text-sm text-center">
-                Don&apos;t have an account?{' '}
-                <button
-                  onClick={toggleMode}
-                  className="text-[#5603AD] font-medium hover:underline"
-                >
-                  Register here
-                </button>
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="register"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-6"
-            >
-              <h2 className="text-2xl font-bold text-center text-[#1F1F1F]">
-                Create Account
-              </h2>
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5603AD]"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5603AD]"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5603AD]"
-              />
-              <button className="w-full bg-[#5603AD] text-white py-2 rounded-lg hover:bg-[#440290] transition">
-                Register
-              </button>
-              <p className="text-sm text-center">
-                Already have an account?{' '}
-                <button
-                  onClick={toggleMode}
-                  className="text-[#5603AD] font-medium hover:underline"
-                >
-                  Login here
-                </button>
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              Click here
+            </Link>
+          </p>
+          <UserButton type="submit" className="w-full">
+            Login
+          </UserButton>
+        </form>
+      </Form>
+      <p className="text-sm text-center mt-3">
+        Don&apos;t have an account?{" "}
+        <Link
+          href="/register"
+          className="text-[#5603AD] font-medium hover:underline pl-1"
+        >
+          Register here
+        </Link>
+      </p>
     </div>
   );
 };

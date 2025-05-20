@@ -10,10 +10,10 @@ const WhyJoin = () => {
         <div className="space-y-2">
           <h3 className="font-medium">Get seen. Get booked.</h3>
           <p>
-            At Lugallery, your work doesn’t just sit in a folder — it shines. We
+            At Lugallery, your work doesn’t just sit in a folder it shines. We
             help artisans like you show off your talents to people who are
             actually looking for what you do. Whether you&apos;re a hairstylist,
-            photographer, makeup artist, or sculptor — there&apos;s a space here
+            photographer, makeup artist, or sculptor there&apos;s a space here
             for your spark.
           </p>
         </div>

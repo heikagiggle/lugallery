@@ -45,7 +45,7 @@ const Sort = ({ closeSidebar, onFilterChange }: Props) => {
           className="flex items-center justify-between cursor-pointer"
           onClick={() => setShowTitleDropdown((prev) => !prev)}
         >
-          <p className="font-medium">Artisan Title</p>
+          <p className="font-medium">Type of Artisan</p>
           <ChevronDown className="w-4 h-4" />
         </div>
         {showTitleDropdown && (

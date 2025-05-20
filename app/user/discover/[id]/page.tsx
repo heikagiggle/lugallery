@@ -40,7 +40,7 @@ const ArtisanDetails = () => {
                   height={55}
                   width={55}
                   alt={`thumbnail-${index}`}
-                  className="cursor-pointer rounded-sm"
+                  className="cursor-pointer rounded-sm w-[55px] h-[55px]"
                   onClick={() => setMainImage(image)}
                 />
               </div>

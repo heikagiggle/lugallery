@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Form,
   FormField,
@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "../../../../../components/ui/select";
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
+import { artisanTitles } from "../../../../user/discover/components/data";
 
 const PartnerForm = () => {
   const handler = useForm<PartnerData>({
@@ -41,11 +42,11 @@ const PartnerForm = () => {
         </h1>
         <FormField
           control={control}
-          name="title"
+          name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
-              <Input {...field} />
+              <FormLabel>First Name</FormLabel>
+              <Input {...field} placeholder="Enter your first name" />
               <FormMessage />
             </FormItem>
           )}
@@ -53,11 +54,11 @@ const PartnerForm = () => {
 
         <FormField
           control={control}
-          name="description"
+          name="last_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
-              <Input {...field} />
+              <FormLabel>Last Name</FormLabel>
+              <Input {...field} placeholder="Enter your last name" />
               <FormMessage />
             </FormItem>
           )}
@@ -65,43 +66,46 @@ const PartnerForm = () => {
 
         <FormField
           control={control}
-          name="price"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Price</FormLabel>
-              <Input type="number" {...field} />
+              <FormLabel>Email</FormLabel>
+              <Input {...field} placeholder="Enter your email address" />
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={control}
-          name="size"
+          name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Size</FormLabel>
+              <FormLabel>Phone</FormLabel>
+              <Input {...field} placeholder="Enter your phone number" />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="artisan"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>What type of artisan are you?</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select size" />
+                  <SelectValue placeholder="Select your artisan category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Small">Small</SelectItem>
-                  <SelectItem value="Medium">Medium</SelectItem>
-                  <SelectItem value="Large">Large</SelectItem>
+                  {artisanTitles.map((title) => (
+                    <SelectItem key={title} value={title}>
+                      {title}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
-          name="stock"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Stock</FormLabel>
-              <Input {...field} />
               <FormMessage />
             </FormItem>
           )}

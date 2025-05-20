@@ -1,15 +1,13 @@
 import { z } from "zod";
 
-export const PartnerSchema = z.object({
-  id: z.string().optional(),
-  title: z.string().nonempty("Partner title is required"),
-  description: z.string().nonempty("Partner description is required"),
-  images: z.array(z.string()).optional(),
-  price: z.string(),
-  discount: z.string().nullable().optional(),
-  stock: z.string().optional(),
-  size:z.string().optional(),
-  
+export const CareerSchema = z.object({
+  first_name: z.string().min(1, { message: "First name is required" }),
+  last_name: z.string().min(1, { message: "Last name is required" }),
+  email: z.string().email(),
+  phone: z.string().min(10, { message: "Phone number is required" }),
+  gender: z.enum(["male", "female"], {
+    errorMap: () => ({ message: "Gender is required" }),
+  }),
 });
 
-export type PartnerData = z.infer<typeof PartnerSchema>;
+export type CareerData = z.infer<typeof CareerSchema>;

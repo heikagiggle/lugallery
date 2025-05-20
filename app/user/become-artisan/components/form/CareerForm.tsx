@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from "../../../../../components/ui/form";
 import { Input } from "../../../../../components/ui/input";
-import { PartnerData, PartnerSchema } from "./schema";
+import { CareerData, CareerSchema } from "./schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -20,14 +20,14 @@ import {
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
 
 const CareerForm = () => {
-  const handler = useForm<PartnerData>({
-    resolver: zodResolver(PartnerSchema),
+  const handler = useForm<CareerData>({
+    resolver: zodResolver(CareerSchema),
 
     mode: "onChange",
   });
   const { control } = handler;
 
-  const onSubmit = (data: PartnerData) => {
+  const onSubmit = (data: CareerData) => {
     console.log(data);
   };
   return (
@@ -41,11 +41,11 @@ const CareerForm = () => {
         </h1>
         <FormField
           control={control}
-          name="title"
+          name="first_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
-              <Input {...field} />
+              <FormLabel>First Name</FormLabel>
+              <Input {...field} placeholder="Enter your first name"/>
               <FormMessage />
             </FormItem>
           )}
@@ -53,11 +53,11 @@ const CareerForm = () => {
 
         <FormField
           control={control}
-          name="description"
+          name="last_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
-              <Input {...field} />
+              <FormLabel>Last Name</FormLabel>
+              <Input {...field} placeholder="Enter your last name" />
               <FormMessage />
             </FormItem>
           )}
@@ -65,29 +65,29 @@ const CareerForm = () => {
 
         <FormField
           control={control}
-          name="price"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Price</FormLabel>
-              <Input type="number" {...field} />
+              <FormLabel>Email</FormLabel>
+              <Input {...field} placeholder="Enter your email address" />
               <FormMessage />
             </FormItem>
           )}
         />
+        
         <FormField
           control={control}
-          name="size"
+          name="gender"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Size</FormLabel>
+              <FormLabel>Gender</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select size" />
+                  <SelectValue placeholder="Select gender" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Small">Small</SelectItem>
-                  <SelectItem value="Medium">Medium</SelectItem>
-                  <SelectItem value="Large">Large</SelectItem>
+                  <SelectItem value="female">Female</SelectItem>
+                  <SelectItem value="male">Male</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -97,11 +97,11 @@ const CareerForm = () => {
 
         <FormField
           control={control}
-          name="stock"
+          name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Stock</FormLabel>
-              <Input {...field} />
+              <FormLabel>Phone</FormLabel>
+              <Input {...field} placeholder="Enter your phone number" />
               <FormMessage />
             </FormItem>
           )}

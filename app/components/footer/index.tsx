@@ -51,17 +51,14 @@ const Footer = () => {
             Contact us
           </Link>
         </ul>
-             <ul className="space-y-2">
+        <ul className="space-y-2">
           <li>
             {" "}
             <Link href="/user/faqs" className=" text-sm  cursor-pointer">
               Terms & conditions
             </Link>
           </li>
-
-          <Link href="/user/contact" className="text-sm cursor-pointer">
-            Privacy Policy
-          </Link>
+          <li className="text-sm cursor-pointer"> Privacy Policy</li>
         </ul>
         <div className="flex gap-x-3">
           <FaInstagram size={20} className="cursor-pointer" />

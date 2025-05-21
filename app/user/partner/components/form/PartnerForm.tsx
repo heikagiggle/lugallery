@@ -111,6 +111,18 @@ const PartnerForm = () => {
           )}
         />
 
+        <FormField
+          control={control}
+          name="portfolio"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Portfolio</FormLabel>
+              <Input {...field} placeholder="Enter your portfolio link" />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <div className="flex justify-end mt-5">
           <UserButton type="submit">Register</UserButton>
         </div>

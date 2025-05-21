@@ -6,6 +6,7 @@ export const PartnerSchema = z.object({
   last_name: z.string().min(1, { message: "Last name is required" }),
   email: z.string().email(),
   phone: z.string().min(10, { message: "Phone number is required" }),
+  portfolio: z.string().min(1, { message: "Portfolio link is required" }),
   artisan: z.enum(artisanTitles, {
     errorMap: () => ({ message: "Artisan category is required" }),
   }),

@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Navigation from "../components/navigation";
-import Footer from "../components/footer";
+import Navigation from "./components/widgets/Navigation";
+import Footer from "../../components/footer";
 
 export default function AuthLayout({
   children,
@@ -23,7 +23,7 @@ export default function AuthLayout({
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Navigation />
-      <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-[#FDFCFB] to-[#e2d1c3] px-4">
+      <div className="min-h-[80vh] flex items-center justify-center px-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={pathname}
@@ -37,7 +37,7 @@ export default function AuthLayout({
           </motion.div>
         </AnimatePresence>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 }

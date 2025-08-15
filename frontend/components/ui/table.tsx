@@ -6,16 +6,30 @@ import { cn } from "@/lib/utils"
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
+    // <div
+    //   data-slot="table-container"
+    //   className="relative w-full overflow-x-auto"
+    // >
+    //   <table
+    //     data-slot="table"
+    //     className={cn("w-full caption-bottom text-sm", className)}
+    //     {...props}
+    //   />
+    // </div>
     <div
-      data-slot="table-container"
-      className="relative w-full overflow-x-auto"
-    >
-      <table
-        data-slot="table"
-        className={cn("w-full caption-bottom text-sm", className)}
-        {...props}
-      />
-    </div>
+  data-slot="table-container"
+  className={cn(
+    "relative w-full overflow-x-auto mobile-scroll",
+    className
+  )}
+>
+  <table
+    data-slot="table"
+    className={cn("w-full caption-bottom text-sm", className)}
+    {...props}
+  />
+</div>
+
   )
 }
 
@@ -57,7 +71,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
     <tr
       data-slot="table-row"
       className={cn(
-        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
+        "hoverbg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
         className
       )}
       {...props}

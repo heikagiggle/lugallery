@@ -16,7 +16,7 @@ const DashboardTopbar = ({ rightContent }: DashboardTopbarProps) => {
 
   return (
     <div
-      className={`flex items-center py-4 justify-between top-0 left-0 right-0 `}
+      className={`flex justify-between top-0 left-0 right-0 `}
       style={{ zIndex: 999 }}
     >
       <div className="flex gap-x-1 items-center text-sm">

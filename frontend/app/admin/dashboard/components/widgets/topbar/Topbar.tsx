@@ -19,7 +19,7 @@ const TopBar = () => {
 
   return (
     <div
-      className={`flex items-center py-4 justify-between stick top0 left0 right0 text-white z-[999]`}
+      className={`flex items-center py-4 justify-between sticky top0 left0 right0 text-white z-[999]`}
     >
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">

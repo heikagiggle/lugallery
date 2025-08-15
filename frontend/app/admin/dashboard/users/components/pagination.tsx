@@ -32,7 +32,7 @@ export function Pagination(props: Props) {
   };
 
   return (
-    <div className="py-4 px-5 flex items-center justify-between mt-auto">
+    <div className="pt-2 px-5 flex items-center justify-between mt-auto">
       <p className="text-[#5F5F61] text-xs whitespace-nowrap">
         Showing {`${page * size + 1} - ${page * size + size}`} of{' '}
         <b className="text-dark-100">{props.totalItems}</b> items

@@ -40,13 +40,11 @@ export function UserTable({ searchQuery = "" }: UserTableProps) {
   const start = page * size;
   const paginatedItems = filteredData.slice(start, start + size);
 
-  // Default status
-
   return (
-    <Card className="bg-white mt-6 shadow-md rounded-xl w-full">
-      <div className="text-sm text-gray-500 py-8">
+    <Card className="bg-white mt-6 shadow-md rounded-xl w-full py-2">
+      <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table>
-          <TableHeader className="sticky top-0 z-10 bg-white text-[#666666] text-sm">
+          <TableHeader className="stick top-0 z-10 bg-white text-[#666666] text-sm">
             <TableRow className="border-b border-[#E5E5E5] py-3">
               <TableHead className="pl-4">Name</TableHead>
               <TableHead>Email</TableHead>
@@ -73,7 +71,7 @@ export function UserTable({ searchQuery = "" }: UserTableProps) {
                   {user.address || "N/A"}
                 </TableCell>
                 <TableCell className="pr-16 text-center text-[#666666]">
-                   {formatDate(user.date_registered)}
+                  {formatDate(user.date_registered)}
                 </TableCell>
                 <TableCell className="text-center cursor-pointer">
                   <Link href={`/partner-dashboard/users/${user.id}`}>

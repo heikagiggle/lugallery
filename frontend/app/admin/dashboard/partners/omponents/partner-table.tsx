@@ -9,18 +9,17 @@ import {
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
 import { useSearchParams } from "next/navigation";
-import { Pagination } from "./pagination";
 import Link from "next/link";
 import { capitalizeWords, formatDate } from "../../components/helper";
-// import { Loader } from "../../../../components/widgets/loader";
 import { Ellipsis } from "../../components/icons/ellipsis";
-import { users } from "./data";
+import { users } from "../../users/components/data";
+import { Pagination } from "../../components/pagination";
 
 interface UserTableProps {
   searchQuery?: string;
 }
 
-export function UserTable({ searchQuery = "" }: UserTableProps) {
+export function PartnerTable({ searchQuery = "" }: UserTableProps) {
   const searchParams = useSearchParams();
   const page = parseInt(searchParams.get("page") || "0");
   const size = parseInt(searchParams.get("size") || "10");
@@ -74,7 +73,7 @@ export function UserTable({ searchQuery = "" }: UserTableProps) {
                   {formatDate(user.date_registered)}
                 </TableCell>
                 <TableCell className="text-center cursor-pointer">
-                  <Link href={`/admin/dashboard/users/${user.id}`}>
+                  <Link href={`/admin/dashboard/partners/${user.id}`}>
                     <Ellipsis />
                   </Link>
                 </TableCell>

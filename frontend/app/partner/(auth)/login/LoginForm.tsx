@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import {
   Form,
   FormField,
@@ -6,26 +7,31 @@ import {
   FormLabel,
   FormMessage,
 } from "../../../../components/ui/form";
+import { Input } from "../../../../components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
-import { PasswordInput } from "../widgets/PasswordInput";
-import { SetNewPasswordData, SetNewPasswordSchema } from "../schema/schema";
-import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { PasswordInput } from "../../../components/widgets/PasswordInput";
 
-const EnterNewPassword = () => {
-  const router = useRouter();
-  const handler = useForm<SetNewPasswordData>({
-    resolver: zodResolver(SetNewPasswordSchema),
+export const LoginSchema = z.object({
+  email: z.string().min(1, { message: "Email is required" }),
+  password: z.string().min(8),
+});
+
+export type LoginData = z.infer<typeof LoginSchema>;
+
+const LoginForm = () => {
+  const handler = useForm<LoginData>({
+    resolver: zodResolver(LoginSchema),
+
     mode: "onChange",
   });
   const { control } = handler;
 
-  const onSubmit = async (data: SetNewPasswordData) => {
+  const onSubmit = (data: LoginData) => {
     console.log(data);
-    router.push("/login");
   };
-
   return (
     <Form {...handler}>
       <form
@@ -33,8 +39,19 @@ const EnterNewPassword = () => {
         className="space-y-3 w-full "
       >
         <h1 className="text-xl md:text-2xl text-[#006400] font-semibold text-center">
-          Enter new password
+          Welcome Back
         </h1>
+        <FormField
+          control={control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <Input {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={control}
@@ -47,24 +64,21 @@ const EnterNewPassword = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
-              <PasswordInput {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
+        <p className="text-sm mt-3">
+          Forgot password?
+          <Link
+            href="/forgot-password"
+            className="text-[#5603AD] font-medium hover:underline pl-1"
+          >
+            Click here
+          </Link>
+        </p>
         <UserButton type="submit" className="w-full">
-          Submit
+          Login
         </UserButton>
       </form>
     </Form>
   );
 };
 
-export default EnterNewPassword;
+export default LoginForm;

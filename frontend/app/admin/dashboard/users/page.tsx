@@ -1,5 +1,7 @@
 "use client";
+
 import { useRouter } from "next/navigation";
+import { Suspense } from "react";
 import { AdminButton } from "../../../components/widgets/buttons/AdminButton";
 import DashboardTopbar from "../../../components/widgets/topbar/dashboard-topbar";
 import { UserTable } from "./components/user-table";
@@ -18,7 +20,9 @@ const AllUsers = () => {
           </AdminButton>
         }
       />
-      <UserTable />
+      <Suspense fallback={<div>Loading users...</div>}>
+        <UserTable />
+      </Suspense>
     </div>
   );
 };

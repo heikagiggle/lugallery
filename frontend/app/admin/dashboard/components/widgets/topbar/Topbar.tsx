@@ -19,8 +19,20 @@ const TopBar = () => {
 
   return (
     <div
-      className={`flex items-center py-4 justify-between sticky top0 left0 right0 text-white z-[999]`}
+      className={`flex items-center py-4 justify-between sticky text-white z-[999]`}
     >
+      <div className="lg:hidden block">
+        <Menu
+          className="text-black cursor-pointer mr-3"
+          onClick={() => setIsOpen(!isOpen)}
+        />
+        {isOpen && (
+          <div className="fixed right-[100px] w-[280px] left-0 top-0 p-5 pt-0 bg-[#006400]  transition transform 0.3s ease-in-out z-[100] h-full">
+            <MobileSidebar onLinkClick={() => setIsOpen(false)} />
+          </div>
+        )}
+      </div>
+
       <div className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
           <SearchIcon />
@@ -60,7 +72,7 @@ const TopBar = () => {
             <p className="text-base font-bold text-[#0D0D0D]">Giggle</p>
           </div>
           <div className="flex items-center gap-[15px] cursor-pointer">
-            <ChevronDown className="text-black bg-amber400" />
+            <ChevronDown className="text-black" />
             {openProfile && (
               <div className="bg-white text-black border text-sm absolute top-[56px] z-20 right-[20px] p-3 mr-8 w-[100px] space-y-2">
                 <Link
@@ -80,9 +92,9 @@ const TopBar = () => {
           </div>
         </div>
 
-        <div className="lg:hidden block">
+        {/* <div className="lg:hidden block">
           <Menu
-            className="text-black cursor-pointer"
+            className="text-black cursor-pointer -right-[200px]"
             onClick={() => setIsOpen(!isOpen)}
           />
           {isOpen && (
@@ -90,8 +102,9 @@ const TopBar = () => {
               <MobileSidebar onLinkClick={() => setIsOpen(false)} />
             </div>
           )}
-        </div>
+        </div> */}
       </div>
+
     </div>
   );
 };

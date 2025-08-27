@@ -95,7 +95,7 @@ const ArtisanDetails = () => {
           </div>
 
           <div className="pt-4">
-            <UserButton className="w-ful">Connect</UserButton>
+            <UserButton className="wful">Connect</UserButton>
           </div>
         </div>
       </div>

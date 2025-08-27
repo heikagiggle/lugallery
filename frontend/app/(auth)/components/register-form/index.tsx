@@ -61,6 +61,18 @@ const RegisterForm = () => {
 
           <FormField
             control={control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <Input {...field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
             name="password"
             render={({ field }) => (
               <FormItem>

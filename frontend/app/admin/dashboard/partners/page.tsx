@@ -1,8 +1,10 @@
 "use client";
+
 import { useRouter } from "next/navigation";
+import { Suspense } from "react";
 import { AdminButton } from "../../../components/widgets/buttons/AdminButton";
 import DashboardTopbar from "../../../components/widgets/topbar/dashboard-topbar";
-import { UserTable } from "../users/components/user-table";
+import { PartnerTable } from "./omponents/partner-table";
 
 const AllPartners = () => {
   const router = useRouter();
@@ -12,13 +14,15 @@ const AllPartners = () => {
       <DashboardTopbar
         rightContent={
           <AdminButton
-            onClick={() => router.push("/admin/dashboard/users/add-artisan")}
+            onClick={() => router.push("/admin/dashboard/users/add-user")}
           >
-            Add Artisan
+            Add Partner
           </AdminButton>
         }
       />
-      <UserTable />
+      <Suspense fallback={<div>Loading partners...</div>}>
+        <PartnerTable />
+      </Suspense>
     </div>
   );
 };

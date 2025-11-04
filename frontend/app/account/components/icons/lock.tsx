@@ -1,6 +1,6 @@
 import { IconProps } from "./type";
 
-export function LockIcon({ className, primaryColor="#3A3842", fillColor="none" }: IconProps) {
+export function LockIcon({ className, primaryColor="#3A3842" }: IconProps) {
   return (
     <svg
       width="24"

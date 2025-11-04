@@ -1,5 +1,4 @@
 "use client";
-import Head from "next/head";
 import AnalyticsCard from "./components/card/analytics-card";
 import UserActivityChart from "./components/charts/user-activity-chart";
 import ApprenticeActvityChart from "./components/charts/apprentice-actvity";

@@ -8,6 +8,7 @@ import { SearchIcon } from "../icons/search-icon";
 import { BellIcon } from "../icons/bell";
 import { ChevronDown, Menu } from "lucide-react";
 import MobileSidebar from "../sidebar/MobileSidebar";
+import { useSearch } from "../../../../../state/client/search-context";
 
 const TopBar = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const TopBar = () => {
   const handleClick = () => setOpenProfile(!openProfile);
   const handleLogout = async () => router.push("/login");
   const [isOpen, setIsOpen] = useState(false);
+  const { searchQuery, setSearchQuery } = useSearch();
 
   return (
     <div
@@ -42,11 +44,16 @@ const TopBar = () => {
           type="search"
           placeholder="Search ..."
           className="border border-[#E9F0FF] rounded-md px-1 py-2 pl-8 text-sm text-black w-full lg:w-[461px] outline-none"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
 
       <div className="flex items-center justify-between gap-x-4">
-        <Link href={'/admin/dashboard/support'} className="relative cursor-pointer bg-white p-2 rounded-lg">
+        <Link
+          href={"/admin/dashboard/support"}
+          className="relative cursor-pointer bg-white p-2 rounded-lg"
+        >
           <MailIcon />
           <span className="absolute top-1 right-1 flex items-center justify-center">
             <span className="h-3 w-3 bg-white rounded-full flex items-center justify-center">
@@ -55,7 +62,10 @@ const TopBar = () => {
           </span>
         </Link>
 
-        <Link href={'/admin/dashboard/settings/notification'} className="relative cursor-pointer bg-white p-2 rounded-lg">
+        <Link
+          href={"/admin/dashboard/settings/notification"}
+          className="relative cursor-pointer bg-white p-2 rounded-lg"
+        >
           <BellIcon />
           <span className="absolute top-1 right-1 flex items-center justify-center">
             <span className="h-3 w-3 bg-white rounded-full flex items-center justify-center">
@@ -76,7 +86,7 @@ const TopBar = () => {
             {openProfile && (
               <div className="bg-white text-black border text-sm absolute top-[56px] z-20 right-[20px] p-3 w-[100px] space-y-2">
                 <Link
-                  href="/dashboard/settings"
+                  href="/admin/dashboard/settings/profile"
                   className="block cursor-pointer hover:text-green-500 font-semibold pb2"
                 >
                   Settings
@@ -104,7 +114,6 @@ const TopBar = () => {
           )}
         </div> */}
       </div>
-
     </div>
   );
 };

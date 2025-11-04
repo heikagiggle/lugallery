@@ -55,6 +55,7 @@ const ProfileForm = () => {
         onSubmit={handler.handleSubmit(onSubmit)}
         className="space-y-6 bg-white mt-8 w-full max-w-full md:max-w-lg mx-auto border shadow-md p-3 rounded-md"
       >
+        <h3 className="font-semibold text-xl">Update Profile</h3>
         <ImageUploader
           name={"profile_image"}
           handler={handler}

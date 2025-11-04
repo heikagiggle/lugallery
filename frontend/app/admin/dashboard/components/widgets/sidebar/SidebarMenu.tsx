@@ -73,11 +73,11 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
             label: "Analytics",
           },
           {
-            url: "/admin/dashboard/help-center/stigma-report",
+            url: "/admin/dashboard/analytics/reviews",
             label: "Reviews",
           },
           {
-            url: "/admin/dashboard/he-center/gender-violence",
+            url: "/admin/dashboard/analytics/feedback",
             label: "User feedback",
           },
         ],

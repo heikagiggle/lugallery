@@ -24,10 +24,10 @@ const AccountLayout = ({ children }: AccountProps) => {
         >
           <MenuIcon size={28} />
         </button>
-       <div className="py-2">
-        <h1 className="font-semibold text-[20px]">Emmanuella Okafor</h1>
-        <p>Your personal account</p>
-      </div>
+        <div className="py-2">
+          <h1 className="font-semibold text-[20px]">Emmanuella Okafor</h1>
+          <p>Your personal account</p>
+        </div>
       </div>
 
       <div className="flex min-h-screen lg:pl-[10rem] xl:pl-[12rem] lg:pr-[8rem] xl:pr-[10rem]">
@@ -38,7 +38,7 @@ const AccountLayout = ({ children }: AccountProps) => {
           </div>
         </main>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

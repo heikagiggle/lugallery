@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { mutate } from "swr";
+import { X } from "lucide-react";
 
 interface NavItem {
   url: string;
@@ -67,9 +68,14 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
         "lg:translate-x-0 lg:static lg:block"
       )}
     >
-      <div className="py-2">
-        <h1 className="font-semibold text-[20px]">Emmanuella Okafor</h1>
-        <p>Your personal account</p>
+      <div className="flex justify-between">
+        <div className="py-2">
+          <h1 className="font-semibold text-[20px]">Emmanuella Okafor</h1>
+          <p>Your personal account</p>
+        </div>
+        <div>
+          <X className="cursor-pointer" onClick={() => setIsOpen(false)} />
+        </div>
       </div>
 
       <ul className="mt-4 w-full flex flex-col gap-4 relative">

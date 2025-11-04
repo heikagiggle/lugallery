@@ -5,11 +5,23 @@ import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { FaInstagram, FaTiktok, FaFacebook, FaWhatsapp } from "react-icons/fa";
+import { ConnectSuccessModal } from "./modals/ConnectSuccesfulModal";
+import { ReviewModal } from "./modals/ReviewModal";
 
 const ArtisanDetails = () => {
   const searchParams = useSearchParams();
   const title = searchParams.get("title");
   const [mainImage, setMainImage] = useState("/apprentice.jpg");
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+
+  const handleConnect = () => {
+    // simulate “connection successful”
+    setShowContactModal(true);
+  };
+
+  const handleCloseContact = () => setShowContactModal(false);
+  const handleOpenReview = () => setShowReviewModal(true);
 
   const thumbnailImages = [
     "/artist.jpg",
@@ -84,7 +96,7 @@ const ArtisanDetails = () => {
             <p>
               <span className="font-semibold">Rating:</span> ⭐⭐⭐⭐☆
             </p>
-       
+
             <div className="flex gap-x-3">
               <span className="font-semibold">Social Media Handles:</span>
               <FaInstagram size={20} className="cursor-pointer" />
@@ -95,10 +107,23 @@ const ArtisanDetails = () => {
           </div>
 
           <div className="pt-4">
-            <UserButton className="wful">Connect</UserButton>
+            <UserButton onClick={handleConnect}>Connect</UserButton>
           </div>
         </div>
       </div>
+      {/* Contact modal */}
+      <ConnectSuccessModal
+        isOpen={showContactModal}
+        onClose={handleCloseContact}
+        onContinue={handleOpenReview}
+      />
+
+      {/* Review modal */}
+      <ReviewModal
+        isOpen={showReviewModal}
+        onClose={() => setShowReviewModal(false)}
+        artisanName="Tolu Crafts"
+      />
     </div>
   );
 };

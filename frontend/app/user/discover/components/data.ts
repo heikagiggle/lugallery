@@ -69,7 +69,18 @@ export const statesWithLgas = {
 
 // This array is typed as const so you can use it safely for dropdowns, type inference, or filtering in TypeScript.
 
-export const artisanData = [
+export interface Artisan {
+  id: string;
+  name: string;
+  title: string;
+  image: string;
+  lga: string;
+  state: string;
+  rating: number;
+  bio: string;
+}
+
+export const artisanData:Artisan[] = [
   {
     id: "1",
     name: "Tolu Crafts",

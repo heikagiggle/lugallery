@@ -92,7 +92,7 @@ const RegisterForm = () => {
         Already have an account?{" "}
         <Link
           href="/login"
-          className="text-[#5603AD] font-medium hover:underline pl-1"
+          className="text-blue-600 font-medium hover:underline pl-1"
         >
           Login here
         </Link>

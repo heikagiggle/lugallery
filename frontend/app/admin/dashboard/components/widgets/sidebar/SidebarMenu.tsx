@@ -35,13 +35,13 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
         url: "",
         label: "Listings",
         subItems: [
-          { url: "/admin/dashboard/listings/hot-deals", label: "Hot Deals" },
+          // { url: "/admin/dashboard/listings/hot-deals", label: "Hot Deals" },
           {
-            url: "/admin/dashboard/resources/press-release",
+            url: "/admin/dashboard/listings/announcement",
             label: "Announcements",
           },
           {
-            url: "/admin/dashboard/resources/news-and-events",
+            url: "/admin/dashboard/listings/spotlight",
             label: "Spotlight",
           },
         ],
@@ -69,6 +69,10 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
         label: "Analytics & Feedback",
         subItems: [
           {
+            url: "/admin/dashboard/analytics",
+            label: "Analytics",
+          },
+          {
             url: "/admin/dashboard/help-center/stigma-report",
             label: "Reviews",
           },
@@ -78,16 +82,21 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
           },
         ],
       },
+      { url: "/admin/dashboard/support", label: "Support" },
       {
         url: "",
-        label: "Settings & Support",
+        label: "Settings",
         subItems: [
           {
-            url: "/admin/dashboard/helcenter/stigmareport",
+            url: "/admin/dashboard/settings/notification",
+            label: "Notifications",
+          },
+          {
+            url: "/admin/dashboard/settings/profile",
             label: "Profile",
           },
           {
-            url: "/admin/dashboard/helpenter/genderviolence",
+            url: "/admin/dashboard/settings/security",
             label: "Security",
           },
         ],
@@ -184,7 +193,7 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
                     active === subItem.url &&
                       "text-white font-medium !bg-green-500/20 rounded-sm ml-0 border-l-4 border-white"
                   )}
-                   onClick={handleClick}
+                  onClick={handleClick}
                 >
                   <Link href={subItem.url} className="ml-3">
                     {subItem.label}

@@ -18,8 +18,11 @@ import {
   SelectValue,
 } from "../../../../../components/ui/select";
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const CareerForm = () => {
+  const router = useRouter()
   const handler = useForm<CareerData>({
     resolver: zodResolver(CareerSchema),
 
@@ -29,12 +32,13 @@ const CareerForm = () => {
 
   const onSubmit = (data: CareerData) => {
     console.log(data);
+    router.push('/user/discover-trainers')
   };
   return (
     <Form {...handler}>
       <form
         onSubmit={handler.handleSubmit(onSubmit)}
-        className="space-y-3 w-full mx-auto p-4 rounded-md my-5"
+        className="space-y-4 w-full mx-auto p-4 rounded-md my-3"
       >
         <h1 className="text-xl md:text-2xl  font-semibold text-center">
           Start your journey
@@ -106,6 +110,12 @@ const CareerForm = () => {
             </FormItem>
           )}
         />
+        <p className="my-2">
+          Already have an account?{" "}
+          <Link href={"/login"} className="text-blue-600 hover:underline">
+            Login here
+          </Link>{" "}
+        </p>
 
         <div className="flex justify-end mt-5">
           <UserButton type="submit">Register</UserButton>

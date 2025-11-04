@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: DashboardLayoutProps) {
           <Topbar />
         </div>
 
-        <div className=" h-full roundedxl py-5 overflow-y-auto">
+        <div className=" h-full p-5 overflow-y-auto bggray-50">
           {children}
         </div>
       </main>

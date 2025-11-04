@@ -4,7 +4,7 @@ const Banner = () => {
     return (
       <div className="relative bg-gradient-to-b from-[#006400] to-black min-h-[70vh] md:min-h-[90vh] overflow-hidden md:mx-10 md:rounded-md">
         {/* Text content */}
-        <div className="flex flex-col space-y-4.5 items-center justify-center md:mt-[10rem] mt-[7rem] text-white px-4 text-center">
+        <div className="flex flex-col space-y-4.5 items-center justify-center md:mt-[10rem] mt-[12rem] text-white px-4 text-center">
           <h1 className="text-3xl md:text-5xl font-bold">
           Find. Connect. Explore.
           </h1>

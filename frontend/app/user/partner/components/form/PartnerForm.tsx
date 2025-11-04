@@ -19,6 +19,7 @@ import {
 } from "../../../../../components/ui/select";
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
 import { artisanTitles } from "../../../discover/components/data";
+import Link from "next/link";
 
 const PartnerForm = () => {
   const handler = useForm<PartnerData>({
@@ -35,7 +36,7 @@ const PartnerForm = () => {
     <Form {...handler}>
       <form
         onSubmit={handler.handleSubmit(onSubmit)}
-        className="space-y-3 w-full mx-auto p-4 rounded-md my-5"
+        className="space-y-4 w-full mx-auto p-4 rounded-md my-3"
       >
         <h1 className="text-xl md:text-2xl  font-semibold text-center">
           Start your journey
@@ -122,7 +123,54 @@ const PartnerForm = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={control}
+          name="do_you_train"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Do you train people?</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
+        <FormField
+          control={control}
+          name="willing_to_train"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Would you like to train people through this platform?
+              </FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="yes">Yes</SelectItem>
+                  <SelectItem value="no">No</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <p className="my-2">
+          Already have an account?{" "}
+          <Link href={"/login"} className="text-blue-600 hover:underline">
+            Login here
+          </Link>{" "}
+        </p>
         <div className="flex justify-end mt-5">
           <UserButton type="submit">Register</UserButton>
         </div>

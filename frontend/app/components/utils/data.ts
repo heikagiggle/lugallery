@@ -1,4 +1,11 @@
-export const menu = [
+export type MenuItem = {
+  id: string;
+  title: string;
+  path: string;
+  isUser?: boolean; // <-- Add this optional field
+};
+
+export const menu: MenuItem[] = [
   {
     id: "1",
     title: "Discover",

@@ -13,8 +13,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { PasswordInput } from "../widgets/PasswordInput";
+import { useAuthContext } from "@/app/state/client/context";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const { setToken } = useAuthContext();
+    const router = useRouter();
   const handler = useForm<LoginData>({
     resolver: zodResolver(LoginSchema),
 
@@ -23,7 +27,9 @@ const LoginForm = () => {
   const { control } = handler;
 
   const onSubmit = (data: LoginData) => {
+    setToken("dummy_token_123");
     console.log(data);
+       router.push("/user/discover");
   };
   return (
     <div>
@@ -62,7 +68,7 @@ const LoginForm = () => {
             Forgot password?
             <Link
               href="/forgot-password"
-              className="text-[#5603AD] font-medium hover:underline pl-1"
+              className="text-blue-600 font-medium hover:underline pl-1"
             >
               Click here
             </Link>
@@ -76,7 +82,7 @@ const LoginForm = () => {
         Don&apos;t have an account?{" "}
         <Link
           href="/register"
-          className="text-[#5603AD] font-medium hover:underline pl-1"
+          className="text-blue-600 font-medium hover:underline pl-1"
         >
           Register here
         </Link>

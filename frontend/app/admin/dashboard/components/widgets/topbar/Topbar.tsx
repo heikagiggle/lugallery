@@ -46,23 +46,23 @@ const TopBar = () => {
       </div>
 
       <div className="flex items-center justify-between gap-x-4">
-        <div className="relative cursor-pointer bg-white p-2 rounded-lg">
+        <Link href={'/admin/dashboard/support'} className="relative cursor-pointer bg-white p-2 rounded-lg">
           <MailIcon />
           <span className="absolute top-1 right-1 flex items-center justify-center">
             <span className="h-3 w-3 bg-white rounded-full flex items-center justify-center">
               <span className="h-1.5 w-1.5 bg-red-500 rounded-full" />
             </span>
           </span>
-        </div>
+        </Link>
 
-        <div className="relative cursor-pointer bg-white p-2 rounded-lg">
+        <Link href={'/admin/dashboard/settings/notification'} className="relative cursor-pointer bg-white p-2 rounded-lg">
           <BellIcon />
           <span className="absolute top-1 right-1 flex items-center justify-center">
             <span className="h-3 w-3 bg-white rounded-full flex items-center justify-center">
               <span className="h-1.5 w-1.5 bg-red-500 rounded-full" />
             </span>
           </span>
-        </div>
+        </Link>
 
         <div
           className="flex items-center borde border-[#e5e5e5]"
@@ -74,7 +74,7 @@ const TopBar = () => {
           <div className="flex items-center gap-[15px] cursor-pointer">
             <ChevronDown className="text-black" />
             {openProfile && (
-              <div className="bg-white text-black border text-sm absolute top-[56px] z-20 right-[20px] p-3 mr-8 w-[100px] space-y-2">
+              <div className="bg-white text-black border text-sm absolute top-[56px] z-20 right-[20px] p-3 w-[100px] space-y-2">
                 <Link
                   href="/dashboard/settings"
                   className="block cursor-pointer hover:text-green-500 font-semibold pb2"

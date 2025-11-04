@@ -67,7 +67,7 @@ const Contact = () => {
                 <textarea
                   {...field}
                   rows={4} // Set the height of the textarea
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full p-2 border border-gray-300 rounded-md resize-none outline-none"
                 />
                 <FormMessage />
               </FormItem>

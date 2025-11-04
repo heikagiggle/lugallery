@@ -10,7 +10,7 @@ const FormComponent = () => {
           <WhyJoin />
         </div>
 
-        <div className="w-full lg:w-1/2 border shadow px-5 py-6 rounded-md">
+        <div className="w-full lg:w-1/2 border shadow px-5 py-6 rounded-md" id="learn">
           <CareerForm />
         </div>
       </div>

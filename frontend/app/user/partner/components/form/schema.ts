@@ -10,6 +10,12 @@ export const PartnerSchema = z.object({
   artisan: z.enum(artisanTitles, {
     errorMap: () => ({ message: "Artisan category is required" }),
   }),
+  do_you_train: z.enum(["yes", "no"], {
+    errorMap: () => ({ message: "Please select an option" }),
+  }),
+  willing_to_train: z.enum(["yes", "no"], {
+    errorMap: () => ({ message: "Please select an option" }),
+  }),
 });
 
 export type PartnerData = z.infer<typeof PartnerSchema>;

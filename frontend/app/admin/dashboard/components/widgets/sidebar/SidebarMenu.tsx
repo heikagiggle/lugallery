@@ -69,7 +69,7 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
         label: "Analytics & Feedback",
         subItems: [
           {
-            url: "/admin/dashboard/analytics",
+            url: "/admin/dashboard/analytics/analytics",
             label: "Analytics",
           },
           {

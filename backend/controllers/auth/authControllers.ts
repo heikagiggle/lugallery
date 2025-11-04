@@ -39,6 +39,19 @@ const register = async (req: Request, res: Response) => {
 
   try {
     const { email, password, name, phone, ...extra } = req.body;
+
+    // ✅ Check if email already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return res.status(400).json({
+        message:
+          "Email is already in use. Please use a different email or log in.",
+      });
+    }
+    // end
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({

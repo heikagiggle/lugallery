@@ -1,0 +1,21 @@
+import { artisanTitles } from "@/app/user/discover/components/data";
+import { z } from "zod";
+
+export const PartnerSchema = z.object({
+  first_name: z.string().min(1, { message: "First name is required" }),
+  last_name: z.string().min(1, { message: "Last name is required" }),
+  email: z.string().email(),
+  phone: z.string().min(10, { message: "Phone number is required" }),
+  portfolio: z.string().min(1, { message: "Portfolio link is required" }),
+  artisan: z.enum(artisanTitles, {
+    errorMap: () => ({ message: "Artisan category is required" }),
+  }),
+  do_you_train: z.enum(["yes", "no"], {
+    errorMap: () => ({ message: "Please select an option" }),
+  }),
+  willing_to_train: z.enum(["yes", "no"], {
+    errorMap: () => ({ message: "Please select an option" }),
+  }),
+});
+
+export type PartnerData = z.infer<typeof PartnerSchema>;

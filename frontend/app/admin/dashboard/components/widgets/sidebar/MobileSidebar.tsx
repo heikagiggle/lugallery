@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 
 const MobileSidebar = ({ onLinkClick }: { onLinkClick: () => void }) => {
   return (
-    <div className="lg:hidden flex flex-col py-8 h-screen">
+    <div className="lg:hidden flex flex-col py-8 h-screen z-[999]">
       <div className="mb-5 flex justify-between items-center gap-x-2 px-5">
         <Link
           href="/"

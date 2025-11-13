@@ -10,6 +10,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Input } from "../../../components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../components/ui/select";
 import { UserButton } from "@/app/components/widgets/buttons/UserButton";
 import { ImageUploader } from "@/app/components/widgets/uploader/image-uploader";
 
@@ -19,6 +26,9 @@ export const ProfileSchema = z.object({
   // bio: z.string(),
   phone: z.string(),
   email: z.string(),
+  gender: z.enum(["male", "female"], {
+    errorMap: () => ({ message: "Gender is required" }),
+  }),
   profile_image: z
     .object({
       url: z.string().url().optional(),
@@ -89,6 +99,26 @@ const ProfileForm = () => {
             <FormItem>
               <FormLabel>Phone number</FormLabel>
               <Input {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="gender"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Gender</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select gender" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="female">Female</SelectItem>
+                  <SelectItem value="male">Male</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

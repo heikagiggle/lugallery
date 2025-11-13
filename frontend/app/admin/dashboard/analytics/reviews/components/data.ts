@@ -4,7 +4,7 @@ export interface ReviewsProps {
   artisan: string;
   rating: string; // e.g. "⭐⭐⭐⭐"
   review: string;
- status: "pending" | "approved" | "rejected";
+  status: "pending" | "approved" | "rejected";
 }
 
 export const reviews: ReviewsProps[] = [
@@ -29,7 +29,8 @@ export const reviews: ReviewsProps[] = [
     user: "Ngozi Eze",
     artisan: "Tunde Ajayi",
     rating: "⭐⭐⭐⭐⭐",
-    review: "Amazing service! Highly recommend this artisan.",
+    review:
+      "Amazing service! Highly recommend this artisan.Excellent craftsmanship! The furniture came out beautifully.",
     status: "approved",
   },
   {

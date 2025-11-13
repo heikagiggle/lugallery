@@ -10,22 +10,22 @@ import {
 import { Card } from "@/components/ui/card";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { capitalizeWords, formatDate } from "../../components/helper";
-import { Ellipsis } from "../../components/icons/ellipsis";
-import { users } from "../../users/components/data";
-import { Pagination } from "../../components/pagination";
+import { capitalizeWords, formatDate } from "../../../components/helper";
+import { Ellipsis } from "../../../components/icons/ellipsis";
+import { mentors } from "./data";
+import { Pagination } from "../../../components/pagination";
 
 interface UserTableProps {
   searchQuery?: string;
 }
 
-export function PartnerTable({ searchQuery = "" }: UserTableProps) {
+export function MentorTable({ searchQuery = "" }: UserTableProps) {
   const searchParams = useSearchParams();
   const page = parseInt(searchParams.get("page") || "0");
   const size = parseInt(searchParams.get("size") || "10");
 
-  // Filter users by search query
-  const filteredData = users?.filter((user) => {
+  // Filter mentors by search query
+  const filteredData = mentors?.filter((user) => {
     const q = searchQuery.toLowerCase();
     return (
       user.name?.toLowerCase().includes(q) ||
@@ -47,33 +47,37 @@ export function PartnerTable({ searchQuery = "" }: UserTableProps) {
             <TableRow className="border-b border-[#E5E5E5] py-3">
               <TableHead className="pl-4">Name</TableHead>
               <TableHead>Email</TableHead>
+              <TableHead>Skill</TableHead>
               <TableHead>States</TableHead>
               <TableHead>Address</TableHead>
-              <TableHead className="pl-[2rem]">Date</TableHead>
+              <TableHead className="md:pl-[1.5rem]">Date registered</TableHead>
 
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paginatedItems.map((user) => (
-              <TableRow key={user.id} className="hover:bg-gray-50">
+            {paginatedItems.map((data) => (
+              <TableRow key={data.id} className="hover:bg-gray-50">
                 <TableCell className="pl-4 text-[#0D0D0D] font-medium">
-                  {user.name}
+                  {data.name}
                 </TableCell>
                 <TableCell className="text-[#666666]">
-                  {user.email || "N/A"}
+                  {data.email || "N/A"}
                 </TableCell>
                 <TableCell className="text-[#666666]">
-                  {capitalizeWords(user.state || "N/A")}
+                  {capitalizeWords(data.skill || "N/A")}
                 </TableCell>
                 <TableCell className="text-[#666666]">
-                  {user.address || "N/A"}
+                  {capitalizeWords(data.state || "N/A")}
+                </TableCell>
+                <TableCell className="text-[#666666]">
+                  {data.address || "N/A"}
                 </TableCell>
                 <TableCell className="pr-16 text-center text-[#666666]">
-                  {formatDate(user.date_registered)}
+                  {formatDate(data.date_registered)}
                 </TableCell>
                 <TableCell className="text-center cursor-pointer">
-                  <Link href={`/admin/dashboard/partners/${user.id}`}>
+                  <Link href={`/admin/dashboard/partners/${data.id}`}>
                     <Ellipsis />
                   </Link>
                 </TableCell>

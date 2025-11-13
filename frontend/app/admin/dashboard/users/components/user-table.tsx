@@ -57,7 +57,7 @@ export function UserTable() {
               <TableHead>Email</TableHead>
               <TableHead>States</TableHead>
               <TableHead>Address</TableHead>
-              <TableHead className="pl-[2rem]">Date</TableHead>
+              <TableHead className="md:pl-[2rem]">Date registered</TableHead>
 
               <TableHead></TableHead>
             </TableRow>

@@ -48,18 +48,18 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
       },
       {
         url: "",
-        label: "Platform Modules",
+        label: "Platform Data",
         subItems: [
           {
-            url: "/admin/dashboard/help-center/stigma-report",
+            url: "/admin/dashboard/platform/categories",
             label: "Categories",
           },
           {
-            url: "/admin/dashboard/help-center/gender-violence",
-            label: "Programs",
+            url: "/admin/dashboard/platform/training",
+            label: "Training",
           },
           {
-            url: "/admin/dashboard/help-center/support-group",
+            url: "/admin/dashboard/platform/mentors",
             label: "Partners & Mentors",
           },
         ],
@@ -139,7 +139,7 @@ const SidebarMenu = ({ onLinkClick, className = "" }: SidebarMenuProps) => {
   };
 
   return (
-    <ul className={`flex flex-col gap-y-2 ${className}`}>
+    <ul className={`flex flex-col gap-y-2 z-[999] ${className}`}>
       {mainMenuItems.map((nav) => (
         <li
           key={nav.label}

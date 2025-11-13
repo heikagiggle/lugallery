@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { AdminButton } from "../../../components/widgets/buttons/AdminButton";
 import DashboardTopbar from "../../../components/widgets/topbar/dashboard-topbar";
-import { PartnerTable } from "./omponents/partner-table";
+import { PartnerTable } from "./components/partner-table";
 
 const AllPartners = () => {
   const router = useRouter();
@@ -14,7 +14,7 @@ const AllPartners = () => {
       <DashboardTopbar
         rightContent={
           <AdminButton
-            onClick={() => router.push("/admin/dashboard/users/add-user")}
+            onClick={() => router.push("/admin/dashboard/partners/add-artisan")}
           >
             Add Partner
           </AdminButton>

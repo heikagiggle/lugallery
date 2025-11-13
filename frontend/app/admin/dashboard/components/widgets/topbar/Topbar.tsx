@@ -21,7 +21,7 @@ const TopBar = () => {
 
   return (
     <div
-      className={`flex items-center py-4 justify-between sticky text-white z-[999]`}
+      className={`flex items-center py-4 justify-between sticky text-white z[999]`}
     >
       <div className="lg:hidden block">
         <Menu

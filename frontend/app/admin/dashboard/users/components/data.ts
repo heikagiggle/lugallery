@@ -4,6 +4,7 @@ export interface UserProps {
   email: string;
   state: string;
   address: string;
+  image: string;
   date_registered: string;
 }
 
@@ -15,6 +16,7 @@ export const users: UserProps[] = [
     state: "Lagos",
     address: "12 Admiralty Way, Lekki Phase 1",
     date_registered: "2025-09-01T10:00:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "2",
@@ -23,6 +25,7 @@ export const users: UserProps[] = [
     state: "Kano",
     address: "23 Ahmadu Bello Way, Nassarawa GRA",
     date_registered: "2025-08-21T09:30:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "3",
@@ -31,6 +34,7 @@ export const users: UserProps[] = [
     state: "Enugu",
     address: "5 Zik Avenue, Independence Layout",
     date_registered: "2025-07-15T14:45:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "4",
@@ -39,6 +43,7 @@ export const users: UserProps[] = [
     state: "Oyo",
     address: "89 Ring Road, Ibadan",
     date_registered: "2025-06-12T11:20:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "5",
@@ -47,6 +52,7 @@ export const users: UserProps[] = [
     state: "Kaduna",
     address: "44 Yakubu Gowon Way",
     date_registered: "2025-05-27T08:15:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "6",
@@ -55,6 +61,7 @@ export const users: UserProps[] = [
     state: "Akwa Ibom",
     address: "77 Oron Road, Uyo",
     date_registered: "2025-04-30T16:00:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "7",
@@ -63,6 +70,7 @@ export const users: UserProps[] = [
     state: "Kwara",
     address: "15 Unity Road, Ilorin",
     date_registered: "2025-04-10T13:00:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "8",
@@ -71,6 +79,7 @@ export const users: UserProps[] = [
     state: "Anambra",
     address: "3 Awka Road, Onitsha",
     date_registered: "2025-03-18T12:30:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "9",
@@ -79,6 +88,7 @@ export const users: UserProps[] = [
     state: "Borno",
     address: "100 Maiduguri Road",
     date_registered: "2025-02-25T15:30:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "10",
@@ -87,6 +97,7 @@ export const users: UserProps[] = [
     state: "Cross River",
     address: "33 Calabar Road",
     date_registered: "2025-01-05T17:45:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "11",
@@ -95,6 +106,7 @@ export const users: UserProps[] = [
     state: "Sokoto",
     address: "4 Shehu Shagari Way",
     date_registered: "2024-12-12T10:00:00",
+    image: "/maxky.jpeg",
   },
   {
     id: "12",
@@ -103,5 +115,6 @@ export const users: UserProps[] = [
     state: "Abia",
     address: "22 Aba-Owerri Road",
     date_registered: "2024-11-23T09:00:00",
+    image: "/maxky.jpeg",
   },
 ];

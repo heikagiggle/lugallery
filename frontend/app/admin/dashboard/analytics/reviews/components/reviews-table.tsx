@@ -13,6 +13,13 @@ import { reviews as initialReviews, ReviewsProps } from "./data";
 import { useSearch } from "../../../../../state/client/search-context";
 import { useEffect, useState } from "react";
 import { Pagination } from "../../../components/pagination";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export function ReviewsTable() {
   const { searchQuery } = useSearch();
@@ -47,7 +54,10 @@ export function ReviewsTable() {
   const paginatedItems = filteredData.slice(start, start + size);
 
   // Handler to update review status
-  const handleStatusChange = (id: string, newStatus: "approved" | "rejected") => {
+  const handleStatusChange = (
+    id: string,
+    newStatus: "approved" | "rejected"
+  ) => {
     setReviews((prev) =>
       prev.map((r) => (r.id === id ? { ...r, status: newStatus } : r))
     );
@@ -75,7 +85,27 @@ export function ReviewsTable() {
                 </TableCell>
                 <TableCell className="text-[#666666]">{data.artisan}</TableCell>
                 <TableCell className="text-[#666666]">{data.rating}</TableCell>
-                <TableCell className="text-[#666666]">{data.review}</TableCell>
+                <TableCell className="text-[#666666] max-w-[200px] truncate cursor-pointer">
+                  {data.review && data.review.length > 40 ? (
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <span className="hover:underline">
+                          {data.review.slice(0, 60)}...
+                        </span>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md">
+                        <DialogHeader>
+                          <DialogTitle>Full Review</DialogTitle>
+                        </DialogHeader>
+                        <p className="text-gray-700 text-sm leading-relaxed">
+                          {data.review}
+                        </p>
+                      </DialogContent>
+                    </Dialog>
+                  ) : (
+                    <span>{data.review || "N/A"}</span>
+                  )}
+                </TableCell>
                 <TableCell className="text-[#666666]">
                   <span
                     className={`px-2 py-1 text-xs font-medium capitalize ${

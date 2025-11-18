@@ -1,17 +1,27 @@
+"use client";
+
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import React from "react";
+import React, { Suspense } from "react";
 import PersonalDetails from "./components/PersonalDetails";
 import EngagementTable from "./components/EngagementTable";
 import { users } from "../components/data";
 import DashboardTopbar from "../../../../components/widgets/topbar/dashboard-topbar";
 
-interface Props {
-  params: { id: string };
-}
+const UserDetails = () => {
+  const params = useParams();
+  const id = params?.id as string;
 
-const UserDetails = ({ params }: Props) => {
-  const user = users.find((u) => u.id === params.id);
+  if (!id) {
+    return (
+      <Card className="p-6 mt-6">
+        <p className="text-gray-500">No user id provided.</p>
+      </Card>
+    );
+  }
+
+  const user = users.find((u) => u.id === id);
 
   if (!user) {
     return (
@@ -22,7 +32,7 @@ const UserDetails = ({ params }: Props) => {
   }
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading user details...</div>}>
       <DashboardTopbar />
       <PersonalDetails user={user} />
       <EngagementTable />
@@ -35,7 +45,7 @@ const UserDetails = ({ params }: Props) => {
           Delete User
         </Button>
       </Card>
-    </div>
+    </Suspense>
   );
 };
 

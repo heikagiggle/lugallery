@@ -8,6 +8,7 @@ export interface ArtisanProfile {
   phone: string;
   rating: number;
   images: string[];
+  wantToTrain: "yes" | "no"; // 👈 Added this field
   socials: {
     instagram?: string;
     facebook?: string;
@@ -28,12 +29,8 @@ export const artisanProfiles: ArtisanProfile[] = [
     localGov: "Gwagwalada",
     phone: "+234 800 123 4567",
     rating: 4,
-    images: [
-      "/carpenter.jpg",
-      "/carpenter.jpg",
-      "/carpenter.jpg",
-      "/carpenter.jpg",
-    ],
+    wantToTrain: "yes",
+    images: ["/carpenter.jpg", "/carpenter.jpg", "/carpenter.jpg", "/carpenter.jpg"],
     socials: {
       instagram: "https://instagram.com/tolucrafts",
       facebook: "https://facebook.com/tolucrafts",
@@ -52,11 +49,8 @@ export const artisanProfiles: ArtisanProfile[] = [
     localGov: "Surulere",
     phone: "+234 801 555 4422",
     rating: 5,
-    images: [
-      "/tailor.jpg",
-      "/tailor.jpg",
-      "/tailor.jpg",
-    ],
+    wantToTrain: "yes",
+    images: ["/tailor.jpg", "/tailor.jpg", "/tailor.jpg"],
     socials: {
       instagram: "https://instagram.com/ngozistyles",
       facebook: "https://facebook.com/ngozistyles",
@@ -74,12 +68,8 @@ export const artisanProfiles: ArtisanProfile[] = [
     localGov: "Nsukka",
     phone: "+234 802 987 6543",
     rating: 4,
-    images: [
-      "",
-      "",
-      "",
-      "",
-    ],
+    wantToTrain: "no",
+    images: ["", "", "", ""],
     socials: {
       instagram: "https://instagram.com/amakalens",
       tiktok: "https://tiktok.com/@amakalens",
@@ -97,11 +87,8 @@ export const artisanProfiles: ArtisanProfile[] = [
     localGov: "Ibadan North",
     phone: "+234 805 776 1122",
     rating: 5,
-    images: [
-      "/mechanic.jpg",
-      "/mechanic.jpg",
-      "/mechanic.jpg",
-    ],
+    wantToTrain: "yes",
+    images: ["/mechanic.jpg", "/mechanic.jpg", "/mechanic.jpg"],
     socials: {
       facebook: "https://facebook.com/kolatech",
       whatsapp: "https://wa.me/2348057761122",
@@ -118,12 +105,8 @@ export const artisanProfiles: ArtisanProfile[] = [
     localGov: "Nassarawa",
     phone: "+234 809 334 2255",
     rating: 5,
-    images: [
-      "/mua.jpg",
-      "/mua.jpg",
-      "/mua.jpg",
-      "/mua.jpg",
-    ],
+    wantToTrain: "no",
+    images: ["/mua.jpg", "/mua.jpg", "/mua.jpg", "/mua.jpg"],
     socials: {
       instagram: "https://instagram.com/zainabbeauty",
       tiktok: "https://tiktok.com/@zainabbeauty",

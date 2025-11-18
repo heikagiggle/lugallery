@@ -93,7 +93,7 @@ export function ReviewsTable() {
                           {data.review.slice(0, 60)}...
                         </span>
                       </DialogTrigger>
-                      <DialogContent className="max-w-md">
+                      <DialogContent>
                         <DialogHeader>
                           <DialogTitle>Full Review</DialogTitle>
                         </DialogHeader>

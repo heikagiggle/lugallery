@@ -10,7 +10,7 @@ const Apprentices = () => {
   const router = useRouter();
 
   return (
-    <div className="pr-[2rem] md:pr-[3rem] lg:pr-0">
+    <div className="pr-[0.5rem] sm:pr-[1.5rem] md:pr-[3rem] lg:pr-0">
       <DashboardTopbar
         rightContent={
           <AdminButton

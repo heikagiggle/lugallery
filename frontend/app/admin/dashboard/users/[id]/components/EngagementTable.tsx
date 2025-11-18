@@ -75,7 +75,7 @@ const EngagementTable = () => {
               <TableHead>Artisan Title</TableHead>
               <TableHead>Rating</TableHead>
               <TableHead>Reviews</TableHead>
-              <TableHead className="pl-14">Date</TableHead>
+              <TableHead className="md:pl-14">Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

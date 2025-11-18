@@ -18,7 +18,6 @@ import {
   SelectValue,
 } from "../../../../../components/ui/select";
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
-import Link from "next/link";
 import { artisanTitles } from "@/app/user/discover/components/data";
 
 const AddArtisanForm = () => {

@@ -1,7 +1,7 @@
 export interface IAuthState {
   token?: string | null;
   setToken: (token: string | null) => void;
-   user?: { name: string } | null; //TODO 
+  user?: { name: string } | null; //TODO
 }
 
 export enum AuthStateActionType {

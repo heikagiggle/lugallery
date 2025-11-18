@@ -22,7 +22,7 @@ const Appearance = () => {
       </p>
 
       {/* Themes */}
-      <div className="grid grid-cols-2 px-1 gap-4">
+      <div className="grid md:grid-cols-2 px-1 gap-4">
         {/* Light Theme Option */}
         <div
           onClick={() => handleThemeChange("light")}

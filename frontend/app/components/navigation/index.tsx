@@ -45,118 +45,73 @@ const Navigation = () => {
   };
 
   return (
-    <div className="flex justify-between mx-5 md:mx-10 pt-7 pb-5 md:pt-6 md:pb-6">
-      <div className="flex items-center gap-x-4 md:gap-x-10 w-full md:w-auto">
-        <Link
-          href="/"
-          className="font-bold logo-font md:text-2xl text-lg cursor-pointer"
-        >
-          Lugallery
-        </Link>
-        <div className="relative w-full max-w-xs md:max-w-md">
-          <div className="absolute inset-y-0 start-0 flex items-center pl-3">
-            <CiSearch size={20} />
+    <>
+      {/* Fixed Nav */}
+      <div className="fixed top-0 left-0 w-full z-[1000] bg-white shadow-sm">
+        <div className="flex justify-between mx-5 md:mx-10 pt-7 pb-5 md:pt-6 md:pb-6">
+          <div className="flex items-center gap-x-4 md:gap-x-10 w-full md:w-auto">
+            <Link
+              href="/"
+              className="font-bold logo-font md:text-2xl text-lg cursor-pointer"
+            >
+              Lugallery
+            </Link>
+
+            <div className="relative w-full max-w-xs md:max-w-md">
+              <div className="absolute inset-y-0 start-0 flex items-center pl-3">
+                <CiSearch size={20} />
+              </div>
+              <input
+                type="search"
+                className="w-full md:w-[350px] xl:w-[450px] pl-8 pr-2 md:pl-10 md:pr-12 py-2 
+              text-xs md:text-base outline-none border border-[#e5e5e5] bg-white rounded-lg"
+                placeholder="Search here"
+              />
+            </div>
           </div>
-          <input
-            type="search"
-            className="w-full md:w-[350px] xl:w-[450px] pl-8 pr-2  md:pl-10 md:pr-12 py-2 text-xs md:text-base outline-none border border-[#e5e5e5] bg-white rounded-lg"
-            placeholder="Search here"
-          />
+
+          {/* Desktop Nav */}
+          <ul className="hidden lg:flex xl:gap-x-10 gap-x-3 text-[13px] xl:text-[15px] text-black py-3 px-10">
+            {menu.map((navItem) => (
+              <li key={navItem.path}>
+                <Link href={navItem.path}>
+                  <p
+                    className={`hover:text-[#006400] hover:font-semibold transition-colors ${
+                      activeTab === navItem.path
+                        ? "text-[#006400] font-semibold"
+                        : ""
+                    }`}
+                    onClick={() => handleSetActiveTab(navItem.path)}
+                  >
+                    {navItem.isUser ? (
+                      <span className="flex items-center gap-2">
+                        <span
+                          className="bg-[#006400] text-white rounded-full w-6 h-6 
+                      flex items-center justify-center text-xs font-bold"
+                        >
+                          {userInitial}
+                        </span>
+                        <span className="hidden md:inline">{user?.name}</span>
+                      </span>
+                    ) : (
+                      navItem.title
+                    )}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Nav */}
+          <div className="block lg:hidden">
+            <MobileNavigation />
+          </div>
         </div>
       </div>
 
-      {/* Desktop Nav */}
-      <ul className="hidden lg:flex xl:gap-x-10 gap-x-3 text-[13px] xl:text-[15px] text-black py-3 px-10">
-        {menu.map((navItem) => (
-          <li key={navItem.path}>
-            <Link href={navItem.path}>
-              <p
-                className={`hover:text-[#006400] hover:font-semibold transition-colors ${
-                  activeTab === navItem.path
-                    ? "text-[#006400] font-semibold"
-                    : ""
-                }`}
-                onClick={() => handleSetActiveTab(navItem.path)}
-              >
-                {navItem.isUser ? (
-                  <span className="flex items-center gap-2 ">
-                    <span className="bg-[#006400] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-                      {userInitial}
-                    </span>
-                    <span className="hidden md:inline">{user?.name}</span>
-                  </span>
-                ) : (
-                  navItem.title
-                )}
-              </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      {/* Mobile Nav */}
-      <div className="block lg:hidden">
-        <MobileNavigation />
-      </div>
-    </div>
-
-    // fixed naviagtion
-    //   <div className=" fixed z-1000 bg-white w-full">
-    //   <div className="flex justify-between mx-5 md:mx-10 pt-7 pb-5 md:pt-6 md:pb-6">
-    //     <div className="flex items-center gap-x-4 md:gap-x-10 w-full md:w-auto">
-    //       <Link
-    //         href="/"
-    //         className="font-bold logo-font md:text-2xl text-lg cursor-pointer"
-    //       >
-    //         Lugallery
-    //       </Link>
-    //       <div className="relative w-full max-w-xs md:max-w-md">
-    //         <div className="absolute inset-y-0 start-0 flex items-center pl-3">
-    //           <CiSearch size={20} />
-    //         </div>
-    //         <input
-    //           type="search"
-    //           className="w-full md:w-[350px] xl:w-[450px] pl-8 pr-2  md:pl-10 md:pr-12 py-2 text-xs md:text-base outline-none border border-[#e5e5e5] bg-white rounded-lg"
-    //           placeholder="Search here"
-    //         />
-    //       </div>
-    //     </div>
-
-    //     {/* Desktop Nav */}
-    //     <ul className="hidden lg:flex xl:gap-x-10 gap-x-3 text-[13px] xl:text-[15px] text-black py-3 px-10">
-    //       {menu.map((navItem) => (
-    //         <li key={navItem.path}>
-    //           <Link href={navItem.path}>
-    //             <p
-    //               className={`hover:text-[#006400] hover:font-semibold transition-colors ${
-    //                 activeTab === navItem.path
-    //                   ? "text-[#006400] font-semibold"
-    //                   : ""
-    //               }`}
-    //               onClick={() => handleSetActiveTab(navItem.path)}
-    //             >
-    //               {navItem.isUser ? (
-    //                 <span className="flex items-center gap-2 ">
-    //                   <span className="bg-[#006400] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-    //                     {userInitial}
-    //                   </span>
-    //                   <span className="hidden md:inline">{user?.name}</span>
-    //                 </span>
-    //               ) : (
-    //                 navItem.title
-    //               )}
-    //             </p>
-    //           </Link>
-    //         </li>
-    //       ))}
-    //     </ul>
-
-    //     {/* Mobile Nav */}
-    //     <div className="block lg:hidden">
-    //       <MobileNavigation />
-    //     </div>
-    //   </div>
-    // </div>
+      {/* Spacer — ensures content is not hidden under fixed header */}
+      <div className="h-[95px]" />
+    </>
   );
 };
 

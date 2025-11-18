@@ -6,33 +6,33 @@ import { useState } from "react";
 import { MailIcon } from "../icons/mail-icon";
 import { SearchIcon } from "../icons/search-icon";
 import { BellIcon } from "../icons/bell";
-import { ChevronDown, Menu } from "lucide-react";
-import MobileSidebar from "../sidebar/MobileSidebar";
+import { ChevronDown, MenuIcon } from "lucide-react";
 import { useSearch } from "../../../../../state/client/search-context";
 
-const TopBar = () => {
+interface TopBarProps {
+  setIsSidebarOpen: (open: boolean) => void;
+  isSidebarOpen: boolean;
+}
+
+const TopBar = ({ setIsSidebarOpen, isSidebarOpen }: TopBarProps) => {
   const router = useRouter();
 
   const [openProfile, setOpenProfile] = useState(false);
   const handleClick = () => setOpenProfile(!openProfile);
   const handleLogout = async () => router.push("/login");
-  const [isOpen, setIsOpen] = useState(false);
   const { searchQuery, setSearchQuery } = useSearch();
 
   return (
     <div
-      className={`flex items-center py-4 justify-between sticky text-white z[999]`}
+      className={`flex items-center py-4 justify-between sticky text-white pl-1 lg:pl-10 border-b border-[#E5E5E5] pr-5 sm:pr-10 lg:pr-4`}
     >
-      <div className="lg:hidden block">
-        <Menu
-          className="text-black cursor-pointer mr-3"
-          onClick={() => setIsOpen(!isOpen)}
-        />
-        {isOpen && (
-          <div className="fixed right-[100px] w-[280px] left-0 top-0 p-5 pt-0 bg-[#006400]  transition transform 0.3s ease-in-out z-[100] h-full">
-            <MobileSidebar onLinkClick={() => setIsOpen(false)} />
-          </div>
-        )}
+      <div className="lg:hidden p-4 flex items-center gap-x-5">
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="text-gray-800 cursor-pointer"
+        >
+          <MenuIcon size={28} />
+        </button>
       </div>
 
       <div className="relative">
@@ -52,7 +52,7 @@ const TopBar = () => {
       <div className="flex items-center justify-between gap-x-4">
         <Link
           href={"/admin/dashboard/support"}
-          className="relative cursor-pointer bg-white p-2 rounded-lg"
+          className="relative cursor-pointer p-2 rounded-lg"
         >
           <MailIcon />
           <span className="absolute top-1 right-1 flex items-center justify-center">
@@ -64,7 +64,7 @@ const TopBar = () => {
 
         <Link
           href={"/admin/dashboard/settings/notification"}
-          className="relative cursor-pointer bg-white p-2 rounded-lg"
+          className="relative cursor-pointer p-2 rounded-lg"
         >
           <BellIcon />
           <span className="absolute top-1 right-1 flex items-center justify-center">
@@ -78,7 +78,7 @@ const TopBar = () => {
           className="flex items-center borde border-[#e5e5e5]"
           onClick={handleClick}
         >
-          <div className="cursor-pointer bg-white p-2 rounded-lg">
+          <div className="cursor-pointer p-2 rounded-lg">
             <p className="text-base font-bold text-[#0D0D0D]">Giggle</p>
           </div>
           <div className="flex items-center gap-[15px] cursor-pointer">

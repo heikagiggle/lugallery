@@ -53,7 +53,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({
         setRating(null);
         setRecommend(null);
         setSuggestions("");
-      }, 10000); // show thank-you step for 2 seconds
+      }, 10000); 
       return () => clearTimeout(timer);
     }
   }, [step]);

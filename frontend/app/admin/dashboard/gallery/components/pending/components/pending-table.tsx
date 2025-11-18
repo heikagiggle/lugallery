@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { capitalizeWords, formatDate } from "../../../../components/helper";
 import { artisanProfiles } from "../../data";
 import { useEffect } from "react";
@@ -47,7 +46,7 @@ export function PendingProfileTable() {
   const start = currentPage * size;
   const paginatedItems = filteredData.slice(start, start + size);
 
-  return (
+  return (  
     <Card className="bg-white mt-6 shadow-md rounded-xl w-full py-2">
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table className="z-0">

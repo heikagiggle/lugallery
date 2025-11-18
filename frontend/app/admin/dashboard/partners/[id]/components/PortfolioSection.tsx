@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 import React from "react";
 
 interface PortfolioProps {
@@ -25,10 +26,12 @@ const PortfolioSection = ({ portfolio, images }: PortfolioProps) => {
       {images && images.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {images.map((img, i) => (
-            <img
+            <Image
               key={i}
               src={img}
               alt={`Work ${i + 1}`}
+              width={128}
+              height={128}
               className="rounded-lg w-full h-32 object-cover"
             />
           ))}

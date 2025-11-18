@@ -10,7 +10,7 @@ const FeaturedCollections = () => {
 
 
   return (
-    <div className="mt-4 mb-10 flex flex-col justify-center items-center mx-12">
+    <div className="pt-12 mb-10 flex flex-col justify-center items-center mx-12">
       <div className="space-y-2.5 text-center">
         <h1 className="text-3xl md:text-5xl font-semibold">Featured</h1>
         <p className="text-xl">Desired curated professionals</p>

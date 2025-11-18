@@ -1,7 +1,12 @@
 "use client";
 
 import React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { StudentProps } from "../../components/data";
 import { Star } from "lucide-react";
 import { formatDate } from "../../../../components/helper";
@@ -21,7 +26,7 @@ export const StudentModal: React.FC<StudentModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg bg-white rounded-lg shadow-lg">
+      <DialogContent className=" bg-white rounded-lg shadow-lg">
         <DialogHeader>
           <DialogTitle className="text-lg font-semibold text-gray-800">
             Student Details
@@ -30,16 +35,20 @@ export const StudentModal: React.FC<StudentModalProps> = ({
 
         <div className="mt-4 text-gray-700 space-y-2">
           <p>
-            <span className="font-medium text-gray-800">Name:</span> {student.name}
+            <span className="font-medium text-gray-800">Name:</span>{" "}
+            {student.name}
           </p>
           <p>
-            <span className="font-medium text-gray-800">Email:</span> {student.email}
+            <span className="font-medium text-gray-800">Email:</span>{" "}
+            {student.email}
           </p>
           <p>
-            <span className="font-medium text-gray-800">Skill:</span> {student.skill}
+            <span className="font-medium text-gray-800">Skill:</span>{" "}
+            {student.skill}
           </p>
           <p>
-            <span className="font-medium text-gray-800">State:</span> {student.state}
+            <span className="font-medium text-gray-800">State:</span>{" "}
+            {student.state}
           </p>
           <p>
             <span className="font-medium text-gray-800">Duration:</span>{" "}

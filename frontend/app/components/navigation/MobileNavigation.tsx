@@ -67,7 +67,7 @@ const MobileNavigation = () => {
               <li
                 key={index}
                 className={`w-full p-[0.08rem] transition-all text-sm ${
-                  activeTab === index ? "text-[#006400]" : "text-black"
+                  activeTab === index ? "text-[#006400] font-bold" : "text-black"
                 } hover:text-[#006400]`}
               >
                 <Link

@@ -59,7 +59,7 @@ const ProfileDetailsModal = ({
 
       <DialogContent
         side
-        className="z-50 border-none max-w-2xl  overflow-y-auto p-8 shadow-lg"
+        className="z-50 border-none max-w-2xl overflow-y-auto p-8 shadow-lg"
       >
         <DialogTitle className="text-2xl font-semibold text-[#111013] mb-6">
           Artisan Profile
@@ -116,7 +116,7 @@ const ProfileDetailsModal = ({
             <p className="text-[#666666]">{profile.title}</p>
             <p className="text-sm leading-relaxed">{profile.description}</p>
 
-            <div className="mt-3">
+            <div className="mt-3 space-y-2">
               <p>
                 <span className="font-medium">State:</span> {profile.state}
               </p>
@@ -126,6 +126,18 @@ const ProfileDetailsModal = ({
               </p>
               <p>
                 <span className="font-medium">Phone:</span> {profile.phone}
+              </p>
+              <p>
+                <span className="font-medium">Wants to Train:</span>{" "}
+                <span
+                  className={`${
+                    profile.wantToTrain === "yes"
+                      ? "text-green-600 font-semibold"
+                      : "text-red-500 font-medium"
+                  }`}
+                >
+                  {profile.wantToTrain === "yes" ? "Yes" : "No"}
+                </span>
               </p>
             </div>
 

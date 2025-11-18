@@ -68,7 +68,7 @@ const Notification = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex sm:flex-row flex-col justify-between lg:items-center gap-2">
         <h1 className="text-2xl font-semibold">Notifications</h1>
         {selectedIds.length > 0 && (
           <button

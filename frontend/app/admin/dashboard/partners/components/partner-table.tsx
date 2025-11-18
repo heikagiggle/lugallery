@@ -58,7 +58,7 @@ export function PartnerTable({ searchQuery = "" }: UserTableProps) {
           </TableHeader>
           <TableBody>
             {paginatedItems.map((user) => (
-              <TableRow key={user.id} className="hover:bg-gray-50">
+              <TableRow key={user.id} className="hover:bg-gray-50 z-50">
                 <TableCell className="pl-4 text-[#0D0D0D] font-medium">
                   {user.name}
                 </TableCell>

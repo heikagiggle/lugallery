@@ -12,9 +12,9 @@ interface SpotlightUserProps {
 
 const SpotlightUser: React.FC<SpotlightUserProps> = ({ artisans }) => {
   return (
-    <section className="py-12 bg-white max-w-7xl mx-auto">
+    <section className="pt-14 pb-12 bg-white max-w-7xl mx-auto">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Spotlight 🌟</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">Spotlight 🌟</h2>
         <p className="text-gray-500 text-lg md:text-xl mb-8">
           Meet the creatives everyone is booking right now. These talented
           artisans are setting trends, delivering excellence, and making waves

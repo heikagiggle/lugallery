@@ -23,6 +23,8 @@ export const PartnerSchema = z.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters" }),
   role: z.literal("PARTNER"),
+  do_you_train: z.enum(["yes", "no"]),
+  willing_to_train: z.enum(["yes", "no"]),
 });
 
 //Career schema

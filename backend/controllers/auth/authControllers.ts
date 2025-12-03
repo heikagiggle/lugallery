@@ -1,8 +1,7 @@
-// Import types only (TypeScript syntax)
 import type { Request, Response } from "express";
 
-// Import runtime modules with require
-const { prisma } = require("../../lib/prisma");
+import { prisma } from "../../lib/prisma";  // ✔️ correct
+
 const {
   AdminSchema,
   CareerSchema,
@@ -71,6 +70,8 @@ const register = async (req: Request, res: Response) => {
                   phone,
                   portfolio: extra.portfolio,
                   artisan: extra.artisan,
+                  do_you_train: extra.do_you_train,
+                  willing_to_train: extra.willing_to_train,
                 },
               }
             : undefined,
@@ -97,8 +98,11 @@ const register = async (req: Request, res: Response) => {
             : undefined,
       },
     });
+    const { password: _removedPassword, ...safeUser } = user;
 
-    res.status(201).json({ message: "User registered successfully", user });
+    res
+      .status(201)
+      .json({ message: "User registered successfully", user: safeUser });
   } catch (error) {
     res.status(500).json({ message: "Registration failed", error });
   }
@@ -215,28 +219,17 @@ const getUserProfile = async (req: Request, res: Response) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  if (user.role === "ADMIN") {
-    const allUsers = await prisma.user.findMany({
-      select: {
-        id: true,
-        email: true,
-        role: true,
-      },
-    });
-    return res.json(allUsers);
-  }
-
-  // Regular user — show only their own profile
-  const currentUser = await prisma.user.findUnique({
+  const fullUser = await prisma.user.findUnique({
     where: { id: user.userId },
-    select: {
-      id: true,
-      email: true,
-      role: true,
+    include: {
+      userData: true,
+      partner: true,
+      career: true,
+      admin: true,
     },
   });
 
-  res.json(currentUser);
+  res.json(fullUser);
 };
 
 module.exports = {

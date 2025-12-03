@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// Import runtime modules with require
-const { prisma } = require("../../lib/prisma");
+const prisma_1 = require("../../lib/prisma"); // ✔️ correct
 const { AdminSchema, CareerSchema, PartnerSchema, UserRegisterSchema, } = require("../../schema/registerSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -26,8 +25,18 @@ const register = async (req, res) => {
     }
     try {
         const { email, password, name, phone, ...extra } = req.body;
+        // ✅ Check if email already exists
+        const existingUser = await prisma_1.prisma.user.findUnique({
+            where: { email },
+        });
+        if (existingUser) {
+            return res.status(400).json({
+                message: "Email is already in use. Please use a different email or log in.",
+            });
+        }
+        // end
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await prisma.user.create({
+        const user = await prisma_1.prisma.user.create({
             data: {
                 email,
                 password: hashedPassword,
@@ -41,6 +50,8 @@ const register = async (req, res) => {
                             phone,
                             portfolio: extra.portfolio,
                             artisan: extra.artisan,
+                            do_you_train: extra.do_you_train,
+                            willing_to_train: extra.willing_to_train,
                         },
                     }
                     : undefined,
@@ -63,7 +74,10 @@ const register = async (req, res) => {
                     : undefined,
             },
         });
-        res.status(201).json({ message: "User registered successfully", user });
+        const { password: _removedPassword, ...safeUser } = user;
+        res
+            .status(201)
+            .json({ message: "User registered successfully", user: safeUser });
     }
     catch (error) {
         res.status(500).json({ message: "Registration failed", error });
@@ -71,7 +85,7 @@ const register = async (req, res) => {
 };
 const login = async (req, res) => {
     const { email, password } = req.body;
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma_1.prisma.user.findUnique({ where: { email } });
     if (!user) {
         return res.status(401).json({ message: "Invalid email or password" });
     }
@@ -84,12 +98,12 @@ const login = async (req, res) => {
 };
 const sendOTP = async (req, res) => {
     const { email } = req.body;
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma_1.prisma.user.findUnique({ where: { email } });
     if (!user)
         return res.status(404).json({ message: "User not found" });
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-    await prisma.oTP.create({
+    await prisma_1.prisma.oTP.create({
         data: {
             email,
             otp,
@@ -115,7 +129,7 @@ const sendOTP = async (req, res) => {
 };
 const verifyOTP = async (req, res) => {
     const { email, otp } = req.body;
-    const otpEntry = await prisma.oTP.findFirst({
+    const otpEntry = await prisma_1.prisma.oTP.findFirst({
         where: { email, otp },
         orderBy: { createdAt: "desc" },
     });
@@ -126,7 +140,7 @@ const verifyOTP = async (req, res) => {
 };
 const resetPassword = async (req, res) => {
     const { email, otp, newPassword } = req.body;
-    const otpEntry = await prisma.oTP.findFirst({
+    const otpEntry = await prisma_1.prisma.oTP.findFirst({
         where: { email, otp },
         orderBy: { createdAt: "desc" },
     });
@@ -134,12 +148,12 @@ const resetPassword = async (req, res) => {
         return res.status(400).json({ message: "Invalid or expired OTP" });
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    await prisma.user.update({
+    await prisma_1.prisma.user.update({
         where: { email },
         data: { password: hashedPassword },
     });
     // Optionally delete used OTPs
-    await prisma.oTP.deleteMany({
+    await prisma_1.prisma.oTP.deleteMany({
         where: { email },
     });
     res.json({ message: "Password reset successful" });
@@ -149,26 +163,16 @@ const getUserProfile = async (req, res) => {
     if (!user) {
         return res.status(401).json({ message: "Unauthorized" });
     }
-    if (user.role === "ADMIN") {
-        const allUsers = await prisma.user.findMany({
-            select: {
-                id: true,
-                email: true,
-                role: true,
-            },
-        });
-        return res.json(allUsers);
-    }
-    // Regular user — show only their own profile
-    const currentUser = await prisma.user.findUnique({
+    const fullUser = await prisma_1.prisma.user.findUnique({
         where: { id: user.userId },
-        select: {
-            id: true,
-            email: true,
-            role: true,
+        include: {
+            userData: true,
+            partner: true,
+            career: true,
+            admin: true,
         },
     });
-    res.json(currentUser);
+    res.json(fullUser);
 };
 module.exports = {
     register,

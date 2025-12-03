@@ -6,8 +6,8 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
+
 
 datasource db {
   provider = "postgresql"
@@ -45,6 +45,10 @@ model Partner {
   phone      String
   portfolio  String
   artisan    String
+ 
+  do_you_train     String?
+  willing_to_train String?
+
 
   approved   Boolean @default(false) // Partners require approval
 }

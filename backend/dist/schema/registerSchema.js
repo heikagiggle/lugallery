@@ -24,6 +24,8 @@ exports.PartnerSchema = zod_1.z.object({
         .string()
         .min(8, { message: "Password must be at least 8 characters" }),
     role: zod_1.z.literal("PARTNER"),
+    do_you_train: zod_1.z.enum(["yes", "no"]),
+    willing_to_train: zod_1.z.enum(["yes", "no"]),
 });
 //Career schema
 exports.CareerSchema = zod_1.z.object({

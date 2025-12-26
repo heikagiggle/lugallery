@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 
-import { prisma } from "../../lib/prisma";  // ✔️ correct
+import { prisma } from "../../lib/prisma"; // ✔️ correct
 
 const {
   AdminSchema,
@@ -133,41 +133,41 @@ const login = async (req: Request, res: Response) => {
 };
 
 const sendOTP = async (req: Request, res: Response) => {
-  const { email } = req.body;
+  try {
+    const { email } = req.body;
 
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) return res.status(404).json({ message: "User not found" });
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-  const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit
-  const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
-  await prisma.oTP.create({
-    data: {
-      email,
-      otp,
-      expiresAt,
-    },
-  });
+    await prisma.oTP.create({
+      data: { email, otp, expiresAt },
+    });
 
-  // Send email via nodemailer
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "Your OTP Code",
-    text: `Your OTP is ${otp}`,
-  };
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Your OTP Code",
+      text: `Your OTP is ${otp}`,
+    });
 
-  await transporter.sendMail(mailOptions);
-
-  res.json({ message: "OTP sent to your email." });
+    res.json({ message: "OTP sent to your email." });
+  } catch (error) {
+    console.error("SEND OTP ERROR:", error);
+    res.status(500).json({ message: "Failed to send OTP" });
+  }
 };
 
 const verifyOTP = async (req: Request, res: Response) => {

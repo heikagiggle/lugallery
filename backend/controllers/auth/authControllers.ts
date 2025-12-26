@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 
-import { prisma } from "../../lib/prisma"; // ✔️ correct
+import { prisma } from "../../lib/prisma";
+import { Resend } from "resend";
 
 const {
   AdminSchema,
@@ -11,6 +12,8 @@ const {
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 type Role = "USER" | "PARTNER" | "CAREER" | "ADMIN";
 
@@ -146,18 +149,24 @@ const sendOTP = async (req: Request, res: Response) => {
       data: { email, otp, expiresAt },
     });
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+    // const transporter = nodemailer.createTransport({
+    //   host: "smtp.gmail.com",
+    //   port: 465,
+    //   secure: true,
+    //   auth: {
+    //     user: process.env.EMAIL_USER,
+    //     pass: process.env.EMAIL_PASS,
+    //   },
+    // });
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    // await transporter.sendMail({
+    //   from: process.env.EMAIL_USER,
+    //   to: email,
+    //   subject: "Your OTP Code",
+    //   text: `Your OTP is ${otp}`,
+    // });
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
       to: email,
       subject: "Your OTP Code",
       text: `Your OTP is ${otp}`,
@@ -169,6 +178,7 @@ const sendOTP = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to send OTP" });
   }
 };
+console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
 
 const verifyOTP = async (req: Request, res: Response) => {
   const { email, otp } = req.body;

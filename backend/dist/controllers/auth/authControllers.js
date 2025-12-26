@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const prisma_1 = require("../../lib/prisma"); // ✔️ correct
+const prisma_1 = require("../../lib/prisma");
+const resend_1 = require("resend");
 const { AdminSchema, CareerSchema, PartnerSchema, UserRegisterSchema, } = require("../../schema/registerSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
+const resend = new resend_1.Resend(process.env.RESEND_API_KEY);
 const register = async (req, res) => {
     const { role } = req.body;
     const schemaByRole = {
@@ -96,37 +97,35 @@ const login = async (req, res) => {
     const token = jwt.sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
     res.json({ message: "Login successful", token, role: user.role });
 };
+console.log("ENV CHECK:", {
+    NODE_ENV: process.env.NODE_ENV,
+    RESEND_API_KEY_EXISTS: !!process.env.RESEND_API_KEY,
+});
 const sendOTP = async (req, res) => {
-    const { email } = req.body;
-    const user = await prisma_1.prisma.user.findUnique({ where: { email } });
-    if (!user)
-        return res.status(404).json({ message: "User not found" });
-    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-    await prisma_1.prisma.oTP.create({
-        data: {
-            email,
-            otp,
-            expiresAt,
-        },
-    });
-    // Send email via nodemailer
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-    });
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: "Your OTP Code",
-        text: `Your OTP is ${otp}`,
-    };
-    await transporter.sendMail(mailOptions);
-    res.json({ message: "OTP sent to your email." });
+    try {
+        const { email } = req.body;
+        const user = await prisma_1.prisma.user.findUnique({ where: { email } });
+        if (!user)
+            return res.status(404).json({ message: "User not found" });
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+        await prisma_1.prisma.oTP.create({
+            data: { email, otp, expiresAt },
+        });
+        await resend.emails.send({
+            from: "onboarding@resend.dev",
+            to: email,
+            subject: "Your OTP Code",
+            text: `Your OTP is ${otp}`,
+        });
+        res.json({ message: "OTP sent to your email." });
+    }
+    catch (error) {
+        console.error("SEND OTP ERROR:", error);
+        res.status(500).json({ message: "Failed to send OTP" });
+    }
 };
+console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
 const verifyOTP = async (req, res) => {
     const { email, otp } = req.body;
     const otpEntry = await prisma_1.prisma.oTP.findFirst({

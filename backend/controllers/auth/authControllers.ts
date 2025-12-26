@@ -11,7 +11,6 @@ const {
 } = require("../../schema/registerSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -135,6 +134,12 @@ const login = async (req: Request, res: Response) => {
   res.json({ message: "Login successful", token, role: user.role });
 };
 
+console.log("ENV CHECK:", {
+  NODE_ENV: process.env.NODE_ENV,
+  RESEND_API_KEY_EXISTS: !!process.env.RESEND_API_KEY,
+});
+
+
 const sendOTP = async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
@@ -149,22 +154,6 @@ const sendOTP = async (req: Request, res: Response) => {
       data: { email, otp, expiresAt },
     });
 
-    // const transporter = nodemailer.createTransport({
-    //   host: "smtp.gmail.com",
-    //   port: 465,
-    //   secure: true,
-    //   auth: {
-    //     user: process.env.EMAIL_USER,
-    //     pass: process.env.EMAIL_PASS,
-    //   },
-    // });
-
-    // await transporter.sendMail({
-    //   from: process.env.EMAIL_USER,
-    //   to: email,
-    //   subject: "Your OTP Code",
-    //   text: `Your OTP is ${otp}`,
-    // });
     await resend.emails.send({
       from: "onboarding@resend.dev",
       to: email,

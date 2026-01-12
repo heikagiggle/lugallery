@@ -15,9 +15,8 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = authHeader.split(" ")[1];
 
   try {
-    const secret = process.env.JWTSECRET as string;
+    const secret = process.env.JWT_SECRET as string;
     const decoded = jwt.verify(token, secret) as JwtPayload;
-
     req.user = decoded;
 
     next();

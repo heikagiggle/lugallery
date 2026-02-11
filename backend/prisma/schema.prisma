@@ -8,7 +8,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -22,35 +21,38 @@ enum Role {
 }
 
 model User {
-  id    String   @id @default(uuid())
-  email     String   @unique
+  id        String    @id @default(uuid())
+  email     String    @unique
   password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
 
   // Role-specific one-to-one relations
-  partner    Partner?
-  career     Career?
-  admin      Admin?
-  userData   UserData?
+  partner  Partner?
+  career   Career?
+  admin    Admin?
+  userData UserData?
+
+  deletions      AccountDeletion[]
+  supportTickets SupportTicket[]
 }
 
 model Partner {
-  id    String   @id @default(uuid())
-  userId     String    @unique
-  user       User   @relation(fields: [userId], references: [id])
-  
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
   first_name String
   last_name  String
   phone      String
   portfolio  String
   artisan    String
- 
+
   do_you_train     String?
   willing_to_train String?
 
-
-  approved   Boolean @default(false) // Partners require approval
+  approved Boolean @default(false) // Partners require approval
 }
 
 enum Gender {
@@ -59,10 +61,10 @@ enum Gender {
 }
 
 model Career {
-  id    String   @id @default(uuid())
-  userId     String     @unique
-  user       User    @relation(fields: [userId], references: [id])
-  
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
   first_name String
   last_name  String
   phone      String
@@ -70,26 +72,70 @@ model Career {
 }
 
 model Admin {
-  id    String   @id @default(uuid())
-  userId     String    @unique
-  user       User   @relation(fields: [userId], references: [id])
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
 
-  name       String
+  name String
 }
 
 model UserData {
-  id    String   @id @default(uuid())
-  userId   String    @unique
-  user     User   @relation(fields: [userId], references: [id])
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
 
-  name     String
-  phone    String
+  name  String
+  phone String
 }
 
 model OTP {
-  id         Int      @id @default(autoincrement())
-  email      String
-  otp        String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  email     String
+  otp       String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+//to store reasons 
+model AccountDeletion {
+  id        String   @id @default(uuid())
+  userId    String
+  reasons   String[]
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model SupportTicket {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  status    TicketStatus @default(OPEN)
+  createdAt DateTime     @default(now())
+
+  messages SupportMessage[]
+}
+
+model SupportMessage {
+  id       String        @id @default(uuid())
+  ticketId String
+  ticket   SupportTicket @relation(fields: [ticketId], references: [id])
+
+  sender  MessageSender @default(USER)
+  message String
+
+  createdAt DateTime @default(now())
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum MessageSender {
+  USER
+  ADMIN
+  SYSTEM
 }

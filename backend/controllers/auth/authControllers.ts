@@ -115,7 +115,7 @@ const login = async (req: Request, res: Response) => {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
 
-    if (!user) {
+    if (!user || user.deletedAt) {
       return errorResponse(res, "Invalid email or password", 401);
     }
 
@@ -128,7 +128,7 @@ const login = async (req: Request, res: Response) => {
     const token = jwt.sign(
       { userId: user.id, role: user.role },
       process.env.JWT_SECRET as string,
-      { expiresIn: "1d" }
+      { expiresIn: "1d" },
     );
 
     return successResponse(res, { token, role: user.role }, "Login successful");
@@ -225,6 +225,7 @@ const getUserProfile = async (req: Request, res: Response) => {
       id: true,
       email: true,
       role: true,
+      deletedAt: true,
       createdAt: true,
       userData: true,
       partner: true,
@@ -235,6 +236,8 @@ const getUserProfile = async (req: Request, res: Response) => {
 
   return successResponse(res, fullUser, "User profile fetched");
 };
+
+const updateProfile = async () => {};
 
 module.exports = {
   register,

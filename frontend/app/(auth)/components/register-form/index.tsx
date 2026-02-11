@@ -13,8 +13,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { PasswordInput } from "../widgets/PasswordInput";
+import { useRegister } from "../../../hooks/auth";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const { signUp, loading } = useRegister();
+  const router = useRouter();
   const handler = useForm<RegisterData>({
     resolver: zodResolver(RegisterSchema),
 
@@ -22,9 +26,22 @@ const RegisterForm = () => {
   });
   const { control } = handler;
 
-  const onSubmit = (data: RegisterData) => {
-    console.log(data);
+  const onSubmit = async (data: RegisterData) => {
+    try {
+      await signUp({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        phone: data.phone,
+        role: "USER",
+      });
+      router.push("/");
+      console.log("data", data);
+    } catch (error) {
+      console.error("Registration failed", error);
+    }
   };
+
   return (
     <>
       <Form {...handler}>
@@ -32,7 +49,7 @@ const RegisterForm = () => {
           onSubmit={handler.handleSubmit(onSubmit)}
           className="space-y-3 w-full "
         >
-          <h1 className="text-xl md:text-2xl text-[#006400] font-semibold text-center">
+          <h1 className="text-xl md:text-2xl text-brand font-semibold text-center">
             Create Account
           </h1>
           <FormField
@@ -41,7 +58,7 @@ const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Name</FormLabel>
-                <Input {...field} />
+                <Input {...field} placeholder="Enter your name" />
                 <FormMessage />
               </FormItem>
             )}
@@ -53,7 +70,7 @@ const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
-                <Input {...field} />
+                <Input {...field} placeholder="Enter your email" />
                 <FormMessage />
               </FormItem>
             )}
@@ -65,7 +82,7 @@ const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
-                <Input {...field} />
+                <Input {...field} placeholder="Enter your phone number" />
                 <FormMessage />
               </FormItem>
             )}
@@ -77,13 +94,13 @@ const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
-                <PasswordInput {...field} />
+                <PasswordInput {...field} placeholder="Enter your password" />
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <UserButton type="submit" className="w-full mt-5">
+          <UserButton type="submit" className="w-full mt-5" loading={loading}>
             Register
           </UserButton>
         </form>

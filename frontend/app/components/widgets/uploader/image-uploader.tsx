@@ -1,17 +1,16 @@
-'use client';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { Camera } from 'lucide-react';
-import { UseFormReturn, FieldValues, Path, PathValue } from 'react-hook-form';
+"use client";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { Camera } from "lucide-react";
+import { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
 
 interface ImageUploaderProps<TFieldValues extends FieldValues> {
-name: Path<TFieldValues>;
+  name: Path<TFieldValues>;
 
   onUploadComplete?: (fileUrl: string | null) => void;
   handler?: UseFormReturn<TFieldValues>;
   initialImageUrl?: string;
 }
-
 
 export const ImageUploader = <TFieldValues extends FieldValues>({
   name,
@@ -33,11 +32,11 @@ export const ImageUploader = <TFieldValues extends FieldValues>({
       const previewUrl = URL.createObjectURL(file);
       setImage(previewUrl);
 
-    handler?.setValue(
-  name,
-  { url: previewUrl } as PathValue<TFieldValues, typeof name>,
-  { shouldDirty: true }
-);
+      handler?.setValue(
+        name,
+        { url: previewUrl } as PathValue<TFieldValues, typeof name>,
+        { shouldDirty: true },
+      );
 
       onUploadComplete?.(previewUrl);
     }
@@ -45,17 +44,15 @@ export const ImageUploader = <TFieldValues extends FieldValues>({
 
   const handleRemove = () => {
     setImage(null);
-handler?.setValue(
-  name,
-  undefined as PathValue<TFieldValues, typeof name>,
-  { shouldDirty: true }
-);
+    handler?.setValue(name, undefined as PathValue<TFieldValues, typeof name>, {
+      shouldDirty: true,
+    });
 
     onUploadComplete?.(null);
   };
 
   return (
-    <div className="relative w-40 h-40 rounded-full border border-gray-300 overflow-hidden bg-gray-100">
+    <div className="relative w-40 h-40 rounded-full border border-gray-300 overflow-hidden bg-ring">
       {image ? (
         <Image
           src={image}
@@ -65,7 +62,7 @@ handler?.setValue(
           className="object-cover w-full h-full"
         />
       ) : (
-        <div className="flex items-center justify-center w-full h-full text-[#666666] text-sm">
+        <div className="flex items-center justify-center w-full h-full text-foreground text-sm">
           Upload
         </div>
       )}
@@ -80,9 +77,9 @@ handler?.setValue(
 
       <label
         htmlFor={`imageUpload-${name}`}
-        className="absolute bottom-1 left-1/2 translate-x-[-50%] bg-white shadow-md border border-gray-200 rounded-full p-2 cursor-pointer hover:bg-gray-50 transition"
+        className="absolute bottom-1 left-1/2 translate-x-[-50%] bg-background shadow-md border border-ring rounded-full p-2 cursor-pointer hover:bg-ring transition"
       >
-        <Camera />
+        <Camera className="text-foreground" />
       </label>
 
       {image && (

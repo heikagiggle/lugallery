@@ -1,17 +1,33 @@
-'use client'
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import clsx from "clsx"; 
+import clsx from "clsx";
 
 const Appearance = () => {
   const [selectedTheme, setSelectedTheme] = useState("light");
 
-  const handleThemeChange = (theme:string) => {
+  const handleThemeChange = (theme: string) => {
     setSelectedTheme(theme);
-    // Optionally apply theme here
-    // e.g. document.documentElement.classList.add(theme)
-    // localStorage.setItem('theme', theme)
+
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+
+    localStorage.setItem("theme", theme);
   };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setSelectedTheme(savedTheme);
+
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
 
   return (
     <div className="space-y-5">
@@ -30,16 +46,18 @@ const Appearance = () => {
             "space-y-2 cursor-pointer rounded border p-2",
             selectedTheme === "light"
               ? "border-[#006400] ring-2 ring-[#006400]"
-              : "border-gray-300"
+              : "border-gray-300",
           )}
         >
-          <Image
-            src="/light.png"
-            width={500}
-            height={500}
-            alt="light-theme-image"
-            className="rounded-sm"
-          />
+          <div className="relative w-full h-40 md:h-48 lg:h-56">
+            <Image
+              src="/light.png"
+              alt="light-theme-image"
+              fill
+              className="rounded-sm object-cover"
+            />
+          </div>
+
           <div className="flex gap-3 items-center">
             <input
               type="radio"
@@ -51,23 +69,25 @@ const Appearance = () => {
           </div>
         </div>
 
-        {/* Dark Theme Option */}
+        {/* Dark Theme Option */} 
         <div
           onClick={() => handleThemeChange("dark")}
           className={clsx(
             "space-y-2 cursor-pointer rounded border p-2",
             selectedTheme === "dark"
               ? "border-[#006400] ring-2 ring-[#006400]"
-              : "border-gray-300"
+              : "border-gray-300",
           )}
         >
-          <Image
-            src="/dark.png"
-            width={500}
-            height={500}
-            alt="dark-theme-image"
-            className="rounded-sm"
-          />
+         <div className="relative w-full h-40 md:h-48 lg:h-56">
+  <Image
+    src="/dark.png"
+    alt="dark-theme-image"
+    fill
+    className="rounded-sm object-cover"
+  />
+</div>
+
           <div className="flex gap-3 items-center">
             <input
               type="radio"

@@ -34,10 +34,10 @@ const Artisans = ({ toggleSidebar, isSidebarOpen, filters }: Props) => {
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       <div className="mb-6 space-y-3">
-        <h1 className="text-2xl md:text-3xl font-bold text-[#006400]">
+        <h1 className="text-2xl md:text-3xl font-bold text-brand">
           Meet Our Trainers
         </h1>
-        <p className=" font-medium">
+        <p className=" font-medium text-foreground">
           Our trainers have been carefully vetted through their portfolios and
           proven craftsmanship. They are qualified professionals dedicated to
           helping you excel in your chosen field.
@@ -45,11 +45,11 @@ const Artisans = ({ toggleSidebar, isSidebarOpen, filters }: Props) => {
       </div>
 
       <button
-        className="flex items-center gap-x-2 text-[#344054] border rounded-md px-2 py-2 hover:bg-[#F2F2F2] cursor-pointer mb-5"
+        className="flex items-center gap-x-2 text-[#344054] border border-input rounded-md px-2 py-2 hover:bg-[#F2F2F2] cursor-pointer mb-5 group-[]:"
         onClick={toggleSidebar}
       >
-        <Menu />
-        <p>Customize View</p>
+        <Menu className="text-foreground hover:text-background" />
+        <p className="text-muted-foreground">Customize View</p>
       </button>
       <div
         className={`grid gap-6 ${

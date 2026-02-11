@@ -16,10 +16,10 @@ const Accordion = ({ question, answer }: FaqsProps) => {
         <button
           onClick={() => setAccordionOpen(!accordionOpen)}
           className={`flex justify-between w-full py-2 cursor-pointer ${
-            accordionOpen ? 'border-b-0' : 'border-b border-[#1211271F]'
+            accordionOpen ? 'border-b-0' : 'border-b border-input'
           }`}
         >
-          <span className="text-[#121127] font-gothamB text-left">{question}</span>
+          <span className="text-foreground font-gothamB text-left">{question}</span>
           {accordionOpen ? <ChevronUp /> : <ChevronDown />}
         </button>
         <div
@@ -29,7 +29,7 @@ const Accordion = ({ question, answer }: FaqsProps) => {
               : 'grid-rows-[0fr] opacity-0'
           }`}
         >
-          <div className="overflow-hidden border-b text-base border-[#1211271F] px-2 pt-2 pb-4 text-[#121127]/50">
+          <div className="overflow-hidden border-b text-base border-input px-2 pt-2 pb-4 text-foreground/50">
             {answer}
           </div>
         </div>

@@ -45,7 +45,7 @@ export function FeedbackTable() {
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-white text-[#666666] text-sm">
-            <TableRow className="border-b border-[#E5E5E5] py-3">
+            <TableRow className="border-b border-input py-3">
               <TableHead className="pl-4">User</TableHead>
               <TableHead>Rating</TableHead>
               <TableHead>Recommend</TableHead>
@@ -61,14 +61,14 @@ export function FeedbackTable() {
                 </TableCell>
                 <TableCell className="text-[#666666]">{data.rating}</TableCell>
                 <TableCell className="text-[#666666]">
-                 {data.recommend ? "Yes 😃" : "No 😞"}
+                  {data.recommend ? "Yes 😃" : "No 😞"}
                 </TableCell>
                 <TableCell className="text-[#666666]">
                   {data.suggestions}
                 </TableCell>
                 <TableCell className="pr-16 text-[#666666]">
-                    {formatDate(data.submittedAt)}
-                  </TableCell>
+                  {formatDate(data.submittedAt)}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

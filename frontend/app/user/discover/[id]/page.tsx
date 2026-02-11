@@ -45,7 +45,7 @@ const ArtisanDetails = () => {
             {thumbnailImages.map((image, index) => (
               <div
                 key={index}
-                className="border border-[#E5E5E5] bg-[#FBFBFB] p-2 rounded-lg flex justify-center items-center w-20 h-20"
+                className="border border-input bg-[#FBFBFB] p-2 rounded-lg flex justify-center items-center w-20 h-20"
               >
                 <Image
                   src={image}

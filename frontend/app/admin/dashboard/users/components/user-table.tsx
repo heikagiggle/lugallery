@@ -52,7 +52,7 @@ export function UserTable() {
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table>
           <TableHeader className="stick top-0 z-10 bg-white text-[#666666] text-sm">
-            <TableRow className="border-b border-[#E5E5E5] py-3">
+            <TableRow className="border-b border-input py-3">
               <TableHead className="pl-4">Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>States</TableHead>

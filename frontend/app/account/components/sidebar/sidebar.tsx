@@ -13,10 +13,11 @@ import { LockIcon } from "../icons/lock";
 import { LogoutIcon } from "../icons/logout";
 import { ChevronRight } from "../icons/chevron-right";
 import { cn } from "@/lib/utils";
-import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { mutate } from "swr";
 import { X } from "lucide-react";
+import { useAllProfile } from "@/app/hooks/auth/profile";
+import { useAuthContext } from "@/app/state";
 
 interface NavItem {
   url: string;
@@ -31,6 +32,8 @@ interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const pathName = usePathname();
+  const { data } = useAllProfile();
+  const { setToken } = useAuthContext();
 
   const menuItems: NavItem[] = useMemo(
     () => [
@@ -40,8 +43,23 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       { url: "/account/password", Logo: LockIcon, label: "Change Password" },
       { url: "/account/delete-account", Logo: Star, label: "Delete Account" },
     ],
-    []
+    [],
   );
+
+  const userName = useMemo(() => {
+    if (!data) return null;
+
+    switch (data.role) {
+      case "CAREER":
+        return data.career?.first_name ?? null;
+      case "ADMIN":
+        return data.admin?.name ?? null;
+      case "USER":
+      case "PARTNER":
+      default:
+        return data.userData?.name ?? null;
+    }
+  }, [data]);
 
   const active = useMemo(() => {
     let active = null;
@@ -54,7 +72,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const router = useRouter();
 
   const handleLogout = () => {
-    Cookies.remove("AUTH_ACCESS_TOKEN");
+    setToken(null); 
     mutate(() => true, undefined, { revalidate: false });
     toast.success("You are logged out.");
     router.push("/login");
@@ -63,18 +81,25 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   return (
     <aside
       className={cn(
-        "fixed z-40 top-0 left-0 min-h-full w-72 text-[#3A3842] transition-transform transform duration-300 ease-in-out overflow-y-auto scrollbar-hide p-5",
-        isOpen ? "translate-x-0 bg-white z-50 shadow-sm" : "-translate-x-full",
-        "lg:translate-x-0 lg:static lg:block"
+        "fixed z-40 top-0 left-0 min-h-screen w-72 text-[#3A3842] transition-transform transform duration-300 ease-in-out overflow-y-auto scrollbar-hide p-5",
+        isOpen
+          ? "translate-x-0 bg-background z-50 shadow-sm pt-32 lg:pt-5"
+          : "-translate-x-full",
+        "lg:translate-x-0 lg:static lg:block shadow-none",
       )}
     >
       <div className="flex justify-between">
         <div className="py-2">
-          <h1 className="font-semibold text-[20px]">Emmanuella Okafor</h1>
-          <p>Your personal account</p>
+          <h1 className="font-semibold text-[20px] text-foreground">
+            {userName}
+          </h1>
+          <p className="text-foreground">Your personal account</p>
         </div>
         <div>
-          <X className="cursor-pointer" onClick={() => setIsOpen(false)} />
+          <X
+            className="cursor-pointer text-foreground lg:hidden"
+            onClick={() => setIsOpen(false)}
+          />
         </div>
       </div>
 
@@ -83,8 +108,8 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           <Fragment key={nav.url}>
             <li
               className={cn(
-                "border-transparent duration-200 ease-out text-sm w-full rounded-full py-1 hover:text-[#56479D] flex justify-between items-center hover:bg-[#56479D]/10 px-1",
-                active === nav.url && "bg-[#F4F4F5] text-[#111013] font-medium"
+                "border-transparent duration-200 ease-out text-sm w-full rounded-full py-1 hover:text-brand flex justify-between items-center hover:bg-brand/10 px-1 text-foreground",
+                active === nav.url && "bg-[#F4F4F5] text-[#111013] font-medium",
               )}
             >
               <Link
@@ -109,7 +134,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
         className="flex items-center gap-3 rounded-lg p-2 w-fit mt-5 cursor-pointer"
       >
         <LogoutIcon />
-        <h1 className="text-[#3A3842] text-sm">Log out</h1>
+        <h1 className="text-sm text-foreground">Log out</h1>
       </div>
     </aside>
   );

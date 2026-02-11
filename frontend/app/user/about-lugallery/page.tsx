@@ -14,15 +14,15 @@ const AboutLugallery = () => {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold leading-snug">
-            About <span className="text-[#006400]">Lugallery</span>
+          <h2 className="text-3xl text-foreground md:text-4xl font-bold leading-snug">
+            About <span className="text-brand">Lugallery</span>
           </h2>
-          <p className="text-lg text-gray-700">
+          <p className="text-lg text-secondary-foreground">
             Lugallery is where creativity meets opportunity. We&apos;re building
             a vibrant platform for artisans and creatives to showcase their
             talents, connect with clients, and grow their craft.
           </p>
-          <p className="text-base text-gray-600">
+          <p className="text-base text-muted-foreground">
             Whether you&apos;re a seasoned maker or just starting out, Lugallery
             gives you the tools and visibility to succeed. Join a growing
             community that celebrates creativity, passion, and authenticity.
@@ -41,7 +41,7 @@ const AboutLugallery = () => {
             alt="Creative artisan illustration"
             width={500}
             height={500}
-            className="w-full h-auto max-w-sm md:max-w-md"
+            className="w-full h-auto max-w-sm md:max-w-md rounded-2xl"
           />
         </motion.div>
       </div>

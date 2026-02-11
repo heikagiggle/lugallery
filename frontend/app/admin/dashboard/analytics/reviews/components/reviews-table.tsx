@@ -56,10 +56,10 @@ export function ReviewsTable() {
   // Handler to update review status
   const handleStatusChange = (
     id: string,
-    newStatus: "approved" | "rejected"
+    newStatus: "approved" | "rejected",
   ) => {
     setReviews((prev) =>
-      prev.map((r) => (r.id === id ? { ...r, status: newStatus } : r))
+      prev.map((r) => (r.id === id ? { ...r, status: newStatus } : r)),
     );
   };
 
@@ -68,7 +68,7 @@ export function ReviewsTable() {
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-white text-[#666666] text-sm">
-            <TableRow className="border-b border-[#E5E5E5] py-3">
+            <TableRow className="border-b border-input py-3">
               <TableHead className="pl-4">User</TableHead>
               <TableHead>Artisan</TableHead>
               <TableHead>Rating</TableHead>
@@ -112,8 +112,8 @@ export function ReviewsTable() {
                       data.status === "approved"
                         ? "bg-green-100 text-green-700"
                         : data.status === "pending"
-                        ? "bg-yellow-100 text-yellow-700"
-                        : "bg-red-100 text-red-700"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
                     }`}
                   >
                     {data.status}

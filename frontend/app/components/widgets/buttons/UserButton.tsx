@@ -2,6 +2,7 @@
 
 import { type PropsWithChildren, ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { Spinner } from "../../icons/spinner";
 
 type Props = {
   className?: string;
@@ -9,6 +10,7 @@ type Props = {
   onClick?: () => void;
   icon?: ReactNode;
   disabled?: boolean;
+  loading?: boolean; 
 };
 
 export function UserButton({
@@ -16,17 +18,19 @@ export function UserButton({
   type,
   onClick,
   className,
+  loading = false,
 }: PropsWithChildren<Props>) {
   return (
     <button
       className={cn(
-        "bg-gradient-to-r from-black to-[#006400] text-white px-6 py-2 rounded-md  hover:text-[#e5e5e5] cursor-pointer flex justify-center items-center transition-colors duration-300 ease-in-out",
+        "bg-gradient-to-r from-foreground to-[#006400] text-white px-6 py-2 rounded-md hover:text-[#e5e5e5] cursor-pointer flex justify-center items-center transition-colors duration-300 ease-in-out",
         className
       )}
       type={type}
       onClick={onClick}
+      disabled={loading || false}
     >
-      {children}
+      {loading ? <Spinner /> : children}
     </button>
   );
 }

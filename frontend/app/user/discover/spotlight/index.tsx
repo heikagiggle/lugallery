@@ -12,10 +12,10 @@ interface SpotlightUserProps {
 
 const SpotlightUser: React.FC<SpotlightUserProps> = ({ artisans }) => {
   return (
-    <section className="pt-14 pb-12 bg-white max-w-7xl mx-auto">
+    <section className="pt-14 pb-12 max-w-7xl mx-auto">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Spotlight 🌟</h2>
-        <p className="text-gray-500 text-lg md:text-xl mb-8">
+        <h2 className="text-3xl font-bold text-foreground mb-4">Spotlight 🌟</h2>
+        <p className="text-muted-foreground text-lg md:text-xl mb-8">
           Meet the creatives everyone is booking right now. These talented
           artisans are setting trends, delivering excellence, and making waves
           in their craft.
@@ -25,7 +25,7 @@ const SpotlightUser: React.FC<SpotlightUserProps> = ({ artisans }) => {
           {artisans.map((artisan) => (
             <div
               key={artisan.id}
-              className="min-w-[250px] bg-gray-50 rounded-xl shadow-sm border border-gray-100 snap-center flex-shrink-0 p-4 hover:shadow-md transition-shadow duration-200 space-y-2"
+              className="min-w-[250px] bg-background rounded-xl shadow-sm border border-gray-100 snap-center flex-shrink-0 p-4 hover:shadow-md transition-shadow duration-200 space-y-2"
             >
               <div className="relative w-full h-44 mb-3">
                 <Image
@@ -36,7 +36,7 @@ const SpotlightUser: React.FC<SpotlightUserProps> = ({ artisans }) => {
                 />
               </div>
 
-              <h3 className="font-semibold text-gray-800">{artisan.name}</h3>
+              <h3 className="font-semibold text-secondary-foreground">{artisan.name}</h3>
               <p className="text-gray-500 text-sm">{artisan.lga}</p>
               <Link
                 href={`/user/discover/${artisan.id}?title=${artisan.title}`}

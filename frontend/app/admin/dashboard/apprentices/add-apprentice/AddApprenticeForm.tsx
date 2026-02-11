@@ -44,7 +44,7 @@ const AddApprenticeForm = () => {
       <Form {...handler}>
         <form
           onSubmit={handler.handleSubmit(onSubmit)}
-          className="space-y-5 w-full md:w-1/2 mx-auto flex flex-col justify-center p-4 rounded-md my-5 border border-[#e5e5e5]"
+          className="space-y-5 w-full md:w-1/2 mx-auto flex flex-col justify-center p-4 rounded-md my-5 border border-input"
         >
           <h1 className="text-xl md:text-2xl  font-semibold text-center">
             Add New Apprentice

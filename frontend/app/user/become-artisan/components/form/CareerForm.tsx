@@ -20,9 +20,13 @@ import {
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useRegister } from "../../../../hooks/auth";
+import { useEffect } from "react";
+import { PasswordInput } from "../../../../components/widgets/PasswordInput";
 
 const CareerForm = () => {
-  const router = useRouter()
+  const { signUp, loading, success } = useRegister();
+  const router = useRouter();
   const handler = useForm<CareerData>({
     resolver: zodResolver(CareerSchema),
 
@@ -30,10 +34,29 @@ const CareerForm = () => {
   });
   const { control } = handler;
 
-  const onSubmit = (data: CareerData) => {
-    console.log(data);
-    router.push('/user/discover-trainers')
+  const onSubmit = async (data: CareerData) => {
+    try {
+      await signUp({
+        email: data.email,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        gender: data.gender,
+        phone: data.phone,
+        password: data.password,
+        role: "CAREER",
+      });
+      console.log(data);
+    } catch (e) {
+      console.error("registration failed", e);
+    }
   };
+
+  useEffect(() => {
+    if (!loading && success) {
+      router.push("/user/discover-trainers");
+    }
+  }, [loading, success]);
+
   return (
     <Form {...handler}>
       <form
@@ -110,6 +133,17 @@ const CareerForm = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <PasswordInput {...field} placeholder="Enter your password" />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <p className="my-2">
           Already have an account?{" "}
           <Link href={"/login"} className="text-blue-600 hover:underline">
@@ -118,7 +152,9 @@ const CareerForm = () => {
         </p>
 
         <div className="flex justify-end mt-5">
-          <UserButton type="submit">Register</UserButton>
+          <UserButton type="submit" loading={loading}>
+            Register
+          </UserButton>
         </div>
       </form>
     </Form>

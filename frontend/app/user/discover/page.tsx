@@ -47,9 +47,24 @@ const Discover = () => {
   return (
     <>
       {spotlighted.length > 0 && <SpotlightUser artisans={spotlighted} />}
-      <div className="flex">
+      <div className="relative flex">
+        {/* Mobile backdrop */}
         {isSidebarOpen && (
-          <div className="w-64 sticky top-0 max-h-screen overflow-y-auto border-r mr-4">
+          <div
+            className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+
+        {/* Sidebar */}
+        {isSidebarOpen && (
+          <div
+            className="
+        fixed inset-y-0 left-0 z-40 w-full bg-background
+        overflow-y-auto border-r
+        sm:static sm:z-auto sm:w-64 sm:mr-4 pt-28
+      "
+          >
             <Sort
               closeSidebar={() => setIsSidebarOpen(false)}
               onFilterChange={setFilters}
@@ -57,9 +72,10 @@ const Discover = () => {
           </div>
         )}
 
+        {/* Main content */}
         <div
-          className={`transition-all duration-300 ${
-            isSidebarOpen ? "lg:w-[calc(100%-16rem)]" : "w-full"
+          className={`transition-all duration-300 w-full ${
+            isSidebarOpen ? "lg:w-[calc(100%-16rem)]" : ""
           }`}
         >
           <Artisans

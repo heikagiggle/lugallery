@@ -23,7 +23,7 @@ export default function AuthLayout({
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Navigation />
-      <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-[#FDFCFB] to-[#e2d1c3] px-4">
+      <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-hero-from to-hero-to px-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={pathname}
@@ -31,7 +31,7 @@ export default function AuthLayout({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.35 }}
-            className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl"
+            className="w-full max-w-md bg-background p-8 rounded-2xl shadow-xl"
           >
             {children}
           </motion.div>

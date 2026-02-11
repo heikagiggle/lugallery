@@ -16,7 +16,7 @@ const ArtisanDetails = () => {
     "/apprentice.jpg",
     "/mua.jpg",
     "/fashion.jpg",
-   "/apprentice.jpg",
+    "/apprentice.jpg",
   ];
 
   return (
@@ -35,7 +35,7 @@ const ArtisanDetails = () => {
             {thumbnailImages.map((image, index) => (
               <div
                 key={index}
-                className={`border border-[#E5E5E5] bg-[#FBFBFB] p-2 rounded-lg flex justify-center items-center w-20 h-20 cursor-pointer ${
+                className={`border border-input bg-[#FBFBFB] p-2 rounded-lg flex justify-center items-center w-20 h-20 cursor-pointer ${
                   mainImage === image ? "border-[#006400]" : ""
                 }`}
               >
@@ -66,8 +66,8 @@ const ArtisanDetails = () => {
         <div className="flex flex-col gap-y-4 w-full md:max-w-sm">
           <h2 className="text-2xl font-semibold text-[#006400]">Tolu Crafts</h2>
           <p className="text-gray-600">
-            Expert in woodworking and rustic design — creating functional, beautiful
-            pieces and helping aspiring artisans master the craft.
+            Expert in woodworking and rustic design — creating functional,
+            beautiful pieces and helping aspiring artisans master the craft.
           </p>
 
           <div className="space-y-2 text-sm text-gray-700">
@@ -89,10 +89,22 @@ const ArtisanDetails = () => {
 
             <div className="flex items-center gap-x-3 pt-2">
               <span className="font-semibold">Socials:</span>
-              <FaInstagram size={20} className="cursor-pointer hover:text-[#006400]" />
-              <FaFacebook size={20} className="cursor-pointer hover:text-[#006400]" />
-              <FaTiktok size={20} className="cursor-pointer hover:text-[#006400]" />
-              <FaWhatsapp size={20} className="cursor-pointer hover:text-[#006400]" />
+              <FaInstagram
+                size={20}
+                className="cursor-pointer hover:text-[#006400]"
+              />
+              <FaFacebook
+                size={20}
+                className="cursor-pointer hover:text-[#006400]"
+              />
+              <FaTiktok
+                size={20}
+                className="cursor-pointer hover:text-[#006400]"
+              />
+              <FaWhatsapp
+                size={20}
+                className="cursor-pointer hover:text-[#006400]"
+              />
             </div>
           </div>
 
@@ -110,15 +122,18 @@ const ArtisanDetails = () => {
             Program Overview
           </h3>
           <p className="text-gray-700 leading-relaxed">
-            This hands-on program introduces participants to essential woodworking
-            techniques, from material selection to finishing. Ideal for beginners or
-            artisans looking to refine their craft and design skills.
+            This hands-on program introduces participants to essential
+            woodworking techniques, from material selection to finishing. Ideal
+            for beginners or artisans looking to refine their craft and design
+            skills.
           </p>
         </section>
 
         {/* Requirements */}
         <section>
-          <h3 className="text-xl font-semibold text-[#006400] mb-3">Requirements</h3>
+          <h3 className="text-xl font-semibold text-[#006400] mb-3">
+            Requirements
+          </h3>
           <ul className="list-disc list-inside text-gray-700 space-y-1">
             <li>Basic interest or experience in woodworking</li>
             <li>Access to simple hand tools (hammer, saw, chisel, etc.)</li>
@@ -145,9 +160,9 @@ const ArtisanDetails = () => {
             By the End of This Program
           </h3>
           <p className="text-gray-700 leading-relaxed">
-            Students will gain the confidence and skill set to design, build, and
-            finish their own wooden furniture projects, and may qualify to showcase
-            their work on Lugallery’s artisan network.
+            Students will gain the confidence and skill set to design, build,
+            and finish their own wooden furniture projects, and may qualify to
+            showcase their work on Lugallery’s artisan network.
           </p>
         </section>
       </div>

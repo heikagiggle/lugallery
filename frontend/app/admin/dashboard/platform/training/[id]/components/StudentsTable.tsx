@@ -21,7 +21,7 @@ interface StudentsTableProps {
 
 export function StudentsTable({ students }: StudentsTableProps) {
   const [selectedStudent, setSelectedStudent] = useState<StudentProps | null>(
-    null
+    null,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -47,7 +47,7 @@ export function StudentsTable({ students }: StudentsTableProps) {
     <div className="text-sm text-gray-500 mobile-scrollbar">
       <Table>
         <TableHeader className="sticky top-0 z-10 bg-white text-[#666666] text-sm">
-          <TableRow className="border-b border-[#E5E5E5]">
+          <TableRow className="border-b border-input">
             <TableHead className="pl-4">Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Skill</TableHead>
@@ -94,8 +94,8 @@ export function StudentsTable({ students }: StudentsTableProps) {
                   student.status === "active"
                     ? "text-green-600"
                     : student.status === "completed"
-                    ? "text-blue-600"
-                    : "text-red-500"
+                      ? "text-blue-600"
+                      : "text-red-500"
                 }`}
               >
                 {capitalizeWords(student.status)}

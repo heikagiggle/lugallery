@@ -6,8 +6,7 @@ import Image from "next/image";
 import FeaturedModal from "./components/Modal";
 
 const FeaturedCollections = () => {
- const [selectedArtisan, setSelectedArtisan] = useState<Artisan | null>(null);
-
+  const [selectedArtisan, setSelectedArtisan] = useState<Artisan | null>(null);
 
   return (
     <div className="pt-12 mb-10 flex flex-col justify-center items-center mx-12">
@@ -20,7 +19,7 @@ const FeaturedCollections = () => {
         {featured.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col bg-white rounded-md shadow border border-[#e5e5e5] overflow-hidden"
+            className="flex flex-col bg-background rounded-md shadow border border-input overflow-hidden"
           >
             {/* Image section */}
             <div className="w-full h-[200px] relative">
@@ -35,8 +34,8 @@ const FeaturedCollections = () => {
             {/* Content section */}
             <div className="flex flex-col justify-between flex-grow p-4 space-y-3">
               <div>
-                <h3 className="font-semibold text-lg">{item.title}</h3>
-                <p className="text-sm line-clamp-1">{item.desc}</p>
+                <h3 className="font-semibold text-lg text-foreground">{item.title}</h3>
+                <p className="text-sm line-clamp-1 text-foreground">{item.desc}</p>
               </div>
               <UserButton
                 className="w-full"

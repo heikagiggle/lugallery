@@ -44,13 +44,13 @@ export function PartnerTable({ searchQuery = "" }: UserTableProps) {
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table>
           <TableHeader className="stick top-0 z-10 bg-white text-[#666666] text-sm">
-            <TableRow className="border-b border-[#E5E5E5] py-3">
+            <TableRow className="border-b border-input py-3">
               <TableHead className="pl-4">Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Skill</TableHead>
               <TableHead>States</TableHead>
               <TableHead>Address</TableHead>
-              
+
               <TableHead className="md:pl-[1.5rem]">Date registered</TableHead>
 
               <TableHead></TableHead>
@@ -65,7 +65,7 @@ export function PartnerTable({ searchQuery = "" }: UserTableProps) {
                 <TableCell className="text-[#666666]">
                   {user.email || "N/A"}
                 </TableCell>
-                 <TableCell className="text-[#666666]">
+                <TableCell className="text-[#666666]">
                   {capitalizeWords(user.skill || "N/A")}
                 </TableCell>
                 <TableCell className="text-[#666666]">

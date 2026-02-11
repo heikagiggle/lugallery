@@ -52,7 +52,7 @@ export function RejectedProfileTable() {
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table>
           <TableHeader className="stick top-0 z-10 bg-white text-[#666666] text-sm">
-            <TableRow className="border-b border-[#E5E5E5] py-3">
+            <TableRow className="border-b border-input py-3">
               <TableHead className="pl-4">Artisan Name</TableHead>
               <TableHead>Artisan Title</TableHead>
               <TableHead>State</TableHead>
@@ -90,7 +90,7 @@ export function RejectedProfileTable() {
                   <ProfileDetailsModal
                     profile={data}
                     status="Rejected"
-                      rejectionReason="Incomplete profile details. Missing portfolio images."
+                    rejectionReason="Incomplete profile details. Missing portfolio images."
                     trigger={
                       <button type="button">
                         <Ellipsis className="cursor-pointer text-[#63626A]" />

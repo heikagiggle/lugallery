@@ -4,26 +4,24 @@
 @import "tw-animate-css";
 
 * {
-  /* font-family: "Roboto", sans-serif; */
-  /* font-family: "Cascadia Mono", sans-serif; */
   font-family: "Outfit", sans-serif;
   &::-webkit-scrollbar {
     width: 5px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #d1d5db;
+    background: hsl(var(--muted));
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #006400;
+    background: hsl(var(--primary));
   }
 }
 /* globals.scss */
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
-
 
 .mobile-scroll {
   overflow-x: auto;
@@ -32,13 +30,12 @@ html, body {
     height: 4px;
   }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  &::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
   }
 
-  &::-webkit-scrollbar-track {
-    background: transparent;
+  &::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
   }
 
   scrollbar-width: thin;
@@ -67,6 +64,14 @@ html, body {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-hero-from: var(--hero-from);
+  --color-hero-to: var(--hero-to);
+  --color-soft-pink-from: var(--soft-pink-from);
+  --color-soft-pink-to: var(--soft-pink-to);
+  --color-soft-teal-from: var(--soft-teal-from);
+  --color-soft-teal-to: var(--soft-teal-to);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -137,6 +142,13 @@ html, body {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --brand: oklch(0.46 0.14 142);
+  --hero-from: oklch(0.995 0.01 95);
+  --hero-to: oklch(0.88 0.04 75);
+  --soft-pink-from: oklch(0.93 0.05 25);
+  --soft-pink-to: oklch(0.97 0.02 25);
+  --soft-teal-from: oklch(0.96 0.03 200);
+  --soft-teal-to: oklch(0.94 0.02 190);
 }
 
 .dark {
@@ -171,6 +183,13 @@ html, body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --brand: oklch(0.75 0.22 145);
+  --hero-from: oklch(0.22 0.01 95);
+  --hero-to: oklch(0.3 0.02 75);
+  --soft-pink-from: oklch(0.28 0.05 25);
+  --soft-pink-to: oklch(0.22 0.03 25);
+  --soft-teal-from: oklch(0.25 0.04 200);
+  --soft-teal-to: oklch(0.2 0.03 190);
 }
 
 @layer base {

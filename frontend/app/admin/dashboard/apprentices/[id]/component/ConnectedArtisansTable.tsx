@@ -52,7 +52,7 @@ const ConnectedArtisansTable: React.FC<Props> = ({
       <div className="text-sm text-gray-500 py-2 overflow-x-auto mobile-scrollbar">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-white text-[#666666] text-sm">
-            <TableRow className="border-b border-[#E5E5E5]">
+            <TableRow className="border-b border-input">
               <TableHead className="pl-4">Artisan</TableHead>
               <TableHead>Skill</TableHead>
               <TableHead>Review</TableHead>

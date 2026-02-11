@@ -24,7 +24,7 @@ const TopBar = ({ setIsSidebarOpen, isSidebarOpen }: TopBarProps) => {
 
   return (
     <div
-      className={`flex items-center py-4 justify-between sticky text-white pl-1 lg:pl-10 border-b border-[#E5E5E5] pr-5 sm:pr-10 lg:pr-4`}
+      className={`flex items-center py-4 justify-between sticky text-white pl-1 lg:pl-10 border-b border-input pr-5 sm:pr-10 lg:pr-4`}
     >
       <div className="lg:hidden p-4 flex items-center gap-x-5">
         <button
@@ -75,7 +75,7 @@ const TopBar = ({ setIsSidebarOpen, isSidebarOpen }: TopBarProps) => {
         </Link>
 
         <div
-          className="flex items-center borde border-[#e5e5e5]"
+          className="flex items-center borde border-input"
           onClick={handleClick}
         >
           <div className="cursor-pointer p-2 rounded-lg">

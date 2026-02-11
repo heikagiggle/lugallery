@@ -46,12 +46,12 @@ export function PendingProfileTable() {
   const start = currentPage * size;
   const paginatedItems = filteredData.slice(start, start + size);
 
-  return (  
+  return (
     <Card className="bg-white mt-6 shadow-md rounded-xl w-full py-2">
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table className="z-0">
           <TableHeader className="stick top-0 z-0 bg-white text-[#666666] text-sm">
-            <TableRow className="border-b border-[#E5E5E5] py-3">
+            <TableRow className="border-b border-input py-3">
               <TableHead className="pl-4">Artisan Name</TableHead>
               <TableHead>Artisan Title</TableHead>
               <TableHead>State</TableHead>

@@ -11,7 +11,9 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, { message: "Your name is required" }),
   phone: z.string().min(1, { message: "Phone number is required" }),
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z
+    .string()
+    .min(8, { message: "Password must contain 8 characters" }),
 });
 
 export type RegisterData = z.infer<typeof RegisterSchema>;

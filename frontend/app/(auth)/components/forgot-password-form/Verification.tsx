@@ -12,8 +12,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { ContainerProps } from "../../../utils/type";
 import { OtpData, OtpSchema } from "../schema/schema";
+import { useCode } from "../../../hooks/auth/reset";
+import { useEffect } from "react";
 
 const Verification = ({ onNextStep }: ContainerProps) => {
+  const { code, loading, success } = useCode();
   const handler = useForm<OtpData>({
     resolver: zodResolver(OtpSchema),
     mode: "onChange",
@@ -22,9 +25,20 @@ const Verification = ({ onNextStep }: ContainerProps) => {
   const { control } = handler;
 
   const onSubmit = (data: OtpData) => {
-    console.log(data);
-    onNextStep();
+    const email = sessionStorage.getItem("email") || "";
+    const payload = {
+      email,
+      otp: data.otp,
+    };
+    void code(payload);
+    sessionStorage.setItem("otp", data.otp);
   };
+
+  useEffect(() => {
+    if (!loading && success) {
+      onNextStep && onNextStep();
+    }
+  }, [loading, onNextStep, success]);
 
   return (
     <Form {...handler}>
@@ -32,7 +46,7 @@ const Verification = ({ onNextStep }: ContainerProps) => {
         onSubmit={handler.handleSubmit(onSubmit)}
         className="space-y-3 w-full "
       >
-        <h1 className="text-xl md:text-2xl text-[#006400] font-semibold text-center">
+        <h1 className="text-xl md:text-2xl text-brand font-semibold text-center">
           Enter the verification code
         </h1>
 
@@ -42,12 +56,15 @@ const Verification = ({ onNextStep }: ContainerProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Otp</FormLabel>
-              <Input {...field} />
+              <Input
+                {...field}
+                placeholder="Enter the code sent to your email"
+              />
               <FormMessage />
             </FormItem>
           )}
         />
-        <UserButton type="submit" className="w-full">
+        <UserButton type="submit" className="w-full" loading={loading}>
           Submit
         </UserButton>
       </form>

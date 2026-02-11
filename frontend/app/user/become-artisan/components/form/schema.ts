@@ -8,6 +8,9 @@ export const CareerSchema = z.object({
   gender: z.enum(["male", "female"], {
     errorMap: () => ({ message: "Gender is required" }),
   }),
+  password: z
+    .string()
+    .min(8, { message: "Password must contain 8 characters" }),
 });
 
 export type CareerData = z.infer<typeof CareerSchema>;

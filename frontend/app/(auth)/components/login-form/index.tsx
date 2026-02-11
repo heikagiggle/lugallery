@@ -13,12 +13,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { PasswordInput } from "../widgets/PasswordInput";
-import { useAuthContext } from "@/app/state/client/context";
 import { useRouter } from "next/navigation";
+import { useLogin } from "../../../hooks/auth/login";
 
 const LoginForm = () => {
-  const { setToken } = useAuthContext();
-    const router = useRouter();
+  const { login, loading } = useLogin();
+  const router = useRouter();
   const handler = useForm<LoginData>({
     resolver: zodResolver(LoginSchema),
 
@@ -26,11 +26,16 @@ const LoginForm = () => {
   });
   const { control } = handler;
 
-  const onSubmit = (data: LoginData) => {
-    setToken("dummy_token_123");
+  const onSubmit = async (data: LoginData) => {
     console.log(data);
-       router.push("/user/discover");
+    try {
+      await login({ email: data.email ?? "", password: data.password });
+      router.push("/user/discover");
+    } catch (e) {
+      console.error("error in logged");
+    }
   };
+
   return (
     <div>
       <Form {...handler}>
@@ -38,7 +43,7 @@ const LoginForm = () => {
           onSubmit={handler.handleSubmit(onSubmit)}
           className="space-y-3 w-full "
         >
-          <h1 className="text-xl md:text-2xl text-[#006400] font-semibold text-center">
+          <h1 className="text-xl md:text-2xl text-brand font-semibold text-center">
             Welcome Back
           </h1>
           <FormField
@@ -73,7 +78,7 @@ const LoginForm = () => {
               Click here
             </Link>
           </p>
-          <UserButton type="submit" className="w-full">
+          <UserButton type="submit" className="w-full" loading={loading}>
             Login
           </UserButton>
         </form>

@@ -12,8 +12,12 @@ import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { PasswordInput } from "../widgets/PasswordInput";
 import { SetNewPasswordData, SetNewPasswordSchema } from "../schema/schema";
 import { useRouter } from "next/navigation";
+import { useResetPassword } from "../../../hooks/auth/reset";
+import { useEffect } from "react";
 
 const EnterNewPassword = () => {
+  const { reset, loading, success } = useResetPassword();
+
   const router = useRouter();
   const handler = useForm<SetNewPasswordData>({
     resolver: zodResolver(SetNewPasswordSchema),
@@ -22,9 +26,23 @@ const EnterNewPassword = () => {
   const { control } = handler;
 
   const onSubmit = async (data: SetNewPasswordData) => {
-    console.log(data);
-    router.push("/login");
+    const email = sessionStorage.getItem("email") || "";
+    const otp = sessionStorage.getItem("otp") || "";
+
+    const payload = {
+      email,
+      otp,
+      newPassword: data.password,
+    };
+
+    await reset(payload);
   };
+
+  useEffect(() => {
+    if (!loading && success) {
+      router.push("/login");
+    }
+  }, [loading, success, router]);
 
   return (
     <Form {...handler}>
@@ -32,7 +50,7 @@ const EnterNewPassword = () => {
         onSubmit={handler.handleSubmit(onSubmit)}
         className="space-y-3 w-full "
       >
-        <h1 className="text-xl md:text-2xl text-[#006400] font-semibold text-center">
+        <h1 className="text-xl md:text-2xl text-brand font-semibold text-center">
           Enter new password
         </h1>
 
@@ -59,7 +77,7 @@ const EnterNewPassword = () => {
           )}
         />
 
-        <UserButton type="submit" className="w-full">
+        <UserButton type="submit" className="w-full" loading={loading}>
           Submit
         </UserButton>
       </form>

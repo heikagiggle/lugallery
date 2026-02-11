@@ -12,18 +12,35 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { ForgotPasswordSchema, RecoverPasswordData } from "../schema/schema";
 import { ContainerProps } from "../../../utils/type";
+import { useForgotPassword } from "../../../hooks/auth/reset";
+import { useEffect } from "react";
 
 const EnterEmail = ({ onNextStep }: ContainerProps) => {
+  const { forgot, loading, success } = useForgotPassword();
   const handler = useForm<RecoverPasswordData>({
     resolver: zodResolver(ForgotPasswordSchema),
     mode: "onChange",
   });
   const { control } = handler;
 
-  const onSubmit = (data: RecoverPasswordData) => {
-    console.log(data);
-    onNextStep();
+  const onSubmit = async (data: RecoverPasswordData) => {
+    const payload = {
+      email: data.email,
+    };
+
+    try {
+      await forgot(payload);
+      sessionStorage.setItem("email", data.email);
+    } catch (error) {
+      console.error("Failed to send reset email:", error);
+    }
   };
+
+  useEffect(() => {
+    if (!loading && success) {
+      onNextStep && onNextStep();
+    }
+  }, [loading, onNextStep, success]);
 
   return (
     <Form {...handler}>
@@ -31,7 +48,7 @@ const EnterEmail = ({ onNextStep }: ContainerProps) => {
         onSubmit={handler.handleSubmit(onSubmit)}
         className="space-y-3 w-full "
       >
-        <h1 className="text-xl md:text-2xl text-[#006400] font-semibold text-center">
+        <h1 className="text-xl md:text-2xl text-brand font-semibold text-center">
           Enter your email address
         </h1>
 
@@ -41,13 +58,13 @@ const EnterEmail = ({ onNextStep }: ContainerProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <Input {...field} />
+              <Input {...field} placeholder="Enter your email" />
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <UserButton type="submit" className="w-full">
+        <UserButton type="submit" className="w-full" loading={loading}>
           Submit
         </UserButton>
       </form>

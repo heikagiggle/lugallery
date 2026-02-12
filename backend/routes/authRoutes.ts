@@ -9,6 +9,7 @@ const {
   verifyOTP,
   resetPassword,
   getUserProfile,
+  updateProfile,
 } = require("../controllers/auth/authControllers");
 
 // Require middleware
@@ -22,5 +23,6 @@ router.post("/send-otp", sendOTP);
 router.post("/verify-otp", verifyOTP);
 router.post("/reset-password", resetPassword);
 router.get("/me", auth, getUserProfile);
+router.patch("/update-profile", auth, updateProfile);
 
 module.exports = router;

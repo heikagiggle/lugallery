@@ -20,10 +20,17 @@ enum Role {
   USER
 }
 
+enum Gender {
+  male
+  female
+}
+
 model User {
   id        String    @id @default(uuid())
   email     String    @unique
   password  String
+  image     String?
+  gender    Gender?
   role      Role      @default(USER)
   createdAt DateTime  @default(now())
   deletedAt DateTime?
@@ -55,11 +62,6 @@ model Partner {
   approved Boolean @default(false) // Partners require approval
 }
 
-enum Gender {
-  male
-  female
-}
-
 model Career {
   id     String @id @default(uuid())
   userId String @unique
@@ -68,7 +70,6 @@ model Career {
   first_name String
   last_name  String
   phone      String
-  gender     Gender
 }
 
 model Admin {

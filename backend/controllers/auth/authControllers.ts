@@ -3,6 +3,7 @@ import type { Request, Response } from "express";
 import { prisma } from "../../lib/prisma";
 import { Resend } from "resend";
 import { errorResponse, successResponse } from "../../utils/apiResponse";
+import { Prisma } from "@prisma/client";
 
 const {
   AdminSchema,
@@ -60,6 +61,7 @@ const register = async (req: Request, res: Response) => {
       data: {
         email,
         password: hashedPassword,
+        gender: role === "CAREER" ? extra.gender : undefined,
         role,
 
         userData: role === "USER" ? { create: { name, phone } } : undefined,
@@ -86,7 +88,6 @@ const register = async (req: Request, res: Response) => {
                   first_name: extra.first_name,
                   last_name: extra.last_name,
                   phone,
-                  gender: extra.gender,
                 },
               }
             : undefined,
@@ -225,6 +226,8 @@ const getUserProfile = async (req: Request, res: Response) => {
       id: true,
       email: true,
       role: true,
+      image: true,
+      gender: true,
       deletedAt: true,
       createdAt: true,
       userData: true,
@@ -237,7 +240,62 @@ const getUserProfile = async (req: Request, res: Response) => {
   return successResponse(res, fullUser, "User profile fetched");
 };
 
-const updateProfile = async () => {};
+const updateProfile = async (req: Request, res: Response) => {
+  try {
+    const authUser = req.user;
+
+    if (!authUser) {
+      return errorResponse(res, "Unauthorized", 401);
+    }
+
+    const { phone, gender, name, image } = req.body;
+
+    // Role-specific nested updates
+    const userDataUpdate =
+      authUser.role === "USER" && (name !== undefined || phone !== undefined)
+        ? { name: name ?? undefined }
+        : undefined;
+
+    const partnerUpdate =
+      authUser.role === "PARTNER" && phone !== undefined
+        ? { phone }
+        : undefined;
+
+    const adminUpdate =
+      authUser.role === "ADMIN" && name !== undefined ? { name } : undefined;
+
+    // Top-level User updates
+    const userUpdates: Prisma.UserUpdateInput = {
+      ...(gender !== undefined && { gender }),
+      ...(image !== undefined && { image }),
+      ...(userDataUpdate ? { userData: { update: userDataUpdate } } : {}),
+      ...(partnerUpdate ? { partner: { update: partnerUpdate } } : {}),
+      ...(adminUpdate ? { admin: { update: adminUpdate } } : {}),
+    };
+
+    const updatedUser = await prisma.user.update({
+      where: { id: authUser.userId },
+      data: userUpdates,
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        image: true,
+        gender: true,
+        createdAt: true,
+        deletedAt: true,
+        userData: true,
+        partner: true,
+        admin: true,
+      },
+    });
+
+    return successResponse(res, updatedUser, "Profile updated successfully");
+  } catch (error) {
+    console.error(error);
+    return errorResponse(res, "Profile update failed", 500);
+  }
+};
 
 module.exports = {
   register,
@@ -246,4 +304,5 @@ module.exports = {
   verifyOTP,
   resetPassword,
   getUserProfile,
+  updateProfile,
 };

@@ -33,18 +33,23 @@ export interface GetAllProfileResponseProps {
   data: AllProfile | null;
 }
 
-// "data": {
-//     "id": "18025a3c-182f-4c11-9da5-acc52083e0ed",
-//     "email": "okaforemmanuellaoluchi@gmail.com",
-//     "role": "USER",
-//     "createdAt": "2026-01-09T13:46:04.233Z",
-//     "userData": {
-//         "id": "dd492615-01f7-427e-b9d9-6ae6bafa8c0c",
-//         "userId": "18025a3c-182f-4c11-9da5-acc52083e0ed",
-//         "name": "Emmanuella Oluchi Okafor",
-//         "phone": "09020307231"
-//     },
-//     "partner": null,
-//     "career": null,
-//     "admin": null
-// }
+export interface UpdateProfilePayload {
+  name?: string;
+  image?: string;
+  gender?: string;
+  phone?: string;
+}
+
+export interface UpdateProfileResponse {
+  success: boolean;
+  message: string;
+  data: {
+    email: string;
+    role: string;
+  };
+}
+export interface UseUpdateProfileResponse {
+  updateProfile: (payload: UpdateProfilePayload) => Promise<void>;
+  loading: boolean;
+  data?: UpdateProfileResponse | null;
+}

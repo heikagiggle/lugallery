@@ -7,6 +7,9 @@ import { FC, useMemo, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { ChevronDown, X } from "lucide-react";
+import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { useAuthContext } from "@/app/state";
 
 interface NavItem {
   url: string;
@@ -21,7 +24,9 @@ interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const pathName = usePathname();
-
+  const router = useRouter();
+  const { setToken } = useAuthContext();
+  const queryClient = useQueryClient();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const handleDropdown = (label: string) => {
@@ -106,7 +111,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
         ],
       },
     ],
-    []
+    [],
   );
 
   const activeSubItemParent = useMemo(() => {
@@ -136,8 +141,12 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
     return active;
   }, [pathName, mainMenuItems]);
 
-  const router = useRouter();
-  const handleLogout = () => router.push("/login");
+  const handleLogout = () => {
+    setToken(null);
+    queryClient.clear();
+    toast.success("You are logged out.");
+    router.push("/admin/login");
+  };
 
   return (
     <aside
@@ -146,7 +155,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
         isOpen
           ? "translate-x-0 bg-[#006400] z-50 shadow-sm"
           : "-translate-x-full",
-        "lg:translate-x-0 lg:fixed lg:bg-[#006400]"
+        "lg:translate-x-0 lg:fixed lg:bg-[#006400]",
       )}
     >
       <div className="my-5 flex justify-between items-center gap-x-2 px-5">
@@ -170,7 +179,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
               " hover:green-pink-100 hover:bg-opacity-20 border-transparent duration-200 ease-out md:text-base text-sm py-1 hover:text-green-500",
               active === nav.url
                 ? "!bg-green-500/20 rounded-sm border-l-4 border-white"
-                : ""
+                : "",
             )}
           >
             {nav.subItems ? (
@@ -180,7 +189,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                   openDropdown === nav.label && "text-white font-medium ",
                   activeSubItemParent === nav.label &&
                     openDropdown !== nav.label &&
-                    "!bg-green-500/20 border-l-4 border-white"
+                    "!bg-green-500/20 border-l-4 border-white",
                 )}
                 onClick={() => handleDropdown(nav.label)}
               >
@@ -188,7 +197,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                 <span
                   className={cn(
                     "transform transition-transfor duration-200",
-                    openDropdown === nav.label ? "rotate-180" : ""
+                    openDropdown === nav.label ? "rotate-180" : "",
                   )}
                 >
                   <ChevronDown className="w-6" />
@@ -199,7 +208,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                 href={nav.url}
                 className={cn(
                   " items-center w-full text-white md:text-base text-sm leading-6 px-2 hover:text-green-500",
-                  active === nav.url && "text-[#f5f5f5] font-medium "
+                  active === nav.url && "text-[#f5f5f5] font-medium ",
                 )}
                 onClick={() => setIsOpen(false)}
               >
@@ -214,7 +223,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                     className={cn(
                       "text-white hover:text-green-500 px-2 py-1 rounded-md",
                       active === subItem.url &&
-                        "text-white font-medium !bg-green-500/20 rounded-sm ml-0 border-l-4 border-white"
+                        "text-white font-medium !bg-green-500/20 rounded-sm ml-0 border-l-4 border-white",
                     )}
                     onClick={() => setIsOpen(false)}
                   >

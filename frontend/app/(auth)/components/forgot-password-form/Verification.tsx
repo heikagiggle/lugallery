@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { ContainerProps } from "../../../utils/type";
 import { OtpData, OtpSchema } from "../schema/schema";
-import { useCode } from "../../../hooks/auth/reset";
+import { useCode } from "../../../hooks/auth";
 import { useEffect } from "react";
 
 const Verification = ({ onNextStep }: ContainerProps) => {

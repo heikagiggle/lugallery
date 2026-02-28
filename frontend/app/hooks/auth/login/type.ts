@@ -12,7 +12,8 @@ export interface LoginResponse {
   };
 }
 export interface UseLoginResponse {
-  login: (payload: LoginPayload) => Promise<void>;
+  login: (payload: LoginPayload) => Promise<LoginResponse | null>;
   loading: boolean;
+  success:boolean;
   data?: LoginResponse | null;
 }

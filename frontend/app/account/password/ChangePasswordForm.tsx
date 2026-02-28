@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { UserButton } from "@/app/components/widgets/buttons/UserButton";
+import { useChangePasword } from "@/app/hooks/auth/reset/changePassword";
 
 export const PasswordSchema = z.object({
   old_password: z.string(),
@@ -19,6 +20,8 @@ export const PasswordSchema = z.object({
 export type PasswordData = z.infer<typeof PasswordSchema>;
 
 const ChangePasswordForm = () => {
+  const { handlePassword, loading } = useChangePasword();
+
   const handler = useForm<PasswordData>({
     resolver: zodResolver(PasswordSchema),
     mode: "onChange",
@@ -26,6 +29,11 @@ const ChangePasswordForm = () => {
 
   const onSubmit = async (data: PasswordData) => {
     console.log(data);
+    const payload = {
+      ...data,
+    };
+    await handlePassword(payload);
+    console.log(payload)
   };
 
   const { control } = handler;
@@ -42,7 +50,7 @@ const ChangePasswordForm = () => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormLabel>Enter old password</FormLabel>
-              <PasswordInput {...field} placeholder="old password" />
+              <PasswordInput {...field} placeholder="Old password" />
               <FormMessage />
             </FormItem>
           )}
@@ -60,7 +68,9 @@ const ChangePasswordForm = () => {
         />
 
         <div className="flex w-full">
-          <UserButton className="w-full">Change password</UserButton>
+          <UserButton className="w-full" loading={loading}>
+            Change password
+          </UserButton>
         </div>
       </form>
     </Form>

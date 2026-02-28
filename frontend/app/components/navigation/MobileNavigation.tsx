@@ -7,6 +7,9 @@ import { RiCloseLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import { menu } from "../utils/data";
 import { useAllProfile } from "../../hooks/auth/profile";
+import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import { useAuthContext } from "@/app/state";
 
 const MobileNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +17,8 @@ const MobileNavigation = () => {
   const ref = useRef(null);
   useClickAway(ref, () => setIsOpen(false));
   const { data, isLoading } = useAllProfile();
+  const { setToken } = useAuthContext();
+  const queryClient = useQueryClient();
 
   const profileName = useMemo(() => {
     if (!data) return null;
@@ -60,8 +65,12 @@ const MobileNavigation = () => {
   const router = useRouter();
 
   const logout = () => {
+    setToken(null); 
+    queryClient.clear(); 
+    toast.success("You are logged out.");
     router.push("/login");
   };
+
   return (
     <div className="justify-end ">
       <Hamburger

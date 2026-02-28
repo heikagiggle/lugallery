@@ -9,6 +9,7 @@ type Props = {
   onClick?: () => void;
   icon?: ReactNode;
   disabled?: boolean;
+  loading?: boolean;
 };
 
 export function AdminButton({
@@ -16,15 +17,20 @@ export function AdminButton({
   type,
   onClick,
   className,
+  disabled,
 }: PropsWithChildren<Props>) {
   return (
     <button
-      className={cn(
-        "bg-[#006400] text-white px-6 py-2 rounded-md  hover:text-[#e5e5e5] cursor-pointer flex justify-center items-center transition-colors duration-300 ease-in-out",
-        className
-      )}
       type={type}
       onClick={onClick}
+      disabled={disabled}
+      className={cn(
+        "bg-[#006400] text-white px-6 py-2 rounded-md flex justify-center items-center transition-colors duration-300 ease-in-out",
+        disabled
+          ? "opacity-50 cursor-not-allowed"
+          : "hover:text-[#e5e5e5] cursor-pointer",
+        className,
+      )}
     >
       {children}
     </button>

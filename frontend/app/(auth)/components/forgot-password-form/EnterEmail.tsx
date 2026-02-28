@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { ForgotPasswordSchema, RecoverPasswordData } from "../schema/schema";
 import { ContainerProps } from "../../../utils/type";
-import { useForgotPassword } from "../../../hooks/auth/reset";
+import { useForgotPassword } from "../../../hooks/auth";
 import { useEffect } from "react";
 
 const EnterEmail = ({ onNextStep }: ContainerProps) => {

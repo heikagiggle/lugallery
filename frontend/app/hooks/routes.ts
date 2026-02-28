@@ -5,5 +5,14 @@ export const ROUTES = {
   VERIFY_OTP: `/api/user/verify-otp`,
   RESET_PASSWORD: `/api/user/reset-password`,
   RESEND_OTP: `/api/user/resend-otp`,
-  GET_PROFILE:`/api/user/me`
+  GET_PROFILE: `/api/user/me`,
+  UPDATE_PROFILE: `/api/user/update-profile`,
+  CHANGE_PASSWORD:`/api/account/change-password`,
+  USER_CHAT_SUPPORT: ``,
+  DELETE_USER_ACCOUNT: `/api/account/delete-account`,
+
+   CREATE_SUPPORT_TICKET: `/api/support/tickets`,
+  GET_MY_TICKETS: `/api/support/tickets/me`,
+  GET_TICKET_BY_ID: (id: string) => `/api/support/tickets/${id}`,
+  SEND_SUPPORT_MESSAGE: `/api/support/messages`,
 };

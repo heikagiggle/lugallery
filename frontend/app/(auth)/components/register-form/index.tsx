@@ -36,7 +36,6 @@ const RegisterForm = () => {
         role: "USER",
       });
       router.push("/");
-      console.log("data", data);
     } catch (error) {
       console.error("Registration failed", error);
     }

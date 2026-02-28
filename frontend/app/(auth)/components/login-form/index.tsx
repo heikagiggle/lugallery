@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { PasswordInput } from "../widgets/PasswordInput";
 import { useRouter } from "next/navigation";
-import { useLogin } from "../../../hooks/auth/login";
+import { useLogin } from "../../../hooks/auth";
 
 const LoginForm = () => {
   const { login, loading } = useLogin();
@@ -27,12 +27,24 @@ const LoginForm = () => {
   const { control } = handler;
 
   const onSubmit = async (data: LoginData) => {
-    console.log(data);
-    try {
-      await login({ email: data.email ?? "", password: data.password });
+    const response = await login({
+      email: data.email ?? "",
+      password: data.password,
+    });
+
+    if (!response) return;
+
+    const role = response.data.role;
+
+    if (role === "USER") {
       router.push("/user/discover");
-    } catch (e) {
-      console.error("error in logged");
+    } else if (role === "PARTNER") {
+      router.push("/partner/dashboard");
+    } else if (role === "CAREER") {
+      router.push("/career/dashboard");
+    } else if (role === "ADMIN") {
+      // Todo: block admin from general login
+      alert("Admins must log in from the admin portal");
     }
   };
 

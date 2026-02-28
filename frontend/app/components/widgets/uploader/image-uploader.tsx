@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Camera } from "lucide-react";
 import { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
+import { uploadToCloudinary } from "@/app/utils/uploadToCloudinary";
 
 interface ImageUploaderProps<TFieldValues extends FieldValues> {
   name: Path<TFieldValues>;
@@ -26,21 +27,58 @@ export const ImageUploader = <TFieldValues extends FieldValues>({
     }
   }, [initialImageUrl]);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setImage(previewUrl);
+  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const previewUrl = URL.createObjectURL(file);
+  //     setImage(previewUrl);
 
-      handler?.setValue(
-        name,
-        { url: previewUrl } as PathValue<TFieldValues, typeof name>,
-        { shouldDirty: true },
-      );
+  //     handler?.setValue(
+  //       name,
+  //       { url: previewUrl } as PathValue<TFieldValues, typeof name>,
+  //       { shouldDirty: true },
+  //     );
 
-      onUploadComplete?.(previewUrl);
-    }
-  };
+  //     onUploadComplete?.(previewUrl);
+  //   }
+  // };
+
+  const handleImageChange = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  // show preview immediately
+  const previewUrl = URL.createObjectURL(file);
+  setImage(previewUrl);
+
+  handler?.setValue(
+    name,
+    { url: previewUrl, uploading: true } as PathValue<
+      TFieldValues,
+      typeof name
+    >,
+    { shouldDirty: true }
+  );
+
+  try {
+    const data = await uploadToCloudinary(file, "profiles");
+
+    handler?.setValue(
+      name,
+      { url: data.secure_url, uploading: false } as PathValue<
+        TFieldValues,
+        typeof name
+      >,
+      { shouldDirty: true }
+    );
+
+    onUploadComplete?.(data.secure_url);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   const handleRemove = () => {
     setImage(null);

@@ -14,9 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
 import { PasswordInput } from "../widgets/PasswordInput";
 import { useRouter } from "next/navigation";
+import { useLogin } from "@/app/hooks/auth";
 
 const LoginForm = () => {
   const router = useRouter();
+  const { login, loading } = useLogin();
   const handler = useForm<LoginData>({
     resolver: zodResolver(LoginSchema),
 
@@ -24,10 +26,22 @@ const LoginForm = () => {
   });
   const { control } = handler;
 
-  const onSubmit = (data: LoginData) => {
-    console.log(data);
+  const onSubmit = async (data: LoginData) => {
+    const response = await login({
+      email: data.email ?? "",
+      password: data.password,
+    });
+
+    if (!response) return;
+
+    if (response.data.role !== "ADMIN") {
+      alert("Not authorized as admin");
+      return;
+    }
+
     router.push("/admin/dashboard");
   };
+
   return (
     <div>
       <Form {...handler}>
@@ -70,7 +84,7 @@ const LoginForm = () => {
               Click here
             </Link>
           </p>
-          <UserButton type="submit" className="w-full">
+          <UserButton type="submit" className="w-full" loading={loading}>
             Login
           </UserButton>
         </form>

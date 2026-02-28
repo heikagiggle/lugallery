@@ -24,9 +24,9 @@ export interface PartnerRegisterPayload extends BaseRegisterPayload {
   last_name: string;
   phone: string;
   portfolio?: string;
-  artisan: boolean;
-  do_you_train: boolean;
-  willing_to_train: boolean;
+  artisan: string;
+  do_you_train: string;
+  willing_to_train: string;
 }
 
 // CAREER

@@ -20,8 +20,10 @@ import {
 import { UserButton } from "../../../../components/widgets/buttons/UserButton";
 import { artisanTitles } from "../../../discover/components/data";
 import Link from "next/link";
+import { useRegister } from "../../../../hooks/auth";
 
 const PartnerForm = () => {
+    const { signUp, loading } = useRegister();
   const handler = useForm<PartnerData>({
     resolver: zodResolver(PartnerSchema),
 
@@ -29,9 +31,27 @@ const PartnerForm = () => {
   });
   const { control } = handler;
 
-  const onSubmit = (data: PartnerData) => {
+  const onSubmit = async (data: PartnerData) => {
+      try {
+      await signUp({
+        email: data.email,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        portfolio: data.portfolio,
+        phone: data.phone,
+        artisan:data.artisan,
+        do_you_train: data.do_you_train,
+        willing_to_train:data.willing_to_train,
+        password: '',
+        role: "PARTNER",
+      });
+      console.log(data);
+    } catch (e) {
+      console.error("registration failed", e);
+    }
     console.log(data);
   };
+  
   return (
     <Form {...handler}>
       <form
@@ -172,7 +192,7 @@ const PartnerForm = () => {
           </Link>{" "}
         </p>
         <div className="flex justify-end mt-5">
-          <UserButton type="submit">Register</UserButton>
+          <UserButton type="submit" loading={loading}>Register</UserButton>
         </div>
       </form>
     </Form>

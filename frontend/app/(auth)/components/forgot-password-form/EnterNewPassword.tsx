@@ -12,7 +12,7 @@ import { UserButton } from "../../../components/widgets/buttons/UserButton";
 import { PasswordInput } from "../widgets/PasswordInput";
 import { SetNewPasswordData, SetNewPasswordSchema } from "../schema/schema";
 import { useRouter } from "next/navigation";
-import { useResetPassword } from "../../../hooks/auth/reset";
+import { useResetPassword } from "../../../hooks/auth";
 import { useEffect } from "react";
 
 const EnterNewPassword = () => {

@@ -5,7 +5,7 @@ import { menu as staticMenu } from "../utils/data";
 import Link from "next/link";
 import { CiSearch } from "react-icons/ci";
 import MobileNavigation from "./MobileNavigation";
-import { useAllProfile } from "../../hooks/auth/profile";
+import { useAllProfile } from "../../hooks/auth";
 import { useSearch } from "../../state";
 
 const Navigation = () => {

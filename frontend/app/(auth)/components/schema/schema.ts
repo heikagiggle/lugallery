@@ -2,7 +2,9 @@ import { z } from "zod";
 
 export const LoginSchema = z.object({
   email: z.string().min(1, { message: "Email is required" }),
-  password: z.string().min(8),
+  password: z
+    .string()
+    .min(8, { message: "Password must contain 8 characters" }),
 });
 
 export type LoginData = z.infer<typeof LoginSchema>;

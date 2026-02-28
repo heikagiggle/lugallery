@@ -19,11 +19,12 @@ import {
 } from "../../../components/ui/select";
 import { UserButton } from "@/app/components/widgets/buttons/UserButton";
 import { ImageUploader } from "@/app/components/widgets/uploader/image-uploader";
+import { useAllProfile } from "../../hooks/auth";
+import { useEffect } from "react";
+import { useUpdateProfile } from "@/app/hooks/auth/profile/updateProfile";
 
 export const ProfileSchema = z.object({
-  first_name: z.string(),
-  last_name: z.string(),
-  // bio: z.string(),
+  name: z.string(),
   phone: z.string(),
   email: z.string(),
   gender: z.enum(["male", "female"], {
@@ -39,14 +40,17 @@ export const ProfileSchema = z.object({
 export type ProfileData = z.infer<typeof ProfileSchema>;
 
 const ProfileForm = () => {
+  const { data } = useAllProfile();
+  const { updateProfile, loading } = useUpdateProfile();
+
   const handler = useForm<ProfileData>({
     resolver: zodResolver(ProfileSchema),
     mode: "onChange",
     defaultValues: {
-      first_name: "",
-      last_name: "",
+      name: "",
       phone: "",
       email: "",
+      gender: undefined,
       profile_image: undefined,
     },
   });
@@ -56,8 +60,37 @@ const ProfileForm = () => {
   const currentProfileImage = handler.watch("profile_image");
 
   const onSubmit = async (data: ProfileData) => {
-    console.log(data);
+    const payload = {
+      ...data,
+      image: data.profile_image?.url ?? undefined,
+    };
+
+    console.log(payload);
+
+    await updateProfile(payload);
   };
+
+  useEffect(() => {
+    if (!data) return;
+
+    console.log("PROFILE DATA:", data);
+
+    const profile = data.data ?? data;
+
+    handler.reset({
+      name: profile.userData?.name || "",
+      phone: profile.userData?.phone || "",
+      email: profile.email || "",
+      gender:
+        profile.gender === "male" || profile.gender === "female"
+          ? profile.gender
+          : "",
+      profile_image: profile.image
+        ? { url: profile.image, uploading: false }
+        : undefined,
+    });
+  }, [data]);
+  console.log(JSON.stringify(data, null, 2));
 
   return (
     <Form {...handler}>
@@ -72,26 +105,16 @@ const ProfileForm = () => {
         />
         <FormField
           control={control}
-          name="first_name"
+          name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>First name</FormLabel>
+              <FormLabel>Name</FormLabel>
               <Input {...field} />
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={control}
-          name="last_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last name</FormLabel>
-              <Input {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
         <FormField
           control={control}
           name="phone"
@@ -110,7 +133,7 @@ const ProfileForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Gender</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select value={field.value} onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select gender" />
                 </SelectTrigger>
@@ -130,14 +153,14 @@ const ProfileForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <Input {...field} />
+              <Input {...field} readOnly />
               <FormMessage />
             </FormItem>
           )}
         />
 
         <div className="flex justify-end">
-          <UserButton>Save changes</UserButton>
+          <UserButton loading={loading}>Save changes</UserButton>
         </div>
       </form>
     </Form>

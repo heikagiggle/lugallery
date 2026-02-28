@@ -62,3 +62,26 @@ export interface UseResetResponse {
   message: string;
   success: boolean;
 }
+
+export interface PasswordPayload {
+  old_password: string;
+  new_password: string;
+}
+
+export interface PasswordResponse {
+  success: boolean;
+  message: string;
+  data: {
+    token: string;
+    oldPassword: string;
+    newPasword?: string;
+  };
+}
+
+export interface UsePasswordResponse {
+  loading: boolean;
+  success: boolean;
+  data: PasswordResponse | null;
+  handlePassword: (payload: PasswordPayload) => Promise<void>;
+}
+

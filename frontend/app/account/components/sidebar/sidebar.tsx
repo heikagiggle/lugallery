@@ -18,6 +18,7 @@ import { mutate } from "swr";
 import { X } from "lucide-react";
 import { useAllProfile } from "@/app/hooks/auth/profile";
 import { useAuthContext } from "@/app/state";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface NavItem {
   url: string;
@@ -34,6 +35,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const pathName = usePathname();
   const { data } = useAllProfile();
   const { setToken } = useAuthContext();
+  const queryClient = useQueryClient();
 
   const menuItems: NavItem[] = useMemo(
     () => [
@@ -72,8 +74,8 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const router = useRouter();
 
   const handleLogout = () => {
-    setToken(null); 
-    mutate(() => true, undefined, { revalidate: false });
+    setToken(null);
+    queryClient.clear();
     toast.success("You are logged out.");
     router.push("/login");
   };

@@ -8,8 +8,10 @@ const AdminNotes = () => {
   const [notes, setNotes] = useState("");
 
   return (
-    <Card className="p-6 bg-white rounded-lg shadow-sm mt-6">
-      <h3 className="text-lg font-semibold mb-4 text-gray-700">Admin Notes</h3>
+    <Card className="p-6 rounded-lg shadow-sm my-6">
+      <h3 className="text-lg font-semibold mb-4 text-secondary-foreground">
+        Admin Notes
+      </h3>
       <Textarea
         placeholder="Add comments or reasons for rejection..."
         value={notes}

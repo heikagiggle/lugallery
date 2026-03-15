@@ -7,12 +7,15 @@ export const ROUTES = {
   RESEND_OTP: `/api/user/resend-otp`,
   GET_PROFILE: `/api/user/me`,
   UPDATE_PROFILE: `/api/user/update-profile`,
-  CHANGE_PASSWORD:`/api/account/change-password`,
+  CHANGE_PASSWORD: `/api/account/change-password`,
   USER_CHAT_SUPPORT: ``,
   DELETE_USER_ACCOUNT: `/api/account/delete-account`,
-
-   CREATE_SUPPORT_TICKET: `/api/support/tickets`,
+  CREATE_SUPPORT_TICKET: `/api/support/tickets`,
   GET_MY_TICKETS: `/api/support/tickets/me`,
   GET_TICKET_BY_ID: (id: string) => `/api/support/tickets/${id}`,
   SEND_SUPPORT_MESSAGE: `/api/support/messages`,
+  ADMIN_GET_TICKETS: `/api/admin/support/tickets`,
+  ADMIN_GET_TICKET_BY_ID: (id: string) => `/api/admin/support/tickets/${id}`,
+  ADMIN_SEND_MESSAGE: `/api/admin/support/messages`,
+  ADMIN_CLOSE_TICKET: (id: string) => `/api/admin/support/${id}/close`,
 };

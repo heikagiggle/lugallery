@@ -69,7 +69,7 @@ const Appearance = () => {
           </div>
         </div>
 
-        {/* Dark Theme Option */} 
+        {/* Dark Theme Option */}
         <div
           onClick={() => handleThemeChange("dark")}
           className={clsx(
@@ -79,14 +79,14 @@ const Appearance = () => {
               : "border-gray-300",
           )}
         >
-         <div className="relative w-full h-40 md:h-48 lg:h-56">
-  <Image
-    src="/dark.png"
-    alt="dark-theme-image"
-    fill
-    className="rounded-sm object-cover"
-  />
-</div>
+          <div className="relative w-full h-40 md:h-48 lg:h-56">
+            <Image
+              src="/dark.png"
+              alt="dark-theme-image"
+              fill
+              className="rounded-sm object-cover"
+            />
+          </div>
 
           <div className="flex gap-3 items-center">
             <input

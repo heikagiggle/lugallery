@@ -149,6 +149,7 @@ body {
   --soft-pink-to: oklch(0.97 0.02 25);
   --soft-teal-from: oklch(0.96 0.03 200);
   --soft-teal-to: oklch(0.94 0.02 190);
+  
 }
 
 .dark {

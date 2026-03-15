@@ -11,11 +11,11 @@ export function CardComponent(props: StatProps) {
   return (
     <Card
       className={cn(
-        "gap-5 rounded-lg bg-white flex flex-col p-3 shadow-sm",
-        props.className
+        "gap-5 rounded-lg bg-background flex flex-col p-3 shadow-sm",
+        props.className,
       )}
     >
-      <p className="text-[#666666] font-semibold">{props.label}</p>
+      <p className="text-muted-foreground font-semibold">{props.label}</p>
       <p className={"text-2xl font-semibold"}>{props.value}</p>
     </Card>
   );

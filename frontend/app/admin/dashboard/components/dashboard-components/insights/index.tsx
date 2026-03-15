@@ -27,7 +27,7 @@ const chartsConfig = [
 
 export default function Insights() {
   return (
-    <Card className="gap-5 rounded-lg bg-white flex flex-col p-3 shadow-sm h-[23rem]">
+    <Card className="gap-5 rounded-lg flex flex-col p-3 shadow-sm h-[23rem]">
       <div className="flex justify-between">
         <div className="flex items-center gap-x-2">
           <p>Insights</p>
@@ -36,7 +36,7 @@ export default function Insights() {
           </div>
         </div>
 
-        <div className="bg-[#F2F2F2] flex items-center gap-x-2 px-2 py-2 rounded-md font-gothamM cursor-pointer">
+        <div className="bg-muted flex items-center gap-x-2 px-2 py-2 rounded-md font-gothamM cursor-pointer">
           <p>User Engagement</p>
           {/* <ChevronDown /> */}
         </div>
@@ -44,7 +44,7 @@ export default function Insights() {
 
       <div className="flex gap-x-3 items-center">
         <h1 className="text-2xl font-gothamB">4,272</h1>
-        <p className="border-2 border-[#15803D] px-2 py-0.5 bg-[#F0FDF4] rounded-md">
+        <p className="border-2 border-[#15803D] px-2 py-0.5 bg-chart-2/10 bg[#F0FDF4] rounded-md">
           2%
         </p>
       </div>

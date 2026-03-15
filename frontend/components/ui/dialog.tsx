@@ -58,7 +58,7 @@ function DialogContent({
 }) {
   const baseClasses = side
     ? // Side drawer styles
-      'fixed inset-y-0 right-0 z-50 w-full max-w-md sm:max-w-lg bg-white border-l shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-right-80 data-[state=closed]:slide-out-to-right-80'
+      'fixed inset-y-0 right-0 z-50 w-full max-w-md sm:max-w-lg bg-background border-l shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:slide-in-from-right-80 data-[state=closed]:slide-out-to-right-80'
     : // Default centered modal
       'fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 sm:max-w-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95';
 
@@ -72,8 +72,8 @@ function DialogContent({
         {children}
 
         {showCloseButton && (
-          <DialogPrimitive.Close className="absolute top-4 right-4 p-1.5 opacity-70 hover:opacity-100 transition bg-gray-100 rounded-full">
-            <XIcon className='w-4 h-4 font-bold' />
+          <DialogPrimitive.Close className="absolute top-4 right-4 p-1.5 opacity-70 hover:opacity-100 transition bg-muted rounded-full">
+            <XIcon className='w-4 h-4 font-bold text-muted-foreground' />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}

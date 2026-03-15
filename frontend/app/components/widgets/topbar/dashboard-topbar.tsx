@@ -29,7 +29,7 @@ const DashboardTopbar = ({ rightContent }: DashboardTopbarProps) => {
           </div>
         )}
 
-        <p className="text-[#0D0D0D] capitalize font-bold text-lg sm:text-xl">
+        <p className="text-foreground capitalize font-bold text-lg sm:text-xl">
           {address || "Dashboard"}
         </p>
       </div>

@@ -21,7 +21,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   }, []);
 
-  // Load token from sessionStorage on app start
+  // Load token from sessionStorage 
   useEffect(() => {
     const token = sessionStorage.getItem(AccessTokenKey);
     if (token) {

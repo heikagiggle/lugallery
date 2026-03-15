@@ -15,7 +15,6 @@ const Navigation = () => {
 
   const { data } = useAllProfile();
   const { searchQuery, setSearchQuery } = useSearch();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Extract user name and trim to first name
   const userName = useMemo(() => {

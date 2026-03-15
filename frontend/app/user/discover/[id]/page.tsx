@@ -74,12 +74,12 @@ const ArtisanDetails = () => {
 
         {/* Right side */}
         <div className="flex flex-col gap-y-4 w-full md:max-w-sm">
-          <h2 className="text-2xl font-semibold text-[#006400]">Tolu Crafts</h2>
-          <p className="text-gray-600">
+          <h2 className="text-2xl font-semibold text-brand">Tolu Crafts</h2>
+          <p className="text-shadow-foreground">
             Woodworking and rustic designs tailored for home and office spaces.
           </p>
 
-          <div className="space-y-2 text-sm text-gray-700">
+          <div className="space-y-2 text-sm text-secondary-foreground">
             <p>
               <span className="font-semibold">Title:</span> Furniture Designer
             </p>

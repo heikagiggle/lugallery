@@ -23,15 +23,15 @@ const IdTopbar = ({ status, dateApplied, onApprove, onReject }: TopbarProps) => 
       : 'bg-yellow-100 text-yellow-700';
 
   return (
-    <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6 bg-white p-4 rounded-lg shadow-sm">
+    <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-6 p-4 rounded-lg shadow-sm border border-border">
       {/* Left Section */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
         <Button
           variant="ghost"
           onClick={() => router.back()}
-          className="flex items-center gap-1 w-fit"
+          className="flex items-center gap-1 w-fit text-foreground"
         >
-          <ArrowLeft size={16} /> Back
+          <ArrowLeft className='text-foreground' size={16} /> Back
         </Button>
 
         <div className="flex items-center gap-2">

@@ -40,10 +40,10 @@ export function PartnerTable({ searchQuery = "" }: UserTableProps) {
   const paginatedItems = filteredData.slice(start, start + size);
 
   return (
-    <Card className="bg-white mt-6 shadow-md rounded-xl w-full py-2">
+    <Card className="mt-6 shadow-md rounded-xl w-full py-2">
       <div className="text-sm text-gray-500 py-2 mobile-scrollbar">
         <Table>
-          <TableHeader className="stick top-0 z-10 bg-white text-[#666666] text-sm">
+          <TableHeader className="stick top-0 z-10 text-muted-foreground text-sm">
             <TableRow className="border-b border-input py-3">
               <TableHead className="pl-4">Name</TableHead>
               <TableHead>Email</TableHead>
@@ -58,23 +58,23 @@ export function PartnerTable({ searchQuery = "" }: UserTableProps) {
           </TableHeader>
           <TableBody>
             {paginatedItems.map((user) => (
-              <TableRow key={user.id} className="hover:bg-gray-50 z-50">
-                <TableCell className="pl-4 text-[#0D0D0D] font-medium">
+              <TableRow key={user.id} className="hover:bg-muted z-50">
+                <TableCell className="pl-4 text-foreground font-medium">
                   {user.name}
                 </TableCell>
-                <TableCell className="text-[#666666]">
+                <TableCell className="text-muted-foreground">
                   {user.email || "N/A"}
                 </TableCell>
-                <TableCell className="text-[#666666]">
+                <TableCell className="text-muted-foreground">
                   {capitalizeWords(user.skill || "N/A")}
                 </TableCell>
-                <TableCell className="text-[#666666]">
+                <TableCell className="text-muted-foreground">
                   {capitalizeWords(user.state || "N/A")}
                 </TableCell>
-                <TableCell className="text-[#666666]">
+                <TableCell className="text-muted-foreground">
                   {user.address || "N/A"}
                 </TableCell>
-                <TableCell className="pr-16 text-center text-[#666666]">
+                <TableCell className="pr-16 text-center text-muted-foreground">
                   {formatDate(user.date_registered)}
                 </TableCell>
                 <TableCell className="text-center cursor-pointer">

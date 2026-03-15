@@ -25,9 +25,12 @@ const CareersAndPartners = () => {
               className="rounded-xl object-cover w-full h-64"
             />
             <div className="space-y-3 mt-5 flex flex-col flex-grow">
-              <h3 className="text-2xl font-semibold text-foreground">Join as an Artisan</h3>
+              <h3 className="text-2xl font-semibold text-foreground">
+                Join as an Artisan
+              </h3>
               <p className="text-sm md:text-base text-muted-foreground">
-                Expand your reach with Lugallery by connecting with clients across the country.
+                Expand your reach with Lugallery by connecting with clients
+                across the country.
               </p>
               <div className="mt-auto flex justify-center items-center">
                 <Link href="/user/partner">
@@ -51,7 +54,8 @@ const CareersAndPartners = () => {
             <div className="space-y-3 mt-5 flex flex-col flex-grow">
               <h3 className="text-2xl font-semibold">Start a Career</h3>
               <p className="text-sm md:text-base text-muted-foreground">
-                Learn a skill and grow into a pro by training with experienced artisans.
+                Learn a skill and grow into a pro by training with experienced
+                artisans.
               </p>
               <div className="mt-auto flex justify-center items-cente">
                 <Link href="/user/become-artisan">

@@ -25,9 +25,9 @@ export const ConnectSuccessModal: React.FC<ConnectSuccessModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+      <div className="bg-background rounded-lg shadow-lg max-w-md w-full p-6">
         <h3 className="text-lg font-semibold mb-3">Connection Successful</h3>
-        <p className="text-gray-700 mb-4">
+        <p className="text-secondary-foreground mb-4">
           Artisan has been contacted and will reach out to you shortly.
         </p>
         <div className="flex justify-end">

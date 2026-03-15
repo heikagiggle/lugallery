@@ -9,9 +9,9 @@ interface PortfolioProps {
 
 const PortfolioSection = ({ portfolio, images }: PortfolioProps) => {
   return (
-    <Card className="p-6 bg-white rounded-lg shadow-sm mt-6">
-      <h3 className="text-lg font-semibold mb-4 text-gray-700">Portfolio</h3>
-      <p className="text-gray-600 mb-3">
+    <Card className="p-6 rounded-lg shadow-sm mt-6">
+      <h3 className="text-lg font-semibold mb-4 text-foreground">Portfolio</h3>
+      <p className="text-secondary-foreground mb-3">
         Portfolio Link:{" "}
         <a
           href={portfolio}

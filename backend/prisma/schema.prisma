@@ -43,6 +43,7 @@ model User {
 
   deletions      AccountDeletion[]
   supportTickets SupportTicket[]
+  supportMessages SupportMessage[] 
 }
 
 model Partner {
@@ -123,8 +124,11 @@ model SupportMessage {
   ticketId String
   ticket   SupportTicket @relation(fields: [ticketId], references: [id])
 
-  sender  MessageSender @default(USER)
-  message String
+  senderId String?
+  sender   User?         @relation(fields: [senderId], references: [id])
+
+  senderRole  MessageSender @default(USER)
+  message     String
 
   createdAt DateTime @default(now())
 }

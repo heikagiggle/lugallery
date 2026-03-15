@@ -25,7 +25,7 @@ export const createTicket = async (req: Request, res: Response) => {
       messages: {
         create: {
           message: parsed.data.message,
-          sender: "USER",
+          senderRole: "USER",
         },
       },
     },
@@ -117,7 +117,8 @@ export const sendMessage = async (req: Request, res: Response) => {
     data: {
       ticketId,
       message,
-      sender: "USER",
+      senderId: userId,
+      senderRole: "USER",
     },
   });
 

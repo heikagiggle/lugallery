@@ -67,7 +67,8 @@ export const adminReply = async (req: Request, res: Response) => {
     data: {
       ticketId,
       message,
-      sender: "ADMIN",
+      senderId: req.user.userId,
+      senderRole: "ADMIN",
     },
   });
 

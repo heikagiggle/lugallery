@@ -83,7 +83,7 @@ export function ApprenticeTable() {
                   {formatDate(user.date_registered)}
                 </TableCell>
                 <TableCell className="text-center cursor-pointer">
-                  <Link href={`/admin/dashboard/apprentices/${user.id}`}>
+                  <Link href={`/partner/dashboard/apprentices/${user.id}`}>
                     <Ellipsis />
                   </Link>
                 </TableCell>

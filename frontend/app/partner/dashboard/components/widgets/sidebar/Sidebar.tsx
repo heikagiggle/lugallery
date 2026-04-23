@@ -36,7 +36,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const mainMenuItems: NavItem[] = useMemo(
     () => [
       { url: "/partner/dashboard", label: "Dashboard" },
-      { url: "/partner/dashboard/listing", label: "My Listing" },
+      { url: "/partner/dashboard/listings", label: "My Listing" },
       { url: "/partner/dashboard/users", label: "All Clients Requests" },
       { url: "/partner/dashboard/apprentices", label: "Apprentices" },
       { url: "/partner/dashboard/gallery", label: "Gallery / Portfolio" },

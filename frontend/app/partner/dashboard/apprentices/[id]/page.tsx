@@ -7,6 +7,7 @@ import ConnectedArtisansTable from "./component/ConnectedArtisansTable";
 import ReviewDialog from "./component/ReviewDialog";
 import { useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
+import { AdminButton } from "@/app/components/widgets/buttons/AdminButton";
 
 interface Apprentice {
   id: string;
@@ -80,7 +81,10 @@ const ApprenticeDetailsPage = () => {
             Apprentice ID: {apprentice.id}
           </p>
         </div>
-        <Button variant="destructive">Delete Apprentice</Button>
+        <div className="flex gap-2 items-center">
+          <Button variant="destructive" className="py-2">Delete Apprentice</Button>
+          <AdminButton>Accept Apprentice</AdminButton>
+        </div>
       </div>
 
       {/* Personal Details Card */}

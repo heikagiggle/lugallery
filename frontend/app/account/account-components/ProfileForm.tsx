@@ -27,9 +27,9 @@ export const ProfileSchema = z.object({
   name: z.string(),
   phone: z.string(),
   email: z.string(),
-  gender: z.enum(["male", "female"], {
-    errorMap: () => ({ message: "Gender is required" }),
-  }),
+ gender: z.enum(["male", "female"], {
+  error: "Gender is required",
+}),
   profile_image: z
     .object({
       url: z.string().url().optional(),
@@ -84,7 +84,7 @@ const ProfileForm = () => {
       gender:
         profile.gender === "male" || profile.gender === "female"
           ? profile.gender
-          : "",
+          : undefined,
       profile_image: profile.image
         ? { url: profile.image, uploading: false }
         : undefined,

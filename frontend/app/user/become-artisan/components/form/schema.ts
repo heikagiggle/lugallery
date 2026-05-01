@@ -6,7 +6,7 @@ export const CareerSchema = z.object({
   email: z.string().email(),
   phone: z.string().min(10, { message: "Phone number is required" }),
   gender: z.enum(["male", "female"], {
-    errorMap: () => ({ message: "Gender is required" }),
+    error: "Gender is required",
   }),
   password: z
     .string()

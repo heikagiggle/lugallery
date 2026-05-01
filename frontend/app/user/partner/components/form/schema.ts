@@ -8,13 +8,13 @@ export const PartnerSchema = z.object({
   phone: z.string().min(10, { message: "Phone number is required" }),
   portfolio: z.string().min(1, { message: "Portfolio link is required" }),
   artisan: z.enum(artisanTitles, {
-    errorMap: () => ({ message: "Artisan category is required" }),
+    error: "Artisan category is required",
   }),
   do_you_train: z.enum(["yes", "no"], {
-    errorMap: () => ({ message: "Please select an option" }),
+    error: "Please select an option",
   }),
   willing_to_train: z.enum(["yes", "no"], {
-    errorMap: () => ({ message: "Please select an option" }),
+    error: "Please select an option",
   }),
 });
 

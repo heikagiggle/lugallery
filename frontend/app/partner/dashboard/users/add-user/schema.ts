@@ -7,7 +7,7 @@ export const AddUserSchema = z.object({
   phone: z.string().min(10, { message: "Phone number is required" }),
   address: z.string().min(10, { message: "Address number is required" }),
   gender: z.enum(["male", "female"], {
-    errorMap: () => ({ message: "Gender is required" }),
+    error: "Gender is required",
   }),
 });
 

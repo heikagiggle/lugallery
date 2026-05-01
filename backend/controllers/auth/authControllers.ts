@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import { prisma } from "../../lib/prisma";
 import { Resend } from "resend";
 import { errorResponse, successResponse } from "../../utils/apiResponse";
-import { Prisma } from "@prisma/client";
+// import { Prisma } from "@prisma/client";
 
 const {
   AdminSchema,

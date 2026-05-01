@@ -3,6 +3,7 @@ import { useAuthContext } from "../../../state";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
 import { ROUTES } from "../../routes";
+import { AxiosError } from "axios";
 
 export const useAdminSupportChat = () => {
   const { axios } = useAxios();
@@ -52,23 +53,28 @@ export const useAdminSupportChat = () => {
   );
 
   // close ticket
-  const closeTicket = useCallback(
-    async (ticketId: string) => {
-      try {
-        await axios.patch(
-          ROUTES.ADMIN_CLOSE_TICKET(ticketId),
-          {},
-          { headers: { Authorization: `Bearer ${token}` } },
-        );
-        toast.success("Ticket closed");
-        return true;
-      } catch (error: any) {
-        toast.error(error?.response?.data?.message || "Failed to close ticket");
-        return false;
-      }
-    },
-    [axios, token],
-  );
+const closeTicket = useCallback(
+  async (ticketId: string) => {
+    try {
+      await axios.patch(
+        ROUTES.ADMIN_CLOSE_TICKET(ticketId),
+        {},
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
 
+      toast.success("Ticket closed");
+      return true;
+    } catch (error: unknown) {
+      const err = error as AxiosError<{ message?: string }>;
+
+      toast.error(
+        err.response?.data?.message || "Failed to close ticket"
+      );
+
+      return false;
+    }
+  },
+  [axios, token],
+);
   return { getAllTickets, getTicketById, sendMessage, closeTicket };
 };

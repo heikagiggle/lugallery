@@ -54,7 +54,7 @@ const PersonalDetailsCard: React.FC<Props> = ({ apprentice }) => {
         {/* Divider for large screens */}
         <div className="hidden lg:block w-px bg-gray-200 h-32 mx-6" />
 
-        {/* Details Grid */}
+        {/* Details*/}
         <div className="grid sm:grid-cols-2 gap-x-12 gap-y-5 w-full max-w-xl text-gray-700">
           <div>
             <p className="text-sm text-secondary-foreground">Email</p>

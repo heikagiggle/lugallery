@@ -41,7 +41,7 @@ export function Pagination(props: Props) {
         <PaginationContent>
           {page > 0 && (
             <PaginationItem>
-              <PaginationPrevious onClick={() => goToPage(page - 1)}>
+              <PaginationPrevious onClick={() => goToPage(page - 1)} className='hover:text-brand'>
                 Previous
               </PaginationPrevious>
             </PaginationItem>
@@ -49,7 +49,7 @@ export function Pagination(props: Props) {
 
           {page < props.totalPages - 1 && (
             <PaginationItem>
-              <PaginationNext onClick={() => goToPage(page + 1)}>
+              <PaginationNext onClick={() => goToPage(page + 1)} className='hover:text-brand'>
                 Next
               </PaginationNext>
             </PaginationItem>

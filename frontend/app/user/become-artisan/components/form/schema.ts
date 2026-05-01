@@ -11,6 +11,7 @@ export const CareerSchema = z.object({
   password: z
     .string()
     .min(8, { message: "Password must contain 8 characters" }),
+  // reason: z.string().min(1, { message: "Reason is required" }),
 });
 
 export type CareerData = z.infer<typeof CareerSchema>;

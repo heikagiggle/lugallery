@@ -1,6 +1,6 @@
 import { useAuthContext } from "../../../state";
 import { useAxios } from "../../useAxios";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { LoginPayload, LoginResponse, UseLoginResponse } from "./type";
 import { ROUTES } from "../../routes";
 import toast from "react-hot-toast";
@@ -61,7 +61,7 @@ export const useLogin = (): UseLoginResponse => {
       }
 
       return res.data;
-    } catch (error) {
+    } catch {
       setSuccess(false);
       return null;
     } finally {

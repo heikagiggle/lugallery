@@ -28,17 +28,17 @@ export const useForgotPassword = (): UseForgotResponse => {
       try {
         const response = await axios.post<ForgotResponse>(
           `${ROUTES.FORGOT_PASSWORD}`,
-          payload
+          payload,
         );
         toast.success(response.data.message);
         setMessage(response.data.message);
         setSuccess(true);
-      } catch (error) {
+      } catch {
         setMessage("An error occurred");
         setSuccess(false);
       }
     },
-    [axios]
+    [axios],
   );
 
   return { forgot, loading, message, success };
@@ -53,21 +53,21 @@ export const useCode = (): UseCodeResponse => {
   const code = useCallback(
     async (payload: CodePayload) => {
       setMessage("");
-      setSuccess(false); 
+      setSuccess(false);
       try {
         const response = await axios.post<CodeResponse>(
           `${ROUTES.VERIFY_OTP}`,
-          payload
+          payload,
         );
         toast.success(response.data.message);
         setMessage(response.data.message);
         setSuccess(true);
-      } catch (error) {
+      } catch {
         setMessage("An error occurred");
         setSuccess(false);
       }
     },
-    [axios]
+    [axios],
   );
 
   return { code, loading, message, success };
@@ -92,17 +92,17 @@ export const useResetPassword = (): UseResetResponse => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
         toast.success("Password reset successful");
         setMessage(response.data.message);
         setSuccess(true);
-      } catch (error) {
+      } catch {
         setMessage("An error occurred");
         setSuccess(false);
       }
     },
-    [axios, token]
+    [axios, token],
   );
 
   return { reset, loading, message, success };

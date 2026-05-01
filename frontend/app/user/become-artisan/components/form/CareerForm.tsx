@@ -144,6 +144,22 @@ const CareerForm = () => {
             </FormItem>
           )}
         />
+        {/* <FormField
+          control={control}
+          name="reason"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Why do you want to learn this trade?</FormLabel>
+              <textarea
+                {...field}
+                placeholder="Why do you want to learn this trade?"
+                className="w-full border border-gray-300 rounded-lg p-2 resize-none text-sm mt-1 outline-none"
+                rows={3}
+              />
+              <FormMessage />
+            </FormItem>
+          )}
+        /> */}
         <p className="my-2">
           Already have an account?{" "}
           <Link href={"/login"} className="text-blue-600 hover:underline">

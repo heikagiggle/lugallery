@@ -38,7 +38,11 @@ const EnterEmail = ({ onNextStep }: ContainerProps) => {
 
   useEffect(() => {
     if (!loading && success) {
-      onNextStep && onNextStep();
+      // onNextStep && onNextStep();
+      // if (onNextStep) {
+      //   onNextStep();
+      // }
+      onNextStep?.();
     }
   }, [loading, onNextStep, success]);
 

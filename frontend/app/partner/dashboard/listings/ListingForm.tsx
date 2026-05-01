@@ -21,23 +21,18 @@ import { AdminButton } from "../../../components/widgets/buttons/AdminButton";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
-  SocialLink,
   SocialLinksInput,
 } from "../components/social-links/social-links-input";
-import { useState } from "react";
 import {
   MultiImageUploader,
-  UploadedImage,
 } from "@/app/components/widgets/uploader/multi-image-uploader";
 import {
   artisanTitles,
   statesWithLgas,
 } from "@/app/user/discover/components/data";
-import { ImageUploader } from "@/app/components/widgets/uploader/image-uploader";
 
 const ListingForm = () => {
   const router = useRouter();
-  const [galleryImages, setGalleryImages] = useState<UploadedImage[]>([]);
 
   const handler = useForm<ArtisanProfileData>({
     resolver: zodResolver(ArtisanProfileSchema),
@@ -146,7 +141,7 @@ const ListingForm = () => {
                 <FormLabel>State</FormLabel>
                 <Select
                   value={field.value || ""}
-                  onValueChange={(value) => {
+                  onValueChange={(value: string) => {
                     field.onChange(value);
                     handler.setValue("lga", ""); // reset LGA when state changes
                   }}

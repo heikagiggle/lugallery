@@ -3,6 +3,10 @@
 import { useAdminSupportChat } from "@/app/hooks/admin/support";
 import { useEffect, useState } from "react";
 
+// ============================
+// Types
+// ============================
+
 type Message = {
   id?: string;
   from: "support" | "user";
@@ -16,6 +20,25 @@ type SelectedChat = {
   messages: Message[];
 };
 
+type BackendMessage = {
+  id: string;
+  sender: "ADMIN" | "USER";
+  message: string;
+};
+
+type BackendTicket = {
+  id: string;
+  status: "OPEN" | "IN_PROGRESS" | "RESOLVED";
+  user: {
+    email: string;
+  };
+  messages: BackendMessage[];
+};
+
+// ============================
+// Component
+// ============================
+
 const SupportDashboard = () => {
   const {
     getAllTickets,
@@ -24,14 +47,14 @@ const SupportDashboard = () => {
     closeTicket,
   } = useAdminSupportChat();
 
-  const [tickets, setTickets] = useState<any[]>([]);
+  const [tickets, setTickets] = useState<BackendTicket[]>([]);
   const [selectedChat, setSelectedChat] =
     useState<SelectedChat | null>(null);
   const [input, setInput] = useState("");
 
-  // ---------------------------
-  // Fetch all tickets on mount
-  // ---------------------------
+  // ============================
+  // Fetch all tickets
+  // ============================
   useEffect(() => {
     const fetchTickets = async () => {
       const data = await getAllTickets();
@@ -39,11 +62,11 @@ const SupportDashboard = () => {
     };
 
     fetchTickets();
-  }, []);
+  }, [getAllTickets]);
 
-  // ---------------------------
+  // ============================
   // Poll selected ticket
-  // ---------------------------
+  // ============================
   useEffect(() => {
     if (!selectedChat) return;
 
@@ -55,34 +78,40 @@ const SupportDashboard = () => {
         id: updated.id,
         name: updated.user.email,
         status: updated.status,
-        messages: updated.messages.map((msg: any) => ({
-          id: msg.id,
-          from: msg.sender === "ADMIN" ? "support" : "user",
-          text: msg.message,
-        })),
+        messages: updated.messages.map(
+          (msg: BackendMessage): Message => ({
+            id: msg.id,
+            from: msg.sender === "ADMIN" ? "support" : "user",
+            text: msg.message,
+          })
+        ),
       });
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [selectedChat?.id]);
+  }, [selectedChat, getTicketById]);
 
-  // ---------------------------
+  // ============================
   // Send reply
-  // ---------------------------
+  // ============================
   const handleSend = async () => {
     if (!input.trim() || !selectedChat) return;
     if (selectedChat.status === "RESOLVED") return;
 
     await sendMessage(selectedChat.id, input);
 
-    setSelectedChat((prev: any) => ({
-      ...prev,
-      status: "IN_PROGRESS",
-      messages: [
-        ...prev.messages,
-        { from: "support", text: input },
-      ],
-    }));
+    setSelectedChat((prev) => {
+      if (!prev) return prev;
+
+      return {
+        ...prev,
+        status: "IN_PROGRESS",
+        messages: [
+          ...prev.messages,
+          { from: "support", text: input },
+        ],
+      };
+    });
 
     setInput("");
   };
@@ -92,7 +121,7 @@ const SupportDashboard = () => {
   return (
     <div className="flex h-[90vh] bg-background shadow rounded overflow-hidden border mt-4">
       {/* ========================= */}
-      {/* LEFT SIDE — TICKET LIST */}
+      {/* LEFT — TICKET LIST */}
       {/* ========================= */}
       <div
         className={`
@@ -102,7 +131,9 @@ const SupportDashboard = () => {
         `}
       >
         <div className="p-4 border-b">
-          <h2 className="text-lg font-semibold">Support Tickets</h2>
+          <h2 className="text-lg font-semibold">
+            Support Tickets
+          </h2>
         </div>
 
         {tickets.map((ticket) => (
@@ -116,14 +147,16 @@ const SupportDashboard = () => {
                 id: fullTicket.id,
                 name: fullTicket.user.email,
                 status: fullTicket.status,
-                messages: fullTicket.messages.map((msg: any) => ({
-                  id: msg.id,
-                  from:
-                    msg.sender === "ADMIN"
-                      ? "support"
-                      : "user",
-                  text: msg.message,
-                })),
+                messages: fullTicket.messages.map(
+                  (msg: BackendMessage): Message => ({
+                    id: msg.id,
+                    from:
+                      msg.sender === "ADMIN"
+                        ? "support"
+                        : "user",
+                    text: msg.message,
+                  })
+                ),
               });
             }}
             className="p-4 cursor-pointer border-b hover:bg-muted"
@@ -147,14 +180,15 @@ const SupportDashboard = () => {
             </div>
 
             <p className="text-sm text-muted-foreground truncate">
-              {ticket.messages[0]?.message || "No messages yet"}
+              {ticket.messages[0]?.message ||
+                "No messages yet"}
             </p>
           </div>
         ))}
       </div>
 
       {/* ========================= */}
-      {/* RIGHT SIDE — CHAT WINDOW */}
+      {/* RIGHT — CHAT */}
       {/* ========================= */}
       <div
         className={`
@@ -163,7 +197,7 @@ const SupportDashboard = () => {
           ${isMobileChatOpen ? "block" : "hidden md:flex"}
         `}
       >
-        {/* -------- Header -------- */}
+        {/* Header */}
         <div className="p-4 border-b flex justify-between items-center">
           <div className="flex items-center gap-3">
             <button
@@ -187,20 +221,25 @@ const SupportDashboard = () => {
             )}
           </div>
 
-          {/* Close Ticket Button */}
           {selectedChat && (
             <button
-              disabled={selectedChat.status === "RESOLVED"}
+              disabled={
+                selectedChat.status === "RESOLVED"
+              }
               onClick={async () => {
                 const success = await closeTicket(
                   selectedChat.id
                 );
                 if (!success) return;
 
-                setSelectedChat((prev: any) => ({
-                  ...prev,
-                  status: "RESOLVED",
-                }));
+                setSelectedChat((prev) => {
+                  if (!prev) return prev;
+
+                  return {
+                    ...prev,
+                    status: "RESOLVED",
+                  };
+                });
               }}
               className={`px-4 py-2 text-sm rounded ${
                 selectedChat.status === "RESOLVED"
@@ -215,7 +254,7 @@ const SupportDashboard = () => {
           )}
         </div>
 
-        {/* -------- Messages -------- */}
+        {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-2 bg-muted">
           {selectedChat?.messages.map((msg, i) => (
             <div
@@ -239,11 +278,13 @@ const SupportDashboard = () => {
           ))}
         </div>
 
-        {/* -------- Input -------- */}
+        {/* Input */}
         {selectedChat && (
           <div className="p-4 border-t flex bg-background">
             <input
-              disabled={selectedChat.status === "RESOLVED"}
+              disabled={
+                selectedChat.status === "RESOLVED"
+              }
               className="flex-1 px-4 py-2 border rounded mr-2 text-sm disabled:bg-gray-100"
               placeholder={
                 selectedChat.status === "RESOLVED"
@@ -251,13 +292,17 @@ const SupportDashboard = () => {
                   : "Type your reply..."
               }
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) =>
+                setInput(e.target.value)
+              }
               onKeyDown={(e) =>
                 e.key === "Enter" && handleSend()
               }
             />
             <button
-              disabled={selectedChat.status === "RESOLVED"}
+              disabled={
+                selectedChat.status === "RESOLVED"
+              }
               onClick={handleSend}
               className="px-4 py-2 bg-[#006400] text-white rounded hover:bg-green-700 disabled:bg-gray-400"
             >

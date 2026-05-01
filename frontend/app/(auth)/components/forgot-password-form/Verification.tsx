@@ -36,7 +36,8 @@ const Verification = ({ onNextStep }: ContainerProps) => {
 
   useEffect(() => {
     if (!loading && success) {
-      onNextStep && onNextStep();
+      // onNextStep && onNextStep();
+      onNextStep?.();
     }
   }, [loading, onNextStep, success]);
 

@@ -27,9 +27,9 @@ export const MultiImageUploader = ({
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const updateImages = (updated: UploadedImage[]) => {
-    setImages(updated);
-  };
+  // const updateImages = (updated: UploadedImage[]) => {
+  //   setImages(updated);
+  // };
 
   const processFiles = useCallback(
     async (files: FileList | File[]) => {

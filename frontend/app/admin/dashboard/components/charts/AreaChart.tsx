@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   AreaChart as ReAreaChart,
   Area,
@@ -7,21 +7,21 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 
 type CurveType =
-  | 'basis'
-  | 'basisClosed'
-  | 'basisOpen'
-  | 'linear'
-  | 'linearClosed'
-  | 'natural'
-  | 'monotoneX'
-  | 'monotoneY'
-  | 'monotone'
-  | 'step'
-  | 'stepBefore'
-  | 'stepAfter';
+  | "basis"
+  | "basisClosed"
+  | "basisOpen"
+  | "linear"
+  | "linearClosed"
+  | "natural"
+  | "monotoneX"
+  | "monotoneY"
+  | "monotone"
+  | "step"
+  | "stepBefore"
+  | "stepAfter";
 
 interface ChartConfig {
   key: string;
@@ -57,15 +57,18 @@ export function AreaChart({
         <XAxis dataKey="name" padding={{ left: 20, right: 20 }} />
         {/* <YAxis /> */}
         <Tooltip
-          formatter={(value: number) => formatNumber(value)}
+          // formatter={(value: number) => formatNumber(value)}
           //   labelFormatter={(label) => `Month: ${label}`}
+          formatter={(value) =>
+            typeof value === "number" ? formatNumber(value) : ""
+          }
         />
         {charts.map(
           ({
             key,
-            color = '#8884d8',
+            color = "#8884d8",
             strokeWidth = 2,
-            type = 'monotone',
+            type = "monotone",
             fillOpacity = 0,
           }) => (
             <Area
@@ -77,9 +80,9 @@ export function AreaChart({
               fillOpacity={fillOpacity}
               strokeWidth={strokeWidth}
               activeDot={{ r: 6 }}
-              name={key === 'uv' ? 'Active Users' : key}
+              name={key === "uv" ? "Active Users" : key}
             />
-          )
+          ),
         )}
       </ReAreaChart>
     </ResponsiveContainer>

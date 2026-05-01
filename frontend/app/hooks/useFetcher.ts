@@ -36,7 +36,7 @@ export const useFetcher = <T>(
     if (error) {
       const errorMessages: string[] = (error.response?.data.message ?? '')
         .split(',')
-        .map((m: any) => m.trim());
+        .map((m: string) => m.trim());
       for (const message of errorMessages) {
         toast.error(message);
       }

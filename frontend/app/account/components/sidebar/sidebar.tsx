@@ -14,7 +14,6 @@ import { LogoutIcon } from "../icons/logout";
 import { ChevronRight } from "../icons/chevron-right";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
-import { mutate } from "swr";
 import { X } from "lucide-react";
 import { useAllProfile } from "@/app/hooks/auth/profile";
 import { useAuthContext } from "@/app/state";

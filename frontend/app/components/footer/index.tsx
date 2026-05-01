@@ -61,10 +61,22 @@ const Footer = () => {
           <li className="text-sm cursor-pointer"> Privacy Policy</li>
         </ul>
         <div className="flex gap-x-3">
-          <FaInstagram size={20} className="cursor-pointer" />
-          <FaFacebook size={20} className="cursor-pointer" />
-          <FaTiktok size={20} className="cursor-pointer" />
-          <FaWhatsapp size={20} className="cursor-pointer" />
+          <a
+            href="https://www.instagram.com/lugalleryng?igsh=NHd2NDR5Zzc0ZWk3&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram size={20} className="cursor-pointer" />
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            <FaFacebook size={20} className="cursor-pointer" />
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            <FaTiktok size={20} className="cursor-pointer" />
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            <FaWhatsapp size={20} className="cursor-pointer" />
+          </a>
         </div>
       </div>
     </div>

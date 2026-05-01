@@ -34,23 +34,43 @@ export const getTicketByIdAdmin = async (req: Request, res: Response) => {
     return errorResponse(res, "Forbidden", 403);
   }
 
+  const ticketId = req.params.id as string; // ✅ cast here
+
   const ticket = await prisma.supportTicket.findUnique({
-    where: { id: req.params.id },
+    where: { id: ticketId },
     include: {
-      user: {
-        select: { email: true },
-      },
-      messages: {
-        orderBy: { createdAt: "asc" },
-      },
+      user: { select: { email: true } },
+      messages: { orderBy: { createdAt: "asc" } },
     },
   });
 
-  if (!ticket) {
-    return errorResponse(res, "Ticket not found", 404);
+  if (!ticket) return errorResponse(res, "Ticket not found", 404);
+  return successResponse(res, ticket, "Ticket fetched");
+};
+
+export const closeTicket = async (req: Request, res: Response) => {
+  if (req.user?.role !== "ADMIN") {
+    return errorResponse(res, "Forbidden", 403);
   }
 
-  return successResponse(res, ticket, "Ticket fetched");
+  const ticketId = req.params.id as string; // ✅ cast here
+
+  const ticket = await prisma.supportTicket.findUnique({
+    where: { id: ticketId },
+  });
+
+  if (!ticket) return errorResponse(res, "Ticket not found", 404);
+
+  if (ticket.status === "RESOLVED") {
+    return errorResponse(res, "Ticket already resolved", 400);
+  }
+
+  await prisma.supportTicket.update({
+    where: { id: ticketId },
+    data: { status: "RESOLVED" },
+  });
+
+  return successResponse(res, null, "Ticket marked as resolved");
 };
 
 /**
@@ -78,47 +98,4 @@ export const adminReply = async (req: Request, res: Response) => {
   });
 
   return successResponse(res, newMessage, "Reply sent");
-};
-
-/**
- * PATCH /api/admin/support/tickets/:id/close
- */
-// export const closeTicket = async (req: Request, res: Response) => {
-//   if (req.user?.role !== "ADMIN") {
-//     return errorResponse(res, "Forbidden", 403);
-//   }
-
-//   await prisma.supportTicket.update({
-//     where: { id: req.params.id },
-//     data: { status: "RESOLVED" },
-//   });
-
-//   return successResponse(res, null, "Ticket closed");
-// };
-
-export const closeTicket = async (req: Request, res: Response) => {
-  if (req.user?.role !== "ADMIN") {
-    return errorResponse(res, "Forbidden", 403);
-  }
-
-  const ticketId = req.params.id;
-
-  const ticket = await prisma.supportTicket.findUnique({
-    where: { id: ticketId },
-  });
-
-  if (!ticket) {
-    return errorResponse(res, "Ticket not found", 404);
-  }
-
-  if (ticket.status === "RESOLVED") {
-    return errorResponse(res, "Ticket already resolved", 400);
-  }
-
-  await prisma.supportTicket.update({
-    where: { id: ticketId },
-    data: { status: "RESOLVED" },
-  });
-
-  return successResponse(res, null, "Ticket marked as resolved");
 };

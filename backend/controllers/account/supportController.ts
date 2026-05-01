@@ -63,26 +63,21 @@ export const getMyTickets = async (req: Request, res: Response) => {
  */
 export const getTicketById = async (req: Request, res: Response) => {
   const userId = req.user?.userId;
-  const ticketId = req.params.id;
+  const ticketId = req.params.id as string; // ✅ cast here
 
   if (!userId) return errorResponse(res, "Unauthorized", 401);
 
   const ticket = await prisma.supportTicket.findFirst({
     where: {
       id: ticketId,
-      userId, // IMPORTANT: user can only see their own ticket
+      userId,
     },
     include: {
-      messages: {
-        orderBy: { createdAt: "asc" },
-      },
+      messages: { orderBy: { createdAt: "asc" } },
     },
   });
 
-  if (!ticket) {
-    return errorResponse(res, "Ticket not found", 404);
-  }
-
+  if (!ticket) return errorResponse(res, "Ticket not found", 404);
   return successResponse(res, ticket, "Ticket fetched");
 };
 

@@ -265,7 +265,7 @@ const updateProfile = async (req: Request, res: Response) => {
       authUser.role === "ADMIN" && name !== undefined ? { name } : undefined;
 
     // Top-level User updates
-    const userUpdates: Prisma.UserUpdateInput = {
+    const userUpdates = {
       ...(gender !== undefined && { gender }),
       ...(image !== undefined && { image }),
       ...(userDataUpdate ? { userData: { update: userDataUpdate } } : {}),
